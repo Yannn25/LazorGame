@@ -16,7 +16,24 @@ public class Plateau {
 		
 	}
 	
+	public Case getCase(int x, int y){
+		return plateau[x][y];
+	}
+	public void setCase(int x, int y,Case c){
+			plateau[x][y] = c;
+	}
+
 	public boolean deplacerBloc() {
 		return true;
-	}	
+	}
+	
+	public void init(){
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				plateau[i][j] = new CaseVisible();
+			}
+		}
+	}
+
+
 }
