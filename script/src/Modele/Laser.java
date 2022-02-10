@@ -19,5 +19,4 @@ public class Laser {
 		this.orientation=orientation;
 		
 	}
-	
 }

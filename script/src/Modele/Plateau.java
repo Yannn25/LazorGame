@@ -19,5 +19,33 @@ public class Plateau {
 	public boolean deplacerBloc() {
 		return true;
 	}
+
+
+
+	public static int[] produitMatrices(int mat[][], int x1,int x2){
+		int produit[] = new int [2];
+
+		produit[0] = mat[0][0]*x1 + mat[0][1]*x2;
+		produit[1] = mat[1][0]*x1 + mat[1][1]*x2;
+		return produit;
+
+	}
+
+	public Case getCase(int x, int y){
+		return plateau[x][y];
+	}
+
+	public void setCase(int x, int y,Case c){
+			plateau[x][y] = c;
+	}
 	
+	public void init(){
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				plateau[i][j] = new CaseVisible();
+			}
+		}
+	}
+
+
 }
