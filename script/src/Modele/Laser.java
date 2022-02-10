@@ -2,6 +2,7 @@ package Modele;
 
 import java.awt.Point;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Laser {
 
@@ -19,5 +20,5 @@ public class Laser {
 		this.orientation=orientation;
 		
 	}
-	
+
 }
