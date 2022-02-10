@@ -31,14 +31,6 @@ public class Plateau {
 
 	}
 
-	public static void main(String[] args) {
-
-		int x1= 2;
-		int x2= 3;
-		int mat[][]={{2,-2},{5,3}};
-		System.out.println(produitMatrices(mat, x1, x2)[0] + "\n" + produitMatrices(mat, x1, x2)[1]);
-	}
-
 	public Case getCase(int x, int y){
 		return plateau[x][y];
 	}
