@@ -3,7 +3,7 @@ package Modele;
 public abstract class Bloc {
 
 	protected int x,y;		//Postion du bloc dans le tableau
-	final boolean fixe;		//S'il est initialisé à true alors le bloc n'est pas déplaçable
+	final boolean fixe;		//S'il est initialisÃ© Ã  true alors le bloc n'est pas dÃ©plaÃ§able
 	
 	public Bloc(int x, int y, boolean fixe) {
 		
@@ -16,7 +16,7 @@ public abstract class Bloc {
 
 /*
  * Sous-class de bloc.
- * Ces sous-class de Bloc représenterons les différents type de bloc dans le jeu
+ * Ces sous-class de Bloc reprÃ©senterons les diffÃ©rents type de bloc dans le jeu
  */
 class BlocOpaque extends Bloc {		//Le bloc Opaque ne reflechit pas la lumiere et n'est pas deplacable
 	public BlocOpaque(int x,int y) {

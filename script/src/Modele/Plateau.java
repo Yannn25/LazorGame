@@ -18,5 +18,6 @@ public class Plateau {
 	
 	public boolean deplacerBloc() {
 		return true;
-	}	
+	}
+	
 }

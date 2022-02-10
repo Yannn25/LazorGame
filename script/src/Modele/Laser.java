@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Laser {
 
 	protected final int x,y;
-	// Orientation en degré ?
+	// Orientation en degrÃ© ?
 	// Ou orientation avec un vecteur ? Vx, Vy ?
 	protected final int orientation;
 	
