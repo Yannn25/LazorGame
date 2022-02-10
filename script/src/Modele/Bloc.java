@@ -18,32 +18,4 @@ public abstract class Bloc {
  * Sous-class de bloc.
  * Ces sous-class de Bloc repr�senterons les diff�rents type de bloc dans le jeu
  */
-class BlocOpaque extends Bloc {		//Le bloc Opaque ne reflechit pas la lumiere et n'est pas deplacable
-	public BlocOpaque(int x,int y) {
-		super(x,y,true);
-	}
-}
 
-class BlocReflechissant extends Bloc {
-	public BlocReflechissant(int x,int y) {
-		super(x,y,false);
-	}
-}
-
-class BlocSemiReflechissant extends Bloc {
-	public BlocSemiReflechissant(int x,int y) {
-		super(x,y,false);
-	}
-}
-
-class BlocTP extends Bloc {
-	public BlocTP(int x, int y) {
-		super(x,y,false);
-	}
-}
-
-class BlocPrisme extends Bloc {
-	public BlocPrisme(int x, int y) {
-		super(x,y,false);
-	}
-}
