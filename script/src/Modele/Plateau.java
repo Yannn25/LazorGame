@@ -1,5 +1,7 @@
 package Modele;
 
+import javax.swing.JPanel;
+
 public class Plateau {
 
 	final int width;
@@ -22,17 +24,53 @@ public class Plateau {
 	public void setCase(int x, int y,Case c){
 			plateau[x][y] = c;
 	}
-
+        public Laser[] getLasers() {
+            return lasers;
+        }
+        public void setLasers(Laser[] lasers) {
+            this.lasers = lasers;
+        }
+        
+        
+        /*
+        */
 	public boolean deplacerBloc() {
-		return true;
+            return true;
 	}
+
 	
-	public void init(){
+	
+	/*
+	* Initialisation des plateau un peu commme des niveaux
+	*/
+	public void init1(){
 		for(int i = 0; i < height; i++){
 			for(int j = 0; j < width; j++){
 				plateau[i][j] = new CaseVisible();
 			}
 		}
+	}
+	public void init2(){
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				if(i%2 == 0 && j%2 != 0 || i%2 != 0 && j%2 == 0){
+					plateau[i][j] = new CaseVisible();
+				} else {
+					plateau[i][j] = new CaseCachee();
+				}
+			}
+		}
+	}
+	public void init3(){
+            for(int i = 0; i < height; i++){
+                for(int j = 0; j < width; j++){
+                    if(i%2 == 0){
+                        plateau[i][j] = new CaseVisible();
+                    } else {
+                        plateau[i][j] = new CaseCachee();
+                    }
+                }
+            }
 	}
 
 

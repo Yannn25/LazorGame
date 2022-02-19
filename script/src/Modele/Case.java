@@ -21,17 +21,18 @@ class CaseVisible extends Case {
 	}
 
 	/*
-	* 
+	* Affichage dans le terminal d'une Case Visible
 	*/
 	@Override
-	public void afficheCase () {
+	public void afficheCase() {
 		if(this.bloc != null){
 			afficheBloc();
 		}
-		System.out.print("|     |  ");
+		System.out.print("|__|");
 	}
 
 	/*
+	* Affichage d'un bloc
 	*/
 	public void afficheBloc(){
 		System.out.print("| BLOC |  ");
@@ -42,4 +43,12 @@ class CaseVisible extends Case {
 	}
 }
 
-class 	CaseCachee extends Case {}
+class 	CaseCachee extends Case {
+	/*
+	* Affichage dans le terminal d'une Case non Visible
+	*/
+	@Override
+	public void afficheCase () {
+		System.out.print("|** |");
+	}
+}
