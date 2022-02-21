@@ -47,40 +47,33 @@ public class Plateau extends JFrame {
 	public boolean deplacerBloc() {
 		return true;
 	}
-	public static void produitMatrices(int mat[][], int x1[],int x2[]){
-		int Matx1x2[][]= new int [2][2];
-		int produit[][]= new int [2][2];
-		System.out.println("Matrice 1 : ");
-		for (int i=0; i< mat.length;i++){
-			for (int j =0; j<mat.length;j++){
-				System.out.print(mat[i][j]+" ");
+
+
+
+
+	public static int[] produitMatrices(int mat[][], int x1,int x2){
+		int produit[] = new int [2];
+
+		produit[0] = mat[0][0]*x1 + mat[0][1]*x2;
+		produit[1] = mat[1][0]*x1 + mat[1][1]*x2;
+		return produit;
+
+	}
+
+	public Case getCase(int x, int y){
+		return plateau[x][y];
+	}
+
+	public void setCase(int x, int y,Case c){
+			plateau[x][y] = c;
+	}
+	
+	public void init(){
+		for(int i = 0; i < height; i++){
+			for(int j = 0; j < width; j++){
+				plateau[i][j] = new CaseVisible();
 			}
-			System.out.println("\t");
 		}
-
-		//Calcul produit
-		System.out.println("Matrice 2 : ");
-		for (int i=0; i< 2;i++){
-			for (int j =0; j<2;j++){
-				Matx1x2[0][j]=x1[j];
-				Matx1x2[1][j]=x2[j];
-				System.out.print(Matx1x2[i][j]+" ");
-
-			}
-			System.out.println("\t");
-		}
-		System.out.println("Produit Matrice 1 et Matrice 2 : ");
-		for (int i=0; i< 2;i++){
-			for (int j =0; j<2;j++){
-				produit[i][j] = 0;
-				for( int k = 0 ; k < 2 ; k ++ )
-					produit[i][j] = produit[i][j] + mat[i][k] * Matx1x2[k][j] ;
-				System.out.print(produit[i][j]+" ");
-
-			}
-			System.out.println("\t");
-		}
-
 	}
 
 
