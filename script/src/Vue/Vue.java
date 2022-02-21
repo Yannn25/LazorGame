@@ -12,9 +12,10 @@ public class Vue extends JFrame{
     
     public Vue(){
         super(" Vue ");
-        setSize(900, 600);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        super.setSize(900, 600);
+        super.setVisible(true);
+        super.setLayout(null);
+        super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public Plateau getPlat() {
