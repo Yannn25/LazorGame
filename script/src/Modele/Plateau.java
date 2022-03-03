@@ -27,13 +27,15 @@ public class Plateau extends JFrame {
 		panTabCase.setLayout(null);
 		panTabCase.setBounds(0, 0, 200, 200);
 		panTabCase.setBackground(Color.WHITE);
-
 		panTabCase.addMouseMotionListener(ma);
 		panTabCase.addMouseListener(ma);
 
+		JLabel posiCible = new JLabel();
+		posiCible.setLayout(null);
+		posiCible.setBounds(0,0 , 5, 5);
+		posiCible.setBackground(Color.RED);
 
-		tracagelaser();
-		InititialisationPlateauet(-1, -1, jLabels);
+		InititialisationPlateauet();
 		setLayout(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(500, 500);
@@ -73,57 +75,6 @@ public class Plateau extends JFrame {
 			for(int j = 0; j < width; j++){
 				plateau[i][j] = new CaseVisible();
 			}
-		}
-	}
-
-
-	public void InititialisationPlateauet(int x,int y,JLabel jLabels[][]  ){
-		// var jLabels1 = new JLabel[3][3];
-		if(x==-1 && y==-1 ) {
-			for (int i = 0; i < 3; i++) {
-				for (int j = 0; j < 3; j++) {
-					jLabels[i][j] = new JLabel();
-					jLabels[i][j].setBounds(j * 55, i * 55, 50, 50);
-					jLabels[i][j].setLayout(null);
-					jLabels[i][j].setOpaque(true);
-
-					JPanel casep[][] = new JPanel[3][3];
-					casep[i][j] = new JPanel();
-					casep[i][j].setBounds(j * 55, i * 55, 50, 50);
-					casep[i][j].setBackground(Color.RED);
-					casep[i][j].setName("Label" + i + j);
-					casep[i][j].setLayout(null);
-
-					if (i == 2 && j == 2) {
-						panTabCase.add(casep[i][j]);
-
-					}
-
-					if (i == 1 && j == 1 || i == 2 && j == 2) {
-						jLabels[i][j].setBackground(Color.gray);
-					} else {
-						jLabels[i][j].setBackground(Color.WHITE);
-					}
-					panTabCase.add(jLabels[i][j]);
-				}
-			}
-		}
-
-	}
-
-	public void tracagelaser() {
-
-		for (int i = 0; i < 50; i++) {
-			p[i]=new JLabel();
-			p[i].setLayout(null);
-			p[i].setBounds(20 + i * 5, 155 - i * 5, 5, 5);
-			p[i].setOpaque(true);
-			p[i].setBackground(Color.BLUE);
-
-			if (i % 11 == 0) {
-				p[i].setBackground(Color.CYAN);
-			}
-			panTabCase.add(p[i]);
 		}
 	}
 
@@ -181,12 +132,20 @@ public class Plateau extends JFrame {
 							}
 
 							if ( this.selectionPanel.getX()==55 && this.selectionPanel.getY()==55){
-
-
-
-								System.out.println("action");
+								panTabCase.removeAll();
+								MiseajourPlateau(this.selectionPanel.getX(),this.selectionPanel.getY(),this.selectionPanel.getName());
+								panTabCase.repaint();
 							}
 
+							if (this.selectionPanel.getX() >=130 && this.selectionPanel.getY() >=130) {
+								selectionPanel.setLocation(110, 110);
+
+								panTabCase.removeAll();
+								InititialisationPlateauet();
+								panTabCase.repaint();
+								// MiseajourPlateau(this.selectionPanel.getX(),this.selectionPanel.getY(),this.selectionPanel.getName());
+								// panTabCase.repaint();
+							}
 
 					}
 
@@ -199,6 +158,78 @@ public class Plateau extends JFrame {
 		}
 
 	};
+
+	public void InititialisationPlateauet( ){
+		// var jLabels1 = new JLabel[3][3];
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					jLabels[i][j] = new JLabel();
+					jLabels[i][j].setBounds(j * 55, i * 55, 50, 50);
+					jLabels[i][j].setLayout(null);
+					jLabels[i][j].setOpaque(true);
+
+					JPanel casep[][] = new JPanel[3][3];
+					casep[i][j] = new JPanel();
+					casep[i][j].setBounds(j * 55, i * 55, 50, 50);
+					casep[i][j].setBackground(Color.RED);
+					casep[i][j].setName("Label" + i + j);
+					casep[i][j].setLayout(null);
+
+					if (i == 2 && j == 2) {
+						panTabCase.add(casep[i][j]);
+
+					}
+
+					if (i == 1 && j == 1 || i == 2 && j == 2) {
+						jLabels[i][j].setBackground(Color.gray);
+					} else {
+						jLabels[i][j].setBackground(Color.WHITE);
+					}
+					new Laser( jLabels[i][j], panTabCase);
+					panTabCase.add(jLabels[i][j]);
+				}
+			}
+	}
+
+	public void MiseajourPlateau(int x, int y,String nombloc){
+
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				jLabels[i][j] = new JLabel();
+				jLabels[i][j].setBounds(j * 55, i * 55, 50, 50);
+				jLabels[i][j].setLayout(null);
+				jLabels[i][j].setOpaque(true);
+
+				JPanel casep[][] = new JPanel[3][3];
+				casep[i][j] = new JPanel();
+				casep[i][j].setBounds(j * 55, i * 55, 50, 50);
+				casep[i][j].setBackground(Color.RED);
+				casep[i][j].setLayout(null);
+
+				casep[i][j].setLocation(x, y);
+				casep[i][j].setName(nombloc);
+				panTabCase.add(casep[i][j]);
+
+
+				if (i == 1 && j == 1 || i == 2 && j == 2) {
+					jLabels[i][j].setBackground(Color.gray);
+				} else {
+					jLabels[i][j].setBackground(Color.WHITE);
+				}
+
+				if (casep[i][j].getName() == nombloc) {
+
+				}
+
+				//orientationLazer(0,x,y);
+				new Laser(x, y, 0, jLabels[i][j], panTabCase);
+
+				panTabCase.add(jLabels[i][j]);
+				panTabCase.repaint();
+			}
+		}
+	}
+
 
 
 	public static void main( String[] args) {
