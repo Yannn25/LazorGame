@@ -23,7 +23,7 @@ public class Laser {
 
 	}
 	public Laser(JLabel jl, JPanel jp){
-		traçagelaser(0, 50, jl, jp);
+		tracagelaser(0, 50, jl, jp);
 	}
 
 	public static void orientationintialeLaser(int taille,int x, int y,String t[][]){
@@ -45,7 +45,7 @@ public class Laser {
 		String coor[] = new String[taille];
         try{
 
-			System.out.println("Le laser est devié vers les cases suivantes : ");
+			System.out.println("Le laser est deviï¿½ vers les cases suivantes : ");
 			for (int j=0,i=1;i<taille;i++,j++){
 				System.out.print(t[x+i][y+i-1]);
 				System.out.print(t[x+i][y+i]);
@@ -70,7 +70,7 @@ public class Laser {
 	public static void deviationlaserB(int taille, String t[][],int x, int y) {
 		try {
 
-			System.out.println("Le laser est devié vers les cases suivantes : ");
+			System.out.println("Le laser est deviï¿½ vers les cases suivantes : ");
 			for (int i=1;i<taille;i++){
 				System.out.print(t[x+i][y-i+1]);
 				System.out.print(t[x+i][y-i]);
@@ -90,7 +90,7 @@ public class Laser {
 	public static void deviationlaserB1(int taille, String t[][],int x, int y) {
 		try {
 
-			System.out.println("Le laser est devié vers les cases suivantes : ");
+			System.out.println("Le laser est deviï¿½ vers les cases suivantes : ");
 			for (int i=1;i<taille;i++){
 				System.out.print(t[x-i+1][y-i]);
 				System.out.print(t[x-i][y-i]);
@@ -108,7 +108,7 @@ public class Laser {
 	public static void deviationlaserH1(int taille, String t[][],int x, int y) {
 		try {
 
-			System.out.println("Le laser est devié vers les cases suivantes : ");
+			System.out.println("Le laser est deviï¿½ vers les cases suivantes : ");
 			for (int i=1;i<taille;i++){
 				System.out.print(t[x-i+1][y-i]);
 				System.out.print(t[x-i][y-i]);
@@ -122,7 +122,7 @@ public class Laser {
 
 	}
 
-	public void traçagelaser(int debut,int fin,JLabel l,JPanel panTabCase) {
+	public void tracagelaser(int debut,int fin,JLabel l,JPanel panTabCase) {
 
 		for (int i = debut; i < fin; i++) {
 			p[i] = new JLabel();
