@@ -1,7 +1,5 @@
 package Modele;
 
-import javax.swing.JPanel;
-
 public class Plateau {
 
 	final int width;
@@ -32,15 +30,29 @@ public class Plateau {
         }
         
         
-        /*
+        /**
+        * 
+        * @return 
         */
 	public boolean deplacerBloc() {
+            
             return true;
 	}
-
+        
+        /**
+         * Boolean qui nous permet de savoir si la case a la position
+         * (x,y) est une instance de CaseVisible 
+         * @param x coordonées x
+         * @param y coordonées y
+         * @return vrai si il est possible de placer un bloc 
+         * sur la case en question
+         */
+        public boolean DeplacerSurCase(int x, int y){
+            return plateau[x][y] instanceof CaseVisible;
+        }
 	
 	
-	/*
+	/** 
 	* Initialisation des plateau un peu commme des niveaux
 	*/
 	public void init1(){

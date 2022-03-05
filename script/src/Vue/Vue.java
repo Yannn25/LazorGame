@@ -15,6 +15,7 @@ public class Vue extends JFrame{
         super.setSize(900, 600);
         super.setVisible(true);
         super.setLayout(null);
+        super.setLocationRelativeTo(null);
         super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -42,13 +43,14 @@ public class Vue extends JFrame{
                             Line2D line = new Line2D.Float(p.x, p.y, suiv.x, suiv.y);
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 2.0));
-                            g2.draw(line);
+                            g2.draw(line);                           
                             i++;
                         }
                     }
                 }
             }
         }
+        
     }
     
     
