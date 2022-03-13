@@ -28,5 +28,8 @@ public class Laser {
     public void setPoints(LinkedList<Point> points) {
         this.points = points;
     }
-
+    
+    public void CalculTrajectoire(){
+        
+    }
 }

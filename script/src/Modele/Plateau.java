@@ -12,9 +12,17 @@ public class Plateau {
 		
 		this.height=height;
 		this.width=width;
-		this.plateau = new Case[height][width];
+		this.plateau = new Case[width][height];
 		
 	}
+
+        public int getWidth() {
+            return width;
+        }
+
+        public int getHeight() {
+            return height;
+        }
 	
 	public Case getCase(int x, int y){
 		return plateau[x][y];
@@ -84,6 +92,12 @@ public class Plateau {
                 }
             }
 	}
-
+        
+    public void initdemo() {
+        for(int i = 0; i < 3; i ++){
+            plateau[0][i] = new CaseVisible();
+        }
+        plateau[0][2] = new CaseVisible(new BlocOpaque(0, 2));
+    }    
 
 }
