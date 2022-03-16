@@ -12,4 +12,8 @@ public abstract class Bloc {
 		this.fixe=fixe;
 		
 	}
+        
+        public String getType(){
+            return "";
+        } 
 }
