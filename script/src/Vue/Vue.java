@@ -56,7 +56,7 @@ public class Vue extends JFrame {
                     if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
                         if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
                             Point suiv = l.getPoints().get(i+1);
-                            Line2D line = new Line2D.Float(p.x*98, p.y*98, suiv.x*98, suiv.y*98);
+                            Line2D line = new Line2D.Float(p.x*98, p.y*98, suiv.x*44, suiv.y*44);
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 2.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
                             g2.draw(line);

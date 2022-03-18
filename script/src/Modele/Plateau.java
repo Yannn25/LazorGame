@@ -1,6 +1,7 @@
 package Modele;
 
 import java.awt.Point;
+import static java.lang.Math.*;
 import java.util.LinkedList;
 
 public class Plateau {
@@ -113,24 +114,25 @@ public class Plateau {
             for(Laser l : lasers){
                 
                 double depart[] = conversionVersCible(l.x, l.y);
-                l.points.add(new Point((int)depart[0], (int)depart[1]));
+                l.points.add(new Point(abs((int)depart[0]), abs((int)depart[1])));
                     
                 if(l.orientation <= 90){
-                    for(int j = l.y+1; j < tabPencher.length; j++){
-                        double points[] = conversionVersBloc(l.x, j);
-                        int x = (int)points[0];
-                        int y = (int)points[1];
-                        tabPencher[x][y] = true;
-                        l.points.add(new Point((int)points[0], (int)points[1]));
-                       
+                  //  if(l.y == 1){
+                        for(int j = l.y+1; j < tabPencher.length; j++){
+                            double points[] = conversionVersBloc(l.x, j);
+                            int x = abs((int)points[0]);
+                            int y = abs((int)points[1]);
+                            tabPencher[x][y] = true;
+                            l.points.add(new Point(x, y));
+                      //  }
                     }
                 } else {
                     for(int j = l.x+1; j < tabPencher.length; j++){
                         double points[] = conversionVersCible(j, l.y);
-                        int x = (int)points[0];
-                        int y = (int)points[1];
+                        int x = abs((int)points[0]);
+                        int y = abs((int)points[1]);
                         tabPencher[x][y] = true;
-                        l.points.add(new Point((int)points[0], (int)points[1]));
+                        l.points.add(new Point(x, y));
                     }
                 }
             }
