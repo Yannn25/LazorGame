@@ -5,7 +5,9 @@ import Modele.Laser;
 import Modele.Plateau;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import static java.lang.Math.abs;
 import javax.swing.*;
 
 
@@ -13,11 +15,12 @@ public class Vue extends JFrame {
 
     
     protected Plateau plat;
-    private Graphics2D g2;
+    public Graphics2D g2;
+    //public int posMilieu = getHeight()
     
     public Vue(Plateau p){ 
         super(" Vue ");
-        super.setSize(1200, 700);
+        super.setSize(1275, 800);
         super.setVisible(true);
         //super.setLayout(null);
         //super.setLocationRelativeTo(null);
@@ -39,12 +42,11 @@ public class Vue extends JFrame {
     public void paint(Graphics g){
         Plateau();
         TraceLaser(); 
-        //setBackground(Color.white);
+       //Pencher();
     }
     /**
      * Méthode qui permet de tracer la trajectoire de chaque laser
      * appartenant à notre plateau PLAT.
-     * @param g
      */
     public void TraceLaser(){
         int i=0;
@@ -56,9 +58,9 @@ public class Vue extends JFrame {
                     if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
                         if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
                             Point suiv = l.getPoints().get(i+1);
-                            Line2D line = new Line2D.Float(p.x*98, p.y*98, suiv.x*44, suiv.y*44);
+                            Line2D line = new Line2D.Float(100+p.x*getWidth()/24, p.y*getHeight()/14, 100+suiv.x*getWidth()/24, suiv.y*getHeight()/14);
                             g2.setColor(Color.red);
-                            g2.setStroke(new BasicStroke((float) 2.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
+                            g2.setStroke(new BasicStroke((float) 3.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
                             g2.draw(line);
                             i++;
                         }
@@ -70,17 +72,31 @@ public class Vue extends JFrame {
     
 
 
-    public void Plateau(){
+    public void Plateau() {
         plat.init2();
-        for(int i=8; i <= 8*plat.getWidth(); i+=8){
-            for(int j=8; j <= 8*plat.getHeight(); j+=8){
-                //    if(plat.getCase(i/10, j/10) instanceof CaseVisible){
+        for(int i=1; i <= plat.getWidth(); i++){
+            for(int j=1; j <= plat.getHeight(); j++){
+                    if(plat.getCase(i-1, j-1) instanceof CaseVisible){
                     g2.setColor(Color.gray.brighter());
-                    g2.drawRect(13*i, 13*j, 100, 100);
-                  //  if(plat.getCase(i/10, j/10).BlocPresent()){
-                    //    g2.fill3DRect(15*i, 15*j, 100, 100, rootPaneCheckingEnabled);
-                    //}
-                //}                    
+                    g2.drawRect(i*getWidth()/12, j*getHeight()/7, 100, 100);
+                    if(plat.getCase(i-1, j-1).BlocPresent()){
+                        g2.fill3DRect(i*getWidth()/12, j*getHeight()/7, 100, 100, rootPaneCheckingEnabled);
+                    }
+                }                    
+            }
+        }
+        
+    }
+    
+    public void Pencher() {
+        for(int i=1; i <= plat.tabPencher.length; i++){
+            for(int j=1; j <=plat.tabPencher.length; j++){
+                Rectangle r = new Rectangle(84+i*getWidth()/24, j*getHeight()/14, 50, 50);
+                AffineTransform at = AffineTransform.getRotateInstance(Math.PI / 4, 150, 150);
+                Shape rotatedRect = at.createTransformedShape(r);
+                g2.setColor(Color.blue.brighter());
+//                g2.drawRect(13*i, 13*j, 100, 100);
+                g2.draw(rotatedRect);
             }
         }
     }
