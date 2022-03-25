@@ -124,7 +124,7 @@ public class Plateau {
                         if( plateau[i][j].BlocPresent()){
                             switch(plateau[i][j].getType()){
                                 case "Opaque" :
-                                    l.points.clear();
+                                    l.points.clear(); 
                                     l.points.add(new Point(l.x, l.y));
                                     l.points.add(new Point((i+1)/2, (j+2)/2));
                                     break;

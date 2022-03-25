@@ -18,11 +18,11 @@ public class Test  {
     public static void main(String[] args) {
 
 
-        Plateau plat = new Plateau(5,5);
+        Plateau plat = new Plateau(8,8);
        
         
         Laser[] l = new Laser[1];
-        l[0] = new Laser(1,4, 315);
+        l[0] = new Laser(1,2, 315);
         //l[1] = new Laser(0, 0, 90);
         //LinkedList<Point> p = new LinkedList<>();
         //p.add(new Point(100, 400));p.add(new Point(250, 100));//p.add(new Point(400, 40));
