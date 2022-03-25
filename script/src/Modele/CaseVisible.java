@@ -12,7 +12,10 @@ public class CaseVisible extends Case{
 	public CaseVisible(Bloc bloc) {
 		this.bloc=bloc;
 	}
-
+        
+        @Override
+        public String getType() {return "";}
+        
 	/*
 	* Affichage dans le terminal d'une Case Visible
 	*/

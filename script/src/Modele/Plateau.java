@@ -6,8 +6,8 @@ import java.util.LinkedList;
 
 public class Plateau {
 
-	final int width;
-	final int height;
+	public int width;
+	public int height;
 	protected Case[][] plateau;
         public boolean[][] tabPencher;//Le tableau inverser de toutes les "cibles" qu'un laser peut parcourir
 	protected Cible[] cibles; //Toutes les cibles du plateau
@@ -83,65 +83,32 @@ public class Plateau {
             return plateau[x][y] instanceof CaseVisible;
         }
         
-        public  double[] produitMatrices(double mat[][], int x1,int x2){
-		double produit[] = new double [2];
-
-		produit[0] = mat[0][0]*x1 + mat[0][1]*x2;
-		produit[1] = mat[1][0]*x1 + mat[1][1]*x2;
-		return produit;
-
-	}
-
-        
-        public  double[] conversionVersCible(int x,int y) {
-		double[][] n = {{-1,1},{1,1}};
-		return produitMatrices(n,x,y);
-	}
-	
-	public  double[] conversionVersBloc(int x,int y) {
-		double[][] n = {{-0.5,0.5},{0.5,0.5}};
-		return produitMatrices(n,x,y);
-	}
-
-        
-        
         /**
          * Méthode qui va initialiser le tracage du laser en fonction de son 
          * point de départ et de son orientation;
          */
         public void InitLaser(){ 
             for(Laser l : lasers){
-                if(l.orientation > 270 && l.orientation <= 360){
-                    for(int j = l.y; j <= tabPencher.length; j++){
-                        double points[] = conversionVersCible(l.x, j);
-                        int x = (int) (abs((int)points[0]));
-                        int y = (int) (abs((int)points[1]));
-                        l.points.add(new Point(j, y));
-                    } 
-                }
-                if(l.orientation > 180 && l.orientation <= 270) {
-                    for(int j = l.x; j <= tabPencher.length; j++){
-                            double points[] = conversionVersCible(l.y, j);
-                            int x = (int) (abs((int)points[0]));
-                            int y = (int) (abs((int)points[1]));
-                            System.out.println(j +" ; "+ x+" ; "+y);
-                            l.points.add(new Point(j, x));
-                        } 
-                }
-                if(l.orientation > 90 && l.orientation <= 180) {
-                    for(int j = l.y; j > 0; j--) {
-                            double points[] = conversionVersCible(l.x, j);
-                            int x = (int) (abs((int)points[0]));
-                            int y = (int) (abs((int)points[1]));
-                            l.points.add(new Point(j, y));
+                int i = l.x;
+                int j = l.y;
+                while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
+                    l.points.add(new Point(i,j));
+                    System.out.println("i: " + i + ", j:" + j);
+                    if(l.orientation == 45){
+                        i--;
+                        j++;
                     }
-                }
-                if(l.orientation <= 90) {
-                    for(int j = l.x; j > 0; j--) {
-                            double points[] = conversionVersCible(j, l.y);
-                            int x = (int) (abs((int)points[0]));
-                            int y = (int) (abs((int)points[1]));
-                            l.points.add(new Point(j, x));
+                    else if(l.orientation == 135){
+                        i--;
+                        j--;
+                    }
+                    else if(l.orientation == 225){
+                        i++;
+                        j--;
+                    }
+                    else if(l.orientation == 315){
+                        i++;
+                        j++;
                     }
                 }
             }
@@ -151,21 +118,27 @@ public class Plateau {
          * déplacement d'un bloc;
          */
         public void CalculTrajectoire(){
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    //if( plateau[i][j].BlocPresent())
-                    switch(plateau[i][j].getType()){
-                        case "Opaque" :
-                            
-                            break;
-                        case "Prisme" :
-                            break;
-                        case "Reflechissant" :
-                            break;
-                        case "SemiReflechissant" :
-                            break;
-                        case "TP" :
-                            break;
+            for (Laser l : lasers) {
+                for (int i = 0; i < width; i++) {
+                    for (int j = 0; j < height; j++) {
+                        if( plateau[i][j].BlocPresent()){
+                            switch(plateau[i][j].getType()){
+                                case "Opaque" :
+                                    l.points.clear();
+                                    l.points.add(new Point(l.x, l.y));
+                                    l.points.add(new Point((i+1)/2, (j+2)/2));
+                                    break;
+                                case "Prisme" :
+                                    break;
+                                case "Reflechissant" :
+                                    break;
+                                case "SemiReflechissant" :
+                                    break;
+                                case "TP" :
+                                    break;
+                                default : break;
+                            }
+                        }
                     }
                 }
             }

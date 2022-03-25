@@ -2,6 +2,7 @@ package Test;
 
 import Vue.Vue;
 import Modele.*;
+import java.awt.geom.Line2D;
 //import java.awt.Graphics2D;
 //import java.awt.Point;
 //import java.awt.Rectangle;
@@ -21,7 +22,7 @@ public class Test  {
        
         
         Laser[] l = new Laser[1];
-        l[0] = new Laser(3,3, 360);
+        l[0] = new Laser(1,4, 315);
         //l[1] = new Laser(0, 0, 90);
         //LinkedList<Point> p = new LinkedList<>();
         //p.add(new Point(100, 400));p.add(new Point(250, 100));//p.add(new Point(400, 40));
@@ -31,9 +32,14 @@ public class Test  {
         //l[0].setPoints(p);
         // l[1].setPoints(pp);
         plat.setLasers(l);
+        plat.init2();
         plat.InitLaser();
+        plat.CalculTrajectoire();
         
         Vue vue = new Vue(plat);
+        //vue.g2.drawLine(1*vue.getWidth()/12, 1*vue.getHeight()/7, 200, 200);
+        //vue.g2.drawLine(100, 100, 200, 200);
+
 //        for(int i = 1; i <= 8; i++){
 //            Rectangle2D myRect = new Rectangle2D.Double(i*10,104, 50, 50);
 //            AffineTransform at = AffineTransform.getRotateInstance(Math.PI / 4, 150, 150);

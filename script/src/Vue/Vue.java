@@ -41,7 +41,8 @@ public class Vue extends JFrame {
     @Override
     public void paint(Graphics g){
         Plateau();
-        TraceLaser(); 
+        TraceLaser();
+        
        //Pencher();
     }
     /**
@@ -58,7 +59,7 @@ public class Vue extends JFrame {
                     if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
                         if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
                             Point suiv = l.getPoints().get(i+1);
-                            Line2D line = new Line2D.Float(100+p.x*getWidth()/24, p.y*getHeight()/14, 100+suiv.x*getWidth()/24, suiv.y*getHeight()/14);
+                            Line2D line = new Line2D.Float(100 + p.y*50,100 + p.x*50, 100 + suiv.y*50, 100 + suiv.x*50);
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 3.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
                             g2.draw(line);
@@ -73,14 +74,14 @@ public class Vue extends JFrame {
 
 
     public void Plateau() {
-        plat.init2();
         for(int i=1; i <= plat.getWidth(); i++){
             for(int j=1; j <= plat.getHeight(); j++){
                     if(plat.getCase(i-1, j-1) instanceof CaseVisible){
                     g2.setColor(Color.gray.brighter());
-                    g2.drawRect(i*getWidth()/12, j*getHeight()/7, 100, 100);
+                    g2.drawRect(i*100, j*100, 100, 100);
                     if(plat.getCase(i-1, j-1).BlocPresent()){
-                        g2.fill3DRect(i*getWidth()/12, j*getHeight()/7, 100, 100, rootPaneCheckingEnabled);
+                       // fill3drect rect = new 
+                        g2.fill3DRect(i*100, j*100, 100, 100, rootPaneCheckingEnabled);
                     }
                 }                    
             }
