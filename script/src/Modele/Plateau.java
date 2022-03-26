@@ -191,10 +191,12 @@ public class Plateau {
 	}
         
     public void initdemo() {
-        for(int i = 0; i < 3; i ++){
-            plateau[0][i] = new CaseVisible();
-        }
-        plateau[0][2] = new CaseVisible(new BlocOpaque(0, 2));
+        for(int i = 0; i < height; i++){
+	for(int j = 0; j < width; j++){
+			plateau[i][j] = new CaseVisible();
+            }
+	}
+        plateau[3][3] = new CaseVisible(new BlocOpaque(0, 2));
     }    
 
 }

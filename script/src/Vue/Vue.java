@@ -73,7 +73,7 @@ public class Vue extends JFrame {
 
 
     public void Plateau() {
-        plat.init2();
+       // plat.init2();
         for(int i=1; i <= plat.getWidth(); i++){
             for(int j=1; j <= plat.getHeight(); j++){
                     if(plat.getCase(i-1, j-1) instanceof CaseVisible){

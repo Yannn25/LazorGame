@@ -32,9 +32,9 @@ public class Test  {
         //l[0].setPoints(p);
         // l[1].setPoints(pp);
         plat.setLasers(l);
-        plat.init2();
+        plat.initdemo();
         plat.InitLaser();
-        plat.CalculTrajectoire();
+//        plat.CalculTrajectoire();
         
         Vue vue = new Vue(plat);
         //vue.g2.drawLine(1*vue.getWidth()/12, 1*vue.getHeight()/7, 200, 200);
