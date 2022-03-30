@@ -62,6 +62,7 @@ public class Vue extends JFrame {
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 3.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
                             g2.draw(line);
+                        
                             i++;
                         }
                     }

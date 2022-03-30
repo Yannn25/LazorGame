@@ -17,7 +17,7 @@ public class Test  {
     public static void main(String[] args) {
 
 
-        Plateau plat = new Plateau(5,5);
+        Plateau plat = new Plateau(3,3);
        
         
         Laser[] l = new Laser[1];
