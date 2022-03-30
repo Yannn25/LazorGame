@@ -1,6 +1,8 @@
 package Modele;
 
-public abstract class Bloc {
+import javax.swing.*;
+
+public abstract class Bloc extends JPanel {
 
 	protected int x,y;		//Postion du bloc dans le tableau
 	final boolean fixe;		//S'il est initialisé à true alors le bloc n'est pas déplaçable
