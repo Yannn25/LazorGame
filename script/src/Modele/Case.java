@@ -5,41 +5,15 @@ public abstract class Case {
 	
 	public void afficheCase(){ }
 	public void setBloc(Bloc b){}
-
+        public abstract boolean BlocPresent();
+        public String getType() {return "";}
 }
 
-class CaseVisible extends Case {
-	
-	protected Bloc bloc;
-	
-	public CaseVisible() {
-		this(null);
-	}
-	
-	public CaseVisible(Bloc bloc) {
-		this.bloc=bloc;
-	}
 
-	/*
-	* 
-	*/
-	@Override
-	public void afficheCase () {
-		if(this.bloc != null){
-			afficheBloc();
-		}
-		System.out.print("|     |  ");
-	}
+class 	CaseCachee extends Case {
 
-	/*
-	*/
-	public void afficheBloc(){
-		System.out.print("| BLOC |  ");
-	}
-	
-	public void setBloc(Bloc b){
-		this.bloc = b;
-	}
+    @Override
+    public boolean BlocPresent() {
+        return false;
+    }
 }
-
-class 	CaseCachee extends Case {}
