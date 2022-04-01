@@ -17,7 +17,7 @@ public class Vue extends JFrame {
 
     protected Plateau plat;
     public Graphics2D g2;
-    JPanel bloc =new JPanel();
+    BlocOpaque bloc ;
 
 
     public Vue(Plateau p){
@@ -28,11 +28,8 @@ public class Vue extends JFrame {
 
         this.g2 = (Graphics2D) this.getGraphics();
         this.plat = p;
-        bloc.setLayout(null);
-        bloc.setBounds(300,160,100,100);
-        bloc.setBackground(Color.BLACK);
-        add(bloc);
-        setComponentZOrder(bloc, 0);
+
+
 
     }
 
@@ -79,8 +76,8 @@ public class Vue extends JFrame {
 
     public void Plateau() {
         // plat.init2();
-        for(int i=1; i <= plat.getWidth(); i++){
-            for(int j=1; j <= plat.getHeight(); j++){
+        for(int i=1; i <= plat.getHeight(); i++){
+            for(int j=1; j <= plat.getWidth(); j++){
                 if(plat.getCase(i-1, j-1) instanceof CaseVisible){
                     g2.setColor(Color.gray.brighter());
                     g2.drawRect(i*50, j*50, 50, 50);

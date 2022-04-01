@@ -9,7 +9,6 @@ public class Plateau {
     public int width;
     public int height;
     protected Case[][] plateau;
-    public boolean[][] tabPencher;//Le tableau inverser de toutes les "cibles" qu'un laser peut parcourir
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected Laser[] lasers; //Tous les lasers du plateau
 
@@ -17,8 +16,7 @@ public class Plateau {
 
         this.height=height;
         this.width=width;
-        this.plateau = new Case[width][height];
-        this.tabPencher = new boolean[width*2][height*2];
+        this.plateau = new Case[height][width];
 
     }
 
@@ -156,39 +154,7 @@ public class Plateau {
     }
 
     /**
-     * Initialisation des plateau un peu commme des niveaux
-     */
-    public void init1(){
-        for(int i = 0; i < height; i++){
-            for(int j = 0; j < width; j++){
-                plateau[i][j] = new CaseVisible();
-            }
-        }
-    }
-    public void init2(){
-        for(int i = 0; i < height; i++){
-            for(int j = 0; j < width; j++){
-                if(i%2 == 0 && j%2 != 0 || i%2 != 0 && j%2 == 0){
-                    plateau[i][j] = new CaseVisible();
-                    BlocOpaque b = new BlocOpaque(i, j);
-                    plateau[i][j].setBloc(b);
-                } else {
-                    plateau[i][j] = new CaseVisible();
-                }
-            }
-        }
-    }
-    public void init3(){
-        for(int i = 0; i < height; i++){
-            for(int j = 0; j < width; j++){
-                if(i%2 == 0){
-                    plateau[i][j] = new CaseVisible();
-                } else {
-                    plateau[i][j] = new CaseCachee();
-                }
-            }
-        }
-    }
+     * Initialisation des plateau un peu commme des niveaux*/
 
     public void initdemo() {
         for (int i = 0; i < height; i++) {
@@ -196,8 +162,39 @@ public class Plateau {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        plateau[5][5] = new CaseCachee();
-        plateau[5][6] = new CaseCachee();
-        plateau[4][3] = new CaseVisible(new BlocOpaque(0, 2));
+       // plateau[5][5] = new CaseCachee();
+       // plateau[5][6] = new CaseCachee();
+       // plateau[4][3] = new CaseVisible(new BlocOpaque(0, 2));
+
+    }
+
+    public int[] caseAVerifier(int x, int y, int angle){
+        int[] res = new int[2];
+        if(x < 0 || y < 0 || x >= 2*this.height || y >= 2*this.width){
+            return null;
+        }
+        if(x%2 == 1){
+            if(angle == 45 || angle == 315){
+                res[0] = (x+1)/2;
+                res[1] = (y+2)/2;
+            }
+            else if(angle == 225 || angle == 135){
+                res[0] = (x+1)/2;
+                res[1] = (y)/2;
+            }
+        }
+        else if(y%2 == 1){
+            if(angle == 45 || angle == 135){
+                res[0] = (x)/2;
+                res[1] = (y+1)/2;
+            }
+            else if(angle == 225 || angle == 315){
+                res[0] = (x+2)/2;
+                res[1] = (y+1)/2;
+            }
+        }
+        if(res[0] >= this.height || res[1] >= this.width)
+            return null;
+        return res;
     }
 }

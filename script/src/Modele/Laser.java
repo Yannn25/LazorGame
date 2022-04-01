@@ -32,4 +32,10 @@ public class Laser {
     public void CalculTrajectoire(){
         
     }
+
+    public void recupPointdeviation(int x ,int yCasVisible){
+        for (Point pt: points){
+
+        }
+    }
 }
