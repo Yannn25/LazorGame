@@ -20,13 +20,12 @@ public class Test  {
     public static void main(String[] args) {
 
 
-        Plateau plat = new Plateau(3,5);
+        Plateau plat = new Plateau(5,5);
 
 
         Laser[] l = new Laser[1];
         l[0] = new Laser(1,2 , 315);
         int[] res = plat.caseAVerifier(6,1,45);
-        System.out.println("Case a verifier " + res[0] + " " + res[1]);
 
         plat.setLasers(l);
         plat.initdemo();

@@ -87,57 +87,33 @@ public class Plateau {
      */
     public void InitLaser(){
         for(Laser l : lasers){
-            int i = l.x;
-            int j = l.y;
-            while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
-                l.points.add(new Point(i,j));
-                System.out.println("i: " + i + ", j:" + j);
-                if(l.orientation == 45){
-                    i--;
-                    j++;
-                }
-                else if(l.orientation == 135){
-                    i--;
-                    j--;
-                }
-                else if(l.orientation == 225){
-                    i++;
-                    j--;
-                }
-                else if(l.orientation == 315){
-                    i++;
-                    j++;
-                }
-            }
+            calculerChemin(l);
         }
     }
-    /**
-     * Méthode qui permet de recalculer la trajectoire du laser apres le
-     * déplacement d'un bloc;
-     */
-    public void CalculTrajectoire(){
-        for (Laser l : lasers) {
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
-                    if( plateau[i][j].BlocPresent()){
-                        switch(plateau[i][j].getType()){
-                            case "Opaque" :
-                                l.points.clear();
-                                l.points.add(new Point(l.x, l.y));
-                                l.points.add(new Point((i+1)/2, (j+2)/2));
-                                break;
-                            case "Prisme" :
-                                break;
-                            case "Reflechissant" :
-                                break;
-                            case "SemiReflechissant" :
-                                break;
-                            case "TP" :
-                                break;
-                            default : break;
-                        }
-                    }
-                }
+
+    //calcule les points touchés par le laser passé en paramètre
+    public void calculerChemin(Laser l){
+        int i = l.x;
+        int j = l.y;
+        while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
+            l.points.add(new Point(i,j));
+            l.orientation = nouvelAngle(i,j,l.orientation);
+            //System.out.println("i: " + i + ", j:" + j);
+            if(l.orientation == 45){
+                i--;
+                j++;
+            }
+            else if(l.orientation == 135){
+                i--;
+                j--;
+            }
+            else if(l.orientation == 225){
+                i++;
+                j--;
+            }
+            else if(l.orientation == 315){
+                i++;
+                j++;
             }
         }
     }
@@ -162,10 +138,41 @@ public class Plateau {
                 plateau[i][j] = new CaseVisible();
             }
         }
-       // plateau[5][5] = new CaseCachee();
-       // plateau[5][6] = new CaseCachee();
-       // plateau[4][3] = new CaseVisible(new BlocOpaque(0, 2));
+        // plateau[5][5] = new CaseCachee();
+        // plateau[5][6] = new CaseCachee();
+        plateau[3][3] = new CaseVisible(new BlocOpaque(0, 2));
 
+    }
+
+    public int nouvelAngle(int x, int y, int angle) {
+        int[] caseVerif = caseAVerifier(x, y, angle);
+        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()) {
+            System.out.println(caseVerif[0] + " " + caseVerif[1]);
+            if (caseVerif[0] % 2 == 1) {
+                switch (angle) {
+                    case 45:
+                        return 135;
+                    case 135:
+                        return 45;
+                    case 225:
+                        return 315;
+                    case 315:
+                        return 225;
+                }
+            } else if (caseVerif[1] % 2 == 1) {
+                switch (angle) {
+                    case 45:
+                        return 315;
+                    case 135:
+                        return 225;
+                    case 225:
+                        return 135;
+                    case 315:
+                        return 45;
+                }
+            }
+        }
+        return angle;
     }
 
     public int[] caseAVerifier(int x, int y, int angle){
