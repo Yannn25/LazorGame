@@ -1,5 +1,6 @@
 package Modele;
 
+import javax.swing.*;
 import java.awt.Point;
 import static java.lang.Math.*;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ public class Plateau {
     protected Case[][] plateau;
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected Laser[] lasers; //Tous les lasers du plateau
+    BlocReflechissant b;
 
     public Plateau(int height, int width) {
 
@@ -64,7 +66,7 @@ public class Plateau {
      *
      * @return
      */
-    public boolean deplacerBloc() {
+    public boolean deplacerBloc(int x,int y) {
 
         return true;
     }
@@ -95,23 +97,24 @@ public class Plateau {
     public void calculerChemin(Laser l){
         int i = l.x;
         int j = l.y;
+        int angletmp = l.orientation;
         while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
             l.points.add(new Point(i,j));
-            l.orientation = nouvelAngle(i,j,l.orientation);
-            //System.out.println("i: " + i + ", j:" + j);
-            if(l.orientation == 45){
+            angletmp = nouvelAngle(i,j,angletmp);
+           // System.out.println("i: " + i + ", j:" + j);
+            if(angletmp == 45){
                 i--;
                 j++;
             }
-            else if(l.orientation == 135){
+            else if(angletmp == 135){
                 i--;
                 j--;
             }
-            else if(l.orientation == 225){
+            else if(angletmp == 225){
                 i++;
                 j--;
             }
-            else if(l.orientation == 315){
+            else if(angletmp == 315){
                 i++;
                 j++;
             }
@@ -133,22 +136,20 @@ public class Plateau {
      * Initialisation des plateau un peu commme des niveaux*/
 
     public void initdemo() {
-        for (int i = 0; i < height; i++) {
+
+        for (int i = 0; i <height; i++) {
             for (int j = 0; j < width; j++) {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        // plateau[5][5] = new CaseCachee();
-        // plateau[5][6] = new CaseCachee();
-        plateau[3][3] = new CaseVisible(new BlocOpaque(0, 2));
+        plateau[2][3] = new CaseVisible(new BlocReflechissant(0, 2));
 
     }
 
     public int nouvelAngle(int x, int y, int angle) {
         int[] caseVerif = caseAVerifier(x, y, angle);
         if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()) {
-            System.out.println(caseVerif[0] + " " + caseVerif[1]);
-            if (caseVerif[0] % 2 == 1) {
+            if (x % 2 == 1 && y % 2 == 0) {
                 switch (angle) {
                     case 45:
                         return 135;
@@ -159,7 +160,7 @@ public class Plateau {
                     case 315:
                         return 225;
                 }
-            } else if (caseVerif[1] % 2 == 1) {
+            } else if (x % 2 == 1 && y % 2 == 0) {
                 switch (angle) {
                     case 45:
                         return 315;

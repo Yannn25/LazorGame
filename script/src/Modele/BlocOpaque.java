@@ -1,8 +1,5 @@
 package Modele;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class BlocOpaque extends Bloc {  //Le bloc Opaque ne reflechit pas la lumiere et n'est pas deplacable
 	
     

@@ -25,7 +25,8 @@ public class Test  {
 
         Laser[] l = new Laser[1];
         l[0] = new Laser(1,2 , 315);
-        int[] res = plat.caseAVerifier(6,1,45);
+        int[] res = plat.caseAVerifier(2,3,315  );
+        System.out.println("res[0] "+res[0]+" res[1] "+res[1]);
 
         plat.setLasers(l);
         plat.initdemo();
@@ -37,7 +38,7 @@ public class Test  {
 
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
-        rects.setBounds(0,0,300,300);
+        rects.setBounds(50,50,300,300);
         rects.setBackground(Color.WHITE);
 
         JFrame frame = new JFrame("Rectangles");
