@@ -9,11 +9,9 @@ import java.awt.geom.Line2D;
 
 public class Rectangle extends JPanel {
     protected Plateau plat;
-    public static JLabel bloc =new JLabel();
+    public JLabel bloc =new JLabel();
     public static  JLabel pp[]=new JLabel[50];
     public BlocReflechissant br;
-
-
 
     public  Rectangle(Plateau p){
 

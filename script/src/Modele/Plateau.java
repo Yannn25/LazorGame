@@ -1,7 +1,9 @@
 package Modele;
 
+import javax.sound.midi.Receiver;
 import javax.swing.*;
-import java.awt.Point;
+import java.awt.*;
+
 import static java.lang.Math.*;
 import java.util.LinkedList;
 
@@ -66,12 +68,19 @@ public class Plateau {
      *
      * @return
      */
-    public boolean deplacerBloc(int x,int y) {
+    public boolean deplacerBloc(int x1,int y1,int x2,int y2) {
+        if (!getCase(x2, y2).BlocPresent() &&
+                !(getCase(x1, y1) instanceof CaseCachee) &&
+                !(getCase(x2, y2) instanceof CaseCachee)){
+            getCase(x2, y2).ajouterBloc(getCase(x1, y1).getBloc());
+            getCase(x1, y1).enleverBloc();
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
-    /**
+    /*
      * Boolean qui nous permet de savoir si la case a la position
      * (x,y) est une instance de CaseVisible
      * @param x coordonées x
@@ -132,18 +141,15 @@ public class Plateau {
         }
     }
 
-    /**
-     * Initialisation des plateau un peu commme des niveaux*/
+    /* Initialisation des plateau un peu commme des niveaux*/
 
     public void initdemo() {
-
         for (int i = 0; i <height; i++) {
             for (int j = 0; j < width; j++) {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        plateau[2][3] = new CaseVisible(new BlocReflechissant(0, 2));
-
+        plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
@@ -160,7 +166,7 @@ public class Plateau {
                     case 315:
                         return 225;
                 }
-            } else if (x % 2 == 1 && y % 2 == 0) {
+            } else if (x % 2 == 0 && y % 2 == 1) {
                 switch (angle) {
                     case 45:
                         return 315;

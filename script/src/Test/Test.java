@@ -19,9 +19,7 @@ public class Test  {
 
     public static void main(String[] args) {
 
-
         Plateau plat = new Plateau(5,5);
-
 
         Laser[] l = new Laser[1];
         l[0] = new Laser(1,2 , 315);
@@ -31,7 +29,7 @@ public class Test  {
         plat.setLasers(l);
         plat.initdemo();
         plat.InitLaser();
-//        plat.CalculTrajectoire();
+
 
         //Vue vue = new Vue(plat);
 
