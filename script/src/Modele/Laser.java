@@ -10,7 +10,7 @@ public class Laser {
     protected final int x,y;
     // Orientation en degré ?
     // Ou orientation avec un vecteur ? Vx, Vy ?
-    protected final int orientation;
+    protected int orientation;
 
     protected LinkedList<Point> points; //LinkedList des points parcouru par le laser
 
@@ -20,7 +20,7 @@ public class Laser {
         this.y=y;
         this.orientation=orientation;
         this.points = new LinkedList<>();
-        
+
     }
 
     public LinkedList<Point> getPoints() {
@@ -29,8 +29,15 @@ public class Laser {
     public void setPoints(LinkedList<Point> points) {
         this.points = points;
     }
-    
+
     public void CalculTrajectoire(){
-        
+
     }
+
+    public void recupPointdeviation(int x ,int yCasVisible){
+        for (Point pt: points){
+
+        }
+    }
+
 }

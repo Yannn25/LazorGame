@@ -1,5 +1,7 @@
 package Modele;
 
+import javax.swing.*;
+
 public abstract class Bloc {
 
 	protected int x,y;		//Postion du bloc dans le tableau
@@ -11,6 +13,23 @@ public abstract class Bloc {
 		this.y=y;
 		this.fixe=fixe;
 		
+	}
+
+	public int getX(){
+		return this.x;
+	}
+
+	public int getY(){
+		return this.y;
+	}
+
+
+	public void setX(int x){
+		this.x=x;
+	}
+
+	public void setY(int y){
+		this.y=y;
 	}
         
         public String getType(){

@@ -5,6 +5,7 @@ public class BlocOpaque extends Bloc {  //Le bloc Opaque ne reflechit pas la lum
     
     public BlocOpaque(int x,int y) {
 	super(x,y,true);
+
     }
     
     @Override
