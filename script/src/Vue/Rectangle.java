@@ -7,13 +7,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Line2D;
 
-public class Rectangle extends JPanel {
+public class Nvue extends JPanel {
     protected Plateau plat;
     public JLabel bloc =new JLabel();
     public static  JLabel pp[]=new JLabel[50];
     public BlocReflechissant br;
 
-    public  Rectangle(Plateau p){
+    public Nvue(Plateau p){
 
 
 
@@ -38,6 +38,7 @@ public class Rectangle extends JPanel {
             public void mouseReleased(MouseEvent e) {
                 System.out.println("x bloc "+selectionPanel.getX());
                 System.out.println("y bloc "+selectionPanel.getY());
+
             }
 
             @Override
@@ -145,6 +146,18 @@ public class Rectangle extends JPanel {
             }
         }
 
+    }
+
+    public int getXBloc(){
+        return bloc.getX()/50;
+    }
+
+    public int getYBloc(){
+        return bloc.getY()/50;
+    }
+
+    public Bloc caseBloc(){
+        return new BlocReflechissant(getXBloc(), getXBloc());
     }
 
 }
