@@ -1,10 +1,6 @@
 package Modele;
 
-import javax.sound.midi.Receiver;
-import javax.swing.*;
 import java.awt.*;
-
-import static java.lang.Math.*;
 import java.util.LinkedList;
 
 public class Plateau {
@@ -96,8 +92,10 @@ public class Plateau {
      * Méthode qui va initialiser le tracage du laser en fonction de son
      * point de départ et de son orientation;
      */
-    public void InitLaser(){
+    public void initLaser(){
+
         for(Laser l : lasers){
+            l.points = new LinkedList<Point>();
             calculerChemin(l);
         }
     }
@@ -150,6 +148,7 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
+        plateau[2][3] = new CaseVisible(new BlocReflechissant(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
