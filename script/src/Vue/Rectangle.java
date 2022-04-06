@@ -19,7 +19,9 @@ public class Rectangle extends JPanel {
             JLabel selectionPanel = null;
             Point selectionlabelposition = null;
             Point panelClickposition = null;
+            //coordonnées en pixels de la nouvelle position du bloc quand il est déplacé avec la souris
             int newX, newY;
+            //coordonnées dans le tableau de la nouvelle position du bloc quand il est déplacé avec la souris
             int newI, newJ;
 
             @Override
@@ -117,13 +119,13 @@ public class Rectangle extends JPanel {
 
     public void Plateau(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        for(int i=0; i < plat.getHeight(); i++){
-            for(int j=0; j < plat.getWidth(); j++){
+        for(int i=1; i < plat.getHeight(); i++){
+            for(int j=1; j < plat.getWidth(); j++){
                 if(plat.getCase(i, j) instanceof CaseVisible){
                     g2.setColor(Color.gray.brighter());
-                    g2.drawRect(50 + j*50, 50 + i*50, 50, 50);
+                    g2.drawRect(j*50, i*50, 50, 50);
                     if(plat.getCase(i, j).BlocPresent()){
-                        g2.fillRect((j-1)*50 + 50, (i-1)*50 + 50, 50, 50);
+                        g2.fillRect(j*50, i*50, 50, 50);
                     }
                 }
             }

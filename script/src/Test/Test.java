@@ -48,7 +48,7 @@ public class Test  {
 
         rects.addMouseListener(rects.ma);
         rects.addMouseMotionListener(rects.ma);
-        for (int i = 0; i <plat.height; i++) {
+        for (int i = 0; i < plat.height; i++) {
             for (int j = 0; j < plat.width; j++) {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
