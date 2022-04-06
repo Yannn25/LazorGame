@@ -7,20 +7,20 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Line2D;
 
-public class Nvue extends JPanel {
+public class Rectangle extends JPanel {
     protected Plateau plat;
-    public JLabel bloc =new JLabel();
-    public static  JLabel pp[]=new JLabel[50];
-    public BlocReflechissant br;
-
-    public Nvue(Plateau p){
+    public JLabel[][] bloc;
+    public MouseAdapter ma;
 
 
+    public Rectangle(Plateau p){
 
-        MouseAdapter ma = new MouseAdapter() {
+            ma = new MouseAdapter() {
             JLabel selectionPanel = null;
             Point selectionlabelposition = null;
             Point panelClickposition = null;
+            int newX, newY;
+            int newI, newJ;
 
             @Override
             public void mousePressed(MouseEvent e) {
@@ -35,9 +35,15 @@ public class Nvue extends JPanel {
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-                System.out.println("x bloc "+selectionPanel.getX());
-                System.out.println("y bloc "+selectionPanel.getY());
+            public void mouseReleased(MouseEvent e) {System.out.println(selectionlabelposition.y/50 + " " + selectionlabelposition.x/50 + " " + selectionPanel.getY()/50 + " " + selectionPanel.getX()/50);
+                if(newI > 0 && newJ > 0 && newJ <= p.getWidth() && newI <= p.getHeight()){
+                    selectionPanel.setLocation((newJ)*50, (newI)*50);
+                    plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
+                    plat.initLaser();
+                    selectionlabelposition.y = newI*50;
+                    selectionlabelposition.x = newJ*50;
+                    repaint();
+                }
 
             }
 
@@ -49,42 +55,19 @@ public class Nvue extends JPanel {
 
                     Point newPanelClickPoint = e.getPoint();
 
-                    final int newX = selectionlabelposition.x + (newPanelClickPoint.x - panelClickposition.x),
-                            newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
-                    selectionPanel.setLocation(newX, newY);
-                    String labelname = this.selectionPanel.getName();
-                    switch (labelname) {
-                        case "Label22":
-
-                            if (this.selectionPanel.getX() <= 80 && this.selectionPanel.getY() <= 80
-                                    || this.selectionPanel.getX() ==130  && this.selectionPanel.getY() <=70
-                                    || this.selectionPanel.getX() <=100  && this.selectionPanel.getY() <=90
-                            ) {
-                                selectionPanel.setLocation(100, 100);
-
-                            }
-
-
-                            if (this.selectionPanel.getX() == 110 && this.selectionPanel.getY() ==  0
-                                    || this.selectionPanel.getY()<=-10 ||
-                                    this.selectionPanel.getX()<=80 && this.selectionPanel.getY()<=0
-                            ) {
-                                selectionPanel.setLocation(100, 0);
-                            }
+                    newX = selectionlabelposition.x + (newPanelClickPoint.x - panelClickposition.x);
+                    newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
+                    newI = newY/50;
+                    newJ = newX/50;
+                    if(newI > 0 && newJ > 0 && newJ <= p.getWidth() && newI <= p.getHeight()){
+                        selectionPanel.setLocation((newJ)*50, (newI)*50);
                     }
 
                 }
             }
         };
-        addMouseListener(ma);
-        addMouseMotionListener(ma);
 
-        bloc.setOpaque(true);
-        bloc.setBackground(Color.BLACK);
-        bloc.setLayout(null);
-        bloc.setBounds(50, 50, 50, 50);
-        bloc.setName("Label22");
-        setComponentZOrder(bloc, 0);
+        bloc = new JLabel[p.getHeight()][p.getWidth()];
 
         this.plat = p;
         setLayout(null);
@@ -118,7 +101,7 @@ public class Nvue extends JPanel {
                     if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
                         if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
                             Point suiv = l.getPoints().get(i+1);
-                            Graphics gpl=(Graphics)g2;
+                            Graphics gpl = (Graphics)g2;
 
                             Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
                             g2.setColor(Color.red);
@@ -138,26 +121,14 @@ public class Nvue extends JPanel {
             for(int j=0; j < plat.getWidth(); j++){
                 if(plat.getCase(i, j) instanceof CaseVisible){
                     g2.setColor(Color.gray.brighter());
-                    g2.drawRect(50+j*50, 50+i*50, 50, 50);
+                    g2.drawRect(50 + j*50, 50 + i*50, 50, 50);
                     if(plat.getCase(i, j).BlocPresent()){
-                        g2.fillRect(j*50, i*50, 50, 50);
+                        g2.fillRect((j-1)*50 + 50, (i-1)*50 + 50, 50, 50);
                     }
                 }
             }
         }
 
-    }
-
-    public int getXBloc(){
-        return bloc.getX()/50;
-    }
-
-    public int getYBloc(){
-        return bloc.getY()/50;
-    }
-
-    public Bloc caseBloc(){
-        return new BlocReflechissant(getXBloc(), getXBloc());
     }
 
 }

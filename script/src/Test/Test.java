@@ -28,7 +28,7 @@ public class Test  {
 
         plat.setLasers(l);
         plat.initdemo();
-        plat.InitLaser();
+        plat.initLaser();
 
 
         //Vue vue = new Vue(plat);
@@ -36,7 +36,7 @@ public class Test  {
 
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
-        rects.setBounds(50,50,300,300);
+        //rects.setBounds(50,50,300,300);
         rects.setBackground(Color.WHITE);
 
         JFrame frame = new JFrame("Rectangles");
@@ -44,6 +44,23 @@ public class Test  {
         frame.add(rects);
         frame.setSize(1000, 1000);
         frame.setLocationRelativeTo(null);
+        frame.setContentPane(rects);
+
+        rects.addMouseListener(rects.ma);
+        rects.addMouseMotionListener(rects.ma);
+        for (int i = 0; i <plat.height; i++) {
+            for (int j = 0; j < plat.width; j++) {
+                if(plat.getCase(i, j).BlocPresent()){
+                    rects.bloc[i][j]=new JLabel();
+                    rects.bloc[i][j].setOpaque(true);
+                    rects.bloc[i][j].setBackground(Color.BLACK);
+                    rects.bloc[i][j].setLayout(null);
+                    rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
+                    rects.bloc[i][j].setName("Label22");
+                    frame.add(rects.bloc[i][j]);
+                }
+            }
+        }
 
         frame.setVisible(true);
 
