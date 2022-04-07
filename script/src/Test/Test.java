@@ -30,6 +30,7 @@ public class Test  {
         plat.initdemo();
         plat.initLaser();
 
+
         //Vue vue = new Vue(plat);
 
 
