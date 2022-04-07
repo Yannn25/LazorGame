@@ -35,9 +35,23 @@ public class CaseVisible extends Case{
 		this.bloc = b;
 	}
 
-	@Override
-	public boolean BlocPresent() {
-		return this.bloc != null;
+	public Bloc getBloc(){
+		return this.bloc;
 	}
+
+	public void enleverBloc(){
+		this.bloc = null;
+	}
+
+	@Override
+	public boolean ajouterBloc(Bloc bloc) {
+		this.bloc = bloc;
+		return true;
+	}
+
+	@Override
+    public boolean BlocPresent() {
+        return this.bloc != null;
+    }
 
 }
