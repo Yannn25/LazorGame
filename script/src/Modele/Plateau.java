@@ -108,7 +108,7 @@ public class Plateau {
         while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
             l.points.add(new Point(i,j));
             angletmp = nouvelAngle(i,j,angletmp);
-           // System.out.println("i: " + i + ", j:" + j);
+            // System.out.println("i: " + i + ", j:" + j);
             if(angletmp == 45){
                 i--;
                 j++;

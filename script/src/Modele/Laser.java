@@ -1,5 +1,6 @@
 package Modele;
 
+import java.awt.List;
 import java.awt.Point;
 import java.util.LinkedList;
 

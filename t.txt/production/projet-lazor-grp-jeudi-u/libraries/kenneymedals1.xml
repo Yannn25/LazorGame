@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="kenneymedals1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/production/script/ressources/kenneymedals.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
