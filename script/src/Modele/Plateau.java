@@ -10,7 +10,7 @@ public class Plateau {
     protected Case[][] plateau;
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected Laser[] lasers; //Tous les lasers du plateau
-    BlocReflechissant b;
+    protected  boolean win;
 
     public Plateau(int height, int width) {
 
@@ -43,27 +43,35 @@ public class Plateau {
     public Cible[] getCibles() {
         return cibles;
     }
-
     public void setCibles(Cible[] cibles) {
         this.cibles = cibles;
+    }
+    public boolean isWin() {
+        return win;
     }
     
     
 
     public boolean winCondtion() {
         boolean res=true;
-        for(Cible c:this.cibles) {
+        for(Cible c : this.cibles) {
             boolean b = false;
             for(Laser l:this.lasers) {
-                if(l.points.contains(c)) {
-                    b=true;
-                    break;
-                }
+                for(Point p : l.points){
+                    if( c.getPoint().x == p.x && c.getPoint().y == p.y) {
+                        b=true;
+                        break;
+                    }
+                } 
             }
             if(!b) {
                 res = false;
                 break;
             }
+        }
+        if(res){
+            System.out.println("VICTOIRE");
+            win = true;
         }
         return res;
     }
@@ -107,6 +115,7 @@ public class Plateau {
             calculerChemin(l);
         }
         CibleAtteinte();
+        winCondtion();
         System.out.println(cibles[0].isAtteint());
     }
 
@@ -161,6 +170,7 @@ public class Plateau {
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
         plateau[2][3] = new CaseVisible(new BlocReflechissant(0, 2));
+       // plateau[5][5] = new CaseVisible(new BlocSemiReflechissant(1, 1));
     }
 
     public int nouvelAngle(int x, int y, int angle) {

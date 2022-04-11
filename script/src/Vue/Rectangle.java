@@ -11,6 +11,7 @@ public class Rectangle extends JPanel {
     protected Plateau plat;
     public JLabel[][] bloc;
     public MouseAdapter ma;
+    public FinDePartie fin;
 
 
     public Rectangle(Plateau p){
@@ -88,6 +89,19 @@ public class Rectangle extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Plateau(g);
+        TraceLaser(g);
+        Cible(g);
+        if(plat.isWin()){
+            fin = new FinDePartie();
+        }
+    }
+    
+    public void TerminerPartie(Graphics g) {
+      
+    }
+    public void paintFin(Graphics g) {
+        //super.paintComponent(g);
         Plateau(g);
         TraceLaser(g);
         Cible(g);

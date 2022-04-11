@@ -19,11 +19,11 @@ public class Test  {
 
     public static void main(String[] args) {
 
-        Plateau plat = new Plateau(8,8);
+        Plateau plat = new Plateau(10,10);
 
         Laser[] l = new Laser[1];
-        l[0] = new Laser(1,2 , 315);
-        int[] res = plat.caseAVerifier(2,3,315);
+        l[0] = new Laser(6,5 , 315);
+        int[] res = plat.caseAVerifier(2,3,135);
         
         Cible[] c = new Cible[1];
         c[0] = new Cible(7, 4);
