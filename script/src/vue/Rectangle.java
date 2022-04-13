@@ -37,8 +37,9 @@ public class Rectangle extends JPanel {
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {System.out.println(selectionlabelposition.y/50 + " " + selectionlabelposition.x/50 + " " + selectionPanel.getY()/50 + " " + selectionPanel.getX()/50);
-                if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight()){
+            public void mouseReleased(MouseEvent e) {
+                if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
+                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                     selectionPanel.setLocation((newJ)*50, (newI)*50);
                     plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
                     plat.initLaser();
@@ -61,7 +62,8 @@ public class Rectangle extends JPanel {
                     newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
                     newI = newY/50;
                     newJ = newX/50;
-                    if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight()){
+                    if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
+                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                         selectionPanel.setLocation((newJ)*50, (newI)*50);
                     }
 
