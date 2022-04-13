@@ -1,6 +1,6 @@
-package Vue;
+package vue;
 
-import Modele.*;
+import modele.*;
 
 import javax.swing.*;
 import java.awt.*;

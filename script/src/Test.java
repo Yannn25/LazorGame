@@ -1,7 +1,5 @@
-package Test;
-
-import Vue.Rectangle;
-import Modele.*;
+import vue.Rectangle;
+import modele.*;
 
 import javax.swing.*;
 import java.awt.*;
