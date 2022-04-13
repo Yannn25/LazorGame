@@ -37,8 +37,8 @@ public class Rectangle extends JPanel {
             }
 
             @Override
-            public void mouseReleased(MouseEvent e) {
-                if(newI > 0 && newJ > 0 && newJ <= p.getWidth() && newI <= p.getHeight()){
+            public void mouseReleased(MouseEvent e) {System.out.println(selectionlabelposition.y/50 + " " + selectionlabelposition.x/50 + " " + selectionPanel.getY()/50 + " " + selectionPanel.getX()/50);
+                if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight()){
                     selectionPanel.setLocation((newJ)*50, (newI)*50);
                     plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
                     plat.initLaser();
@@ -61,7 +61,7 @@ public class Rectangle extends JPanel {
                     newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
                     newI = newY/50;
                     newJ = newX/50;
-                    if(newI > 0 && newJ > 0 && newJ <= p.getWidth() && newI <= p.getHeight()){
+                    if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight()){
                         selectionPanel.setLocation((newJ)*50, (newI)*50);
                     }
 
@@ -90,7 +90,6 @@ public class Rectangle extends JPanel {
         super.paintComponent(g);
         Plateau(g);
         TraceLaser(g);
-        Cible(g);
     }
 
     public void TraceLaser(Graphics g){
@@ -104,6 +103,8 @@ public class Rectangle extends JPanel {
                     if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
                         if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
                             Point suiv = l.getPoints().get(i+1);
+                            Graphics gpl = (Graphics)g2;
+
                             Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 4.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
@@ -130,23 +131,6 @@ public class Rectangle extends JPanel {
             }
         }
 
-    }
-    
-    public void Cible(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        for(int i = 0; i < plat.getCibles().length; i++) {
-            int x = plat.getCibles()[i].getPoint().x;
-            int y = plat.getCibles()[i].getPoint().y;
-            int diametre = 7;
-            if(plat.getCibles()[i].isAtteint()) {
-                g2.setColor(Color.GREEN);
-                g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
-            } else {
-                 g2.setColor(Color.red);
-                 g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
-            }
-               
-        }  
     }
 
 }

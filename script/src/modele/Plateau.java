@@ -40,15 +40,6 @@ public class Plateau {
     public void setLasers(Laser[] l) {
         this.lasers = l;
     }
-    public Cible[] getCibles() {
-        return cibles;
-    }
-
-    public void setCibles(Cible[] cibles) {
-        this.cibles = cibles;
-    }
-    
-    
 
     public boolean winCondtion() {
         boolean res=true;
@@ -81,6 +72,7 @@ public class Plateau {
             getCase(x1, y1).enleverBloc();
             return true;
         }
+
         return false;
     }
 
@@ -106,8 +98,6 @@ public class Plateau {
             l.points = new LinkedList<Point>();
             calculerChemin(l);
         }
-        CibleAtteinte();
-        System.out.println(cibles[0].isAtteint());
     }
 
     //calcule les points touchés par le laser passé en paramètre
@@ -118,6 +108,7 @@ public class Plateau {
         while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
             l.points.add(new Point(i,j));
             angletmp = nouvelAngle(i,j,angletmp);
+           // System.out.println("i: " + i + ", j:" + j);
             if(angletmp == 45){
                 i--;
                 j++;
@@ -139,18 +130,15 @@ public class Plateau {
 
     public void CibleAtteinte(){
         for( Laser l : lasers) {
-            for(int i = 0; i < cibles.length; i++){
-                    cibles[i].atteint = false;
-                }
             for(Point point : l.points){
-                for(int i = 0; i < cibles.length && cibles[i].atteint == false; i++){
+                for(int i = 0; i < cibles.length; i++){
                     if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
                         cibles[i].atteint = true;
                 }
             }
         }
     }
-    
+
     /* Initialisation des plateau un peu commme des niveaux*/
 
     public void initdemo() {
