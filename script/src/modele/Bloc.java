@@ -34,7 +34,7 @@ public abstract class Bloc {
         
         public String getType(){
             return "";
-        } 
+        }
 
-		public abstract int deviationLaser(int x, int y, int angle);
+	public abstract int deviationLaser(int x, int y, int angle);
 }

@@ -114,35 +114,32 @@ public class Plateau {
         int i = l.x;
         int j = l.y;
         int angletmp = l.orientation;
-        while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
-            l.points.add(new Point(i,j));
-            angletmp = nouvelAngle(i,j,angletmp);
-           // System.out.println("i: " + i + ", j:" + j);
-            if(angletmp == 45){
+        while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0) {
+            l.points.add(new Point(i, j));
+            angletmp = nouvelAngle(i, j, angletmp);
+            // System.out.println("i: " + i + ", j:" + j);
+            if (angletmp == 45) {
                 i--;
                 j++;
-            }
-            else if(angletmp == 135){
-                //i--;
-                //j--;
+            } else if (angletmp == 135) {
 
-                int[] coord = caseAVerifier(i, j, angletmp);
-                if (coord!=null && getCase(coord[0], coord[1]).BlocPresent()
-                        && getCase(coord[0], coord[1]).getBloc().getType()=="Opaque"){
-                    System.out.println("i "+i +" j "+j);
+                i--;
+                j--;
 
-
-                }
-            }
-            else if(angletmp == 225){
+            } else if (angletmp == 225) {
                 i++;
                 j--;
-            }
-            else if(angletmp == 315){
+            } else if (angletmp == 315) {
                 i++;
                 j++;
             }
 
+
+            int[] coord = caseAVerifier(i, j, angletmp);
+             if (coord != null && getCase(coord[0], coord[1]).BlocPresent() && getCase(coord[0], coord[1]).getBloc().getType() == "Opaque") {
+                System.out.println("i " + l.getX() + " j " + l.getY());
+
+            }
         }
     }
 
@@ -201,7 +198,7 @@ public class Plateau {
 
 
         if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()
-                && getCase(caseVerif[0], caseVerif[1]).getBloc().getType()=="Opaque") {
+                && getCase(caseVerif[0], caseVerif[1]).getBloc().getType()=="SemiReflechissant") {
             if (x % 2 == 1 && y % 2 == 0) {
                 switch (angle) {
                     case 45:

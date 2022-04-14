@@ -39,7 +39,7 @@ public class Laser {
     }
 
     public int getY(){
-        return this.getY();
+        return this.y;
     }
 
     public void recupPointdeviation(int x ,int yCasVisible){
