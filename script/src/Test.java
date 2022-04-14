@@ -1,4 +1,3 @@
-
 import vue.Rectangle;
 import modele.*;
 
