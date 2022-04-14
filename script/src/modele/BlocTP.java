@@ -11,4 +11,10 @@ public class BlocTP extends Bloc {
         public String getType(){
             return "TP";
         }
+
+
+    @Override
+    public int deviationLaser(int x, int y, int angle){
+        return 0;
+    }   
 }

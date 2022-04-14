@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.*;
+import java.awt.desktop.SystemEventListener;
 import java.util.LinkedList;
 
 public class Plateau {
@@ -122,8 +123,16 @@ public class Plateau {
                 j++;
             }
             else if(angletmp == 135){
-                i--;
-                j--;
+                //i--;
+                //j--;
+
+                int[] coord = caseAVerifier(i, j, angletmp);
+                if (coord!=null && getCase(coord[0], coord[1]).BlocPresent()
+                        && getCase(coord[0], coord[1]).getBloc().getType()=="Opaque"){
+                    System.out.println("i "+i +" j "+j);
+
+
+                }
             }
             else if(angletmp == 225){
                 i++;
@@ -133,6 +142,7 @@ public class Plateau {
                 i++;
                 j++;
             }
+
         }
     }
 
@@ -156,12 +166,14 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[2][3] = new CaseVisible(new BlocReflechissant(0, 2));
+        plateau[2][3] = new CaseVisible(new BlocOpaque(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
+
         int[] caseVerif = caseAVerifier(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()) {
+        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()
+            && getCase(caseVerif[0], caseVerif[1]).getBloc().getType()=="Reflechissant") {
             if (x % 2 == 1 && y % 2 == 0) {
                 switch (angle) {
                     case 45:
@@ -186,7 +198,36 @@ public class Plateau {
                 }
             }
         }
+
+
+        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()
+                && getCase(caseVerif[0], caseVerif[1]).getBloc().getType()=="Opaque") {
+            if (x % 2 == 1 && y % 2 == 0) {
+                switch (angle) {
+                    case 45:
+                        return 135;
+                    case 135:
+                        return 135;
+                    case 225:
+                        return 135;
+                    case 315:
+                        return 135;
+                }
+            } else if (x % 2 == 0 && y % 2 == 1) {
+                switch (angle) {
+                    case 45:
+                        return 135;
+                    case 135:
+                        return 135;
+                    case 225:
+                        return 135;
+                    case 315:
+                        return 135;
+                }
+            }
+        }
         return angle;
+
     }
 
     public int[] caseAVerifier(int x, int y, int angle){

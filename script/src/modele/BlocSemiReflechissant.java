@@ -11,4 +11,9 @@ public class BlocSemiReflechissant extends Bloc {
         public String getType(){
             return "SemiReflechissant";
         }
+
+    @Override
+    public int deviationLaser(int x, int y, int angle){
+        return 0;
+    }   
 }

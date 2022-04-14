@@ -10,5 +10,11 @@ public class BlocPrisme extends Bloc {
     @Override
     public String getType() {
         return "Prisme";
-    }    
+    } 
+
+
+    @Override
+    public int deviationLaser(int x, int y, int angle){
+        return 0;
+    }   
 }
