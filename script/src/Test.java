@@ -1,7 +1,5 @@
-import modele.Laser;
-import modele.Plateau;
-import modele.Cible;
 import vue.Rectangle;
+import modele.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,22 +17,24 @@ public class Test  {
 
     public static void main(String[] args) {
 
-        Plateau plat = new Plateau(8,8);
+        Plateau plat = new Plateau(5,5);
 
         Laser[] l = new Laser[1];
         l[0] = new Laser(1,2 , 315);
-        int[] res = plat.caseAVerifier(2,3,315);
-        
-        Cible[] c = new Cible[1];
-        c[0] = new Cible(7, 4);
+        int[] res = plat.caseAVerifier(2,3,315  );
+        System.out.println("res[0] "+res[0]+" res[1] "+res[1]);
 
         plat.setLasers(l);
-        plat.setCibles(c);
         plat.initdemo();
         plat.initLaser();
 
+
+        //Vue vue = new Vue(plat);
+
+
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
+        //rects.setBounds(50,50,300,300);
         rects.setBackground(Color.WHITE);
 
         JFrame frame = new JFrame("Rectangles");

@@ -1,8 +1,6 @@
 package vue;
 
-import modele.Laser;
-import modele.CaseVisible;
-import modele.Plateau;
+import modele.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +38,8 @@ public class Rectangle extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                if(newI > 0 && newJ > 0 && newJ <= p.getWidth() && newI <= p.getHeight()){
+                if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
+                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                     selectionPanel.setLocation((newJ)*50, (newI)*50);
                     plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
                     plat.initLaser();
@@ -63,7 +62,8 @@ public class Rectangle extends JPanel {
                     newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
                     newI = newY/50;
                     newJ = newX/50;
-                    if(newI > 0 && newJ > 0 && newJ <= p.getWidth() && newI <= p.getHeight()){
+                    if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
+                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                         selectionPanel.setLocation((newJ)*50, (newI)*50);
                     }
 
@@ -92,7 +92,6 @@ public class Rectangle extends JPanel {
         super.paintComponent(g);
         Plateau(g);
         TraceLaser(g);
-        Cible(g);
     }
 
     public void TraceLaser(Graphics g){
@@ -106,6 +105,8 @@ public class Rectangle extends JPanel {
                     if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
                         if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
                             Point suiv = l.getPoints().get(i+1);
+                            Graphics gpl = (Graphics)g2;
+
                             Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 4.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
