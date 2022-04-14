@@ -193,3 +193,7 @@ gradle-app.setting
 
 # intelliji
 .idea
+*.iml
+
+#netbeans
+nbproject
