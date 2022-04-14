@@ -65,9 +65,8 @@ public class Plateau {
      * @return
      */
     public boolean deplacerBloc(int x1,int y1,int x2,int y2) {
-        if (!getCase(x2, y2).BlocPresent() &&
-                !(getCase(x1, y1) instanceof CaseCachee) &&
-                !(getCase(x2, y2) instanceof CaseCachee)){
+
+        if (deplacementPossible(x1, y1, x2, y2) && !(x1 == x2 && y1 == y2)){
             getCase(x2, y2).ajouterBloc(getCase(x1, y1).getBloc());
             getCase(x1, y1).enleverBloc();
             return true;
@@ -84,7 +83,7 @@ public class Plateau {
      * @return vrai si il est possible de placer un bloc
      * sur la case en question
      */
-    public boolean DeplacerSurCase(int x, int y){
+    public boolean estVisible(int x, int y){
         return plateau[x][y] instanceof CaseVisible;
     }
 
@@ -98,6 +97,15 @@ public class Plateau {
             l.points = new LinkedList<Point>();
             calculerChemin(l);
         }
+    }
+
+    public boolean deplacementPossible(int x1, int y1, int x2, int y2){
+        if(x1 == x2 && y1 == y2){
+            return true;
+        }
+        return !(getCase(x1, y1) instanceof CaseCachee) &&
+        !(getCase(x2, y2) instanceof CaseCachee) &&
+        !getCase(x2, y2).BlocPresent();
     }
 
     //calcule les points touchés par le laser passé en paramètre
