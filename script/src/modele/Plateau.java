@@ -11,6 +11,7 @@ public class Plateau {
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected Laser[] lasers; //Tous les lasers du plateau
     BlocReflechissant b;
+    protected  boolean win;
 
     public Plateau(int height, int width) {
 
@@ -40,29 +41,38 @@ public class Plateau {
     public void setLasers(Laser[] l) {
         this.lasers = l;
     }
-
-    public void setCibles(Cible[] cibles) {
-        this.cibles = cibles;
-    }
     public Cible[] getCibles() {
         return cibles;
     }
-    
+    public void setCibles(Cible[] cibles) {
+        this.cibles = cibles;
+    }
+    public boolean isWin() {
+        return win;
+    }    
+
+
 
     public boolean winCondtion() {
         boolean res=true;
-        for(Cible c:this.cibles) {
+        for(Cible c : this.cibles) {
             boolean b = false;
             for(Laser l:this.lasers) {
-                if(l.points.contains(c)) {
-                    b=true;
-                    break;
-                }
+                for(Point p : l.points){
+                    if( c.getPoint().x == p.x && c.getPoint().y == p.y) {
+                        b=true;
+                        break;
+                    }
+                } 
             }
             if(!b) {
                 res = false;
                 break;
             }
+        }
+        if(res){
+            System.out.println("VICTOIRE");
+            win = true;
         }
         return res;
     }
@@ -105,7 +115,11 @@ public class Plateau {
             l.points = new LinkedList<Point>();
             calculerChemin(l);
         }
+        CibleAtteinte();
+        winCondtion();
+        System.out.println(cibles[0].isAtteint());
     }
+
 
     public boolean deplacementPossible(int x1, int y1, int x2, int y2){
         if(x1 == x2 && y1 == y2){
@@ -146,8 +160,11 @@ public class Plateau {
 
     public void CibleAtteinte(){
         for( Laser l : lasers) {
+            for(int i = 0; i < cibles.length; i++){
+                    cibles[i].atteint = false;
+                }
             for(Point point : l.points){
-                for(int i = 0; i < cibles.length; i++){
+                for(int i = 0; i < cibles.length && cibles[i].atteint == false; i++){
                     if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
                         cibles[i].atteint = true;
                 }
