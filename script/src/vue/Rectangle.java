@@ -147,7 +147,9 @@ public class Rectangle extends JPanel {
                  g2.setColor(Color.red);
                  g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
             }
-               
+           
+            
+            
         }  
     }
 
