@@ -134,6 +134,25 @@ public class Rectangle extends JPanel {
         }
 
     }
+    
+    public void Cible(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        for(int i = 0; i < plat.getCibles().length; i++) {
+            int x = plat.getCibles()[i].getPoint().x;
+            int y = plat.getCibles()[i].getPoint().y;
+            int diametre = 7;
+            if(plat.getCibles()[i].isAtteint()) {
+                g2.setColor(Color.GREEN);
+                g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
+            } else {
+                 g2.setColor(Color.red);
+                 g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
+            }
+           
+            
+            
+        }  
+    }
 
 }
 
