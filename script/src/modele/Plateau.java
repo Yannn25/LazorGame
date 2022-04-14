@@ -41,6 +41,14 @@ public class Plateau {
         this.lasers = l;
     }
 
+    public void setCibles(Cible[] cibles) {
+        this.cibles = cibles;
+    }
+    public Cible[] getCibles() {
+        return cibles;
+    }
+    
+
     public boolean winCondtion() {
         boolean res=true;
         for(Cible c:this.cibles) {
