@@ -21,12 +21,18 @@ public class Test  {
 
         Laser[] l = new Laser[1];
         l[0] = new Laser(1,2 , 315);
+
+
         int[] res = plat.caseAVerifier(2,3,315  );
         System.out.println("res[0] "+res[0]+" res[1] "+res[1]);
 
         plat.setLasers(l);
         plat.initdemo();
         plat.initLaser();
+
+
+
+
 
 
         //Vue vue = new Vue(plat);
@@ -51,10 +57,15 @@ public class Test  {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
                     rects.bloc[i][j].setOpaque(true);
-                    rects.bloc[i][j].setBackground(Color.BLACK);
+                    rects.bloc[i][j].setBackground(Color.LIGHT_GRAY);
                     rects.bloc[i][j].setLayout(null);
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     rects.bloc[i][j].setName("Label22");
+                    rects.bloc[i][j].setText("BlocRaf");
+                    if (i==2 && j==3){
+                        rects.bloc[i][j].setBackground(Color.BLUE);
+                        rects.bloc[i][j].setText("BlocAB");
+                    }
                     frame.add(rects.bloc[i][j]);
                 }
             }
