@@ -113,9 +113,9 @@ public class Plateau {
     public void initLaser(){
         for(Laser l : lasers){
             if (l!=null){
-                l.points = new LinkedList<Point>();
-                tablasers.add(lasers);
-                calculerChemin(l); 
+               l.points = new LinkedList<Point>();
+               tablasers.add(lasers);
+               calculerChemin(l);
             }
         }
         CibleAtteinte();
@@ -157,7 +157,6 @@ public class Plateau {
              }
             l.points.add(new Point(i,j));
             angletmp = nouvelAngle(i, j, angletmp);
-            // System.out.println("i: " + i + ", j:" + j);
             if (angletmp == 45) {
                 i--;
                 j++;
@@ -177,12 +176,6 @@ public class Plateau {
                 j++;
 
             }
-//            else if (angletmp==0){
-//                System.out.println("i "+i +" j "+j);
-//                i=1-i;
-//                j=1-j;
-//                System.out.println("i "+i +" j "+j);
-//            }
 
         }
 
