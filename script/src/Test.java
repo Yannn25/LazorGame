@@ -51,7 +51,28 @@ public class Test  {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
                     rects.bloc[i][j].setOpaque(true);
-                    rects.bloc[i][j].setBackground(Color.BLACK);
+                    switch(plat.getCase(i, j).getType()){
+                            case "Reflechissant" :
+                                rects.bloc[i][j].setBackground(Color.gray.darker());
+                                break;
+                            case "Opaque" :
+                                rects.bloc[i][j].setBackground(Color.blue.darker());
+                                break;
+                            case "TP" :
+                                rects.bloc[i][j].setBackground(Color.yellow);
+                                break;
+                            case "SemiReflechissant" :
+                                rects.bloc[i][j].setBackground(Color.cyan.brighter());
+                                break;
+                            case "Prisme" :
+                                rects.bloc[i][j].setBackground(Color.ORANGE.brighter());
+                                break;
+                            case "" :
+                                rects.bloc[i][j].setBackground(Color.MAGENTA.brighter());
+                                break;
+                            default : rects.bloc[i][j].setBackground(Color.black);
+                            break;
+                        }
                     rects.bloc[i][j].setLayout(null);
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     rects.bloc[i][j].setName("Label22");

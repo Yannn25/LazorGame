@@ -98,16 +98,8 @@ public class Rectangle extends JPanel {
             fin = new FinDePartie();
         }
     }
-    
-    public void TerminerPartie(Graphics g) {
-      
-    }
-    public void paintFin(Graphics g) {
-        //super.paintComponent(g);
-        Plateau(g);
-        TraceLaser(g);
-        Cible(g);
-    }
+
+        
 
     public void TraceLaser(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
@@ -162,9 +154,7 @@ public class Rectangle extends JPanel {
             } else {
                  g2.setColor(Color.red);
                  g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
-            }
-               
+            }    
         }  
     }
-
 }

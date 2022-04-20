@@ -54,4 +54,9 @@ public class CaseVisible extends Case{
         return this.bloc != null;
     }
 
+    @Override
+    public String getType() {
+        return "";
+    }
+
 }

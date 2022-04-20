@@ -7,8 +7,18 @@ public class BlocTP extends Bloc {
 		super(x,y,false);
 	}
         
+        public BlocTP(){
+            super(0,0,false);
+        }
+        
         @Override
         public String getType(){
             return "TP";
         }
+
+
+    @Override
+    public int deviationLaser(int x, int y, int angle){
+        return 0;
+    }   
 }

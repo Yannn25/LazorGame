@@ -20,4 +20,9 @@ public class CaseCachee extends Case {
         return false;
     }
 
+    @Override
+    public String getType() {
+        return "";
+    }
+
 }
