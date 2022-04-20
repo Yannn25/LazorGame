@@ -1,5 +1,4 @@
 import vue.Rectangle;
-import modele.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,7 +16,7 @@ public class Test  {
 
     public static void main(String[] args) {
 
-        Plateau plat = new Plateau(5,5);
+        Plateau plat = new Plateau(10,10);
 
         Laser[] l = new Laser[1];
         l[0] = new Laser(1,2 , 315);
@@ -27,6 +26,7 @@ public class Test  {
         System.out.println("res[0] "+res[0]+" res[1] "+res[1]);
 
         plat.setLasers(l);
+        plat.setCibles(c);
         plat.initdemo();
         plat.initLaser();
 
@@ -40,7 +40,6 @@ public class Test  {
 
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
-        //rects.setBounds(50,50,300,300);
         rects.setBackground(Color.WHITE);
 
         JFrame frame = new JFrame("Rectangles");
