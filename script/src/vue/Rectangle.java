@@ -37,16 +37,18 @@ public class Rectangle extends JPanel {
             }
         }
 
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
-            p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
-                selectionPanel.setLocation((newJ)*50, (newI)*50);
-                plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
-                plat.initLaser();
-                selectionlabelposition.y = newI*50;
-                selectionlabelposition.x = newJ*50;
-                repaint();
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
+                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+                    selectionPanel.setLocation((newJ)*50, (newI)*50);
+                    plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
+                    plat.initLaser();
+                    selectionlabelposition.y = newI*50;
+                    selectionlabelposition.x = newJ*50;
+                    repaint();
+                }
+
             }
 
         }
@@ -57,7 +59,14 @@ public class Rectangle extends JPanel {
                     && selectionlabelposition != null
                     && panelClickposition != null && selectionPanel.getName() != "null") {
 
-                Point newPanelClickPoint = e.getPoint();
+                    newX = selectionlabelposition.x + (newPanelClickPoint.x - panelClickposition.x);
+                    newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
+                    newI = newY/50;
+                    newJ = newX/50;
+                    if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
+                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+                        selectionPanel.setLocation((newJ)*50, (newI)*50);
+                    }
 
                 newX = selectionlabelposition.x + (newPanelClickPoint.x - panelClickposition.x);
                 newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);

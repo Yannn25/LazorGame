@@ -10,8 +10,8 @@ public class Plateau {
     protected Case[][] plateau;
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected Laser[] lasers; //Tous les lasers du plateau
-    BlocReflechissant b;
-    protected  boolean win;
+    Bloc b;
+    LinkedList<Laser[]> tablasers = new LinkedList<>();
 
     public Plateau(int height, int width) {
 
@@ -110,10 +110,12 @@ public class Plateau {
      * point de départ et de son orientation;
      */
     public void initLaser(){
-
         for(Laser l : lasers){
-            l.points = new LinkedList<Point>();
-            calculerChemin(l);
+            if (l!=null){
+               l.points = new LinkedList<Point>();
+               tablasers.add(lasers);
+               calculerChemin(l);
+            }
         }
         CibleAtteinte();
         winCondtion();
@@ -130,35 +132,60 @@ public class Plateau {
         !getCase(x2, y2).BlocPresent();
     }
 
+    public void addLaser(){
+
+    }
+
+    public boolean deplacementPossible(int x1, int y1, int x2, int y2){
+        if(x1 == x2 && y1 == y2){
+            return true;
+        }
+        return !(getCase(x1, y1) instanceof CaseCachee) &&
+        !(getCase(x2, y2) instanceof CaseCachee) &&
+        !getCase(x2, y2).BlocPresent();
+    }
+
     //calcule les points touchés par le laser passé en paramètre
     public void calculerChemin(Laser l){
         int i = l.x;
         int j = l.y;
         int angletmp = l.orientation;
-        while(i <= 2*this.height && j <= 2*this.width && i >= 0 && j >= 0){
-            l.points.add(new Point(i,j));
-            angletmp = nouvelAngle(i,j,angletmp);
-           // System.out.println("i: " + i + ", j:" + j);
-            if(angletmp == 45){
+        while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
+            l.points.add(new Point(i,j ));
+            angletmp = nouvelAngle(i, j, angletmp);
+            // System.out.println("i: " + i + ", j:" + j);
+            if (angletmp == 45) {
                 i--;
                 j++;
-            }
-            else if(angletmp == 135){
+            } else if (angletmp == 135) {
+
                 i--;
                 j--;
-            }
-            else if(angletmp == 225){
+
+            } else if (angletmp == 225) {
+
                 i++;
                 j--;
-            }
-            else if(angletmp == 315){
+
+            } else if (angletmp == 315) {
+
                 i++;
                 j++;
+
             }
+            else if (angletmp==0){
+                System.out.println("i "+i +" j "+j);
+                i=1-i;
+                j=1-j;
+                System.out.println("i "+i +" j "+j);
+            }
+
         }
+
     }
 
     public void CibleAtteinte(){
+
         for( Laser l : lasers) {
             for(int i = 0; i < cibles.length; i++){
                     cibles[i].atteint = false;
@@ -181,37 +208,31 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[2][3] = new CaseVisible(new BlocReflechissant(0, 2));
+        plateau[2][3] = new CaseVisible(new BlocSemiReflechissant(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
+
         int[] caseVerif = caseAVerifier(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()) {
-            if (x % 2 == 1 && y % 2 == 0) {
-                switch (angle) {
-                    case 45:
-                        return 135;
-                    case 135:
-                        return 45;
-                    case 225:
-                        return 315;
-                    case 315:
-                        return 225;
+        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
+
+        String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+
+            switch (nomBloc){
+                case "Reflechissant":{
+                    b=new BlocReflechissant(0, 0);
+                    return b.deviationLaser(x, y,angle );
+
                 }
-            } else if (x % 2 == 0 && y % 2 == 1) {
-                switch (angle) {
-                    case 45:
-                        return 315;
-                    case 135:
-                        return 225;
-                    case 225:
-                        return 135;
-                    case 315:
-                        return 45;
+                case "SemiReflechissant":{
+                    BlocSemiReflechissant br =new BlocSemiReflechissant(0,0);
+
+                    return 0;
                 }
             }
         }
-        return angle;
+        return angle ;
+
     }
 
     public int[] caseAVerifier(int x, int y, int angle){

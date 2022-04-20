@@ -5,7 +5,7 @@ import javax.swing.*;
 public abstract class Bloc {
 
 	protected int x,y;		//Postion du bloc dans le tableau
-	final boolean fixe;		//S'il est initialisé à true alors le bloc n'est pas déplaçable
+	final boolean fixe;//S'il est initialisé à true alors le bloc n'est pas déplaçable
 	
 	public Bloc(int x, int y, boolean fixe) {
 		
@@ -34,5 +34,7 @@ public abstract class Bloc {
         
         public String getType(){
             return "";
-        } 
+        }
+
+	public abstract int deviationLaser(int x, int y, int angle);
 }

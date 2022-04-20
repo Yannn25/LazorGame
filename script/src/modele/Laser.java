@@ -34,6 +34,14 @@ public class Laser {
 
     }
 
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
     public void recupPointdeviation(int x ,int yCasVisible){
         for (Point pt: points){
 

@@ -1,6 +1,3 @@
-import modele.Plateau;
-import modele.Cible;
-import modele.Laser;
 import vue.Rectangle;
 
 import javax.swing.*;
@@ -22,16 +19,24 @@ public class Test  {
         Plateau plat = new Plateau(10,10);
 
         Laser[] l = new Laser[1];
-        l[0] = new Laser(6,5 , 315);
-        int[] res = plat.caseAVerifier(2,3,135);
-        
-        Cible[] c = new Cible[1];
-        c[0] = new Cible(7, 4);
+        l[0] = new Laser(1,2 , 315);
+
+
+        int[] res = plat.caseAVerifier(2,3,315  );
+        System.out.println("res[0] "+res[0]+" res[1] "+res[1]);
 
         plat.setLasers(l);
         plat.setCibles(c);
         plat.initdemo();
         plat.initLaser();
+
+
+
+
+
+
+        //Vue vue = new Vue(plat);
+
 
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
@@ -51,10 +56,15 @@ public class Test  {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
                     rects.bloc[i][j].setOpaque(true);
-                    rects.bloc[i][j].setBackground(Color.BLACK);
+                    rects.bloc[i][j].setBackground(Color.LIGHT_GRAY);
                     rects.bloc[i][j].setLayout(null);
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     rects.bloc[i][j].setName("Label22");
+                    rects.bloc[i][j].setText("BlocRaf");
+                    if (i==2 && j==3){
+                        rects.bloc[i][j].setBackground(Color.BLUE);
+                        rects.bloc[i][j].setText("BlocAB");
+                    }
                     frame.add(rects.bloc[i][j]);
                 }
             }
