@@ -24,12 +24,11 @@ public class Test  {
         Plateau plat = new Plateau(10,10);
 
         Laser[] l = new Laser[1];
-        l[0] = new Laser(6,5 , 315);
+        l[0] = new Laser(6,7 , 315);
 
 
         Cible [] c = new Cible[1];
         c[0] = new Cible(7, 4);
-System.out.println("marchemarche");
 
         plat.setLasers(l);
         plat.setCibles(c);

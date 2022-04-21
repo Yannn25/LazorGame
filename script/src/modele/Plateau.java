@@ -143,7 +143,7 @@ public class Plateau {
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
             l.points.add(new Point(i,j));
             oldtmp = angletmp;
-            angletmp = nouvelAngle(i, j, angletmp);
+            angletmp = nouvelAngle(i, j, angletmp,l);
             if (angletmp == 90 ) {
                 l.points.add(new Point(i, j+2));
                 j += 2;
@@ -182,7 +182,7 @@ public class Plateau {
                 i++;
                 j++;
 
-            } else if (angletmp==0) {
+            } else if (angletmp == -1) {
                 i=1-i;
                 j=1-j;
             }
@@ -219,30 +219,27 @@ public class Plateau {
         plateau[2][3] = new CaseVisible(new BlocOpaque());
     }
 
-    public int nouvelAngle(int x, int y, int angle) {
+    public int nouvelAngle(int x, int y, int angle, Laser l) {
 
         int[] caseVerif = caseAVerifier(x, y, angle);
         int[] Prisme = casePrisme(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
-
-            //String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
-            //System.out.println(nomBloc);
-            
+        if(caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
+            String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+            if("SemiReflechissant".equals(nomBloc)){
+                 SemiReflection(x, y,angle,l);
+                 b=getCase(caseVerif[0], caseVerif[1]).getBloc();
+                 return b.deviationLaser(x, y,angle);
+            }
+        }
+        if(caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
             b=getCase(caseVerif[0], caseVerif[1]).getBloc();
             return b.deviationLaser(x, y,angle);
-
-        }
-        if (Prisme != null && getCase(Prisme[0], Prisme[1]).BlocPresent()){
-
-            //String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
-            //System.out.println(nomBloc);
-            
+        }  
+        if(Prisme != null && getCase(Prisme[0], Prisme[1]).BlocPresent()){
             b=getCase(Prisme[0], Prisme[1]).getBloc();
             return b.deviationLaser(x, y,angle );
-
         }
         return angle ;
-
     }
 
     public int[] caseAVerifier(int x, int y, int angle){
@@ -305,4 +302,34 @@ public class Plateau {
         return res;
     }
     
-}
+    public void SemiReflection(int x, int y, int angle, Laser l){
+        int i = x;
+        int j = y;
+       // int angletmp = angle;
+        while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
+            l.points.add(new Point(i,j));
+            //angletmp = nouvelAngle(i, j, angletmp,l);
+            switch (angle) {
+                case 45:
+                    i--;
+                    j++;
+                    break;
+                case 135:
+                    i--;
+                    j--;
+                    break;
+                case 225:
+                    i++;
+                    j--;
+                    break;
+                case 315:
+                    i++;
+                    j++;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    
+} 
