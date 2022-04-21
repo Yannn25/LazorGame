@@ -149,9 +149,19 @@ public class Plateau {
                 j += 2;
                 angletmp = oldtmp;
             }
+            if(angletmp == 270){
+                l.points.add(new Point(i, j-2));
+                j -= 2;
+                angletmp = oldtmp;
+            }
             if(angletmp == 180) {
                 l.points.add(new Point(i+2, j));
                 i+=2;
+                angletmp = oldtmp;
+            }
+            if(angletmp == 0){
+                l.points.add(new Point(i-2, j));
+                i-=2;
                 angletmp = oldtmp;
             }
             if (angletmp == 45) {
