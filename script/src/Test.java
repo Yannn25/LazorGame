@@ -22,7 +22,7 @@ public class Test  {
         Plateau plat = new Plateau(10,10);
 
         Laser[] l = new Laser[1];
-        l[0] = new Laser(1,2 , 315);
+        l[0] = new Laser(2,3 , 315);
 
 
         Cible [] c = new Cible[1];
@@ -53,35 +53,49 @@ public class Test  {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
                     rects.bloc[i][j].setOpaque(true);
-                    switch(plat.getCase(i, j).getType()){
-                            case "Reflechissant" :
-                                rects.bloc[i][j].setBackground(Color.gray.darker());
-                                break;
-                            case "Opaque" :
-                                rects.bloc[i][j].setBackground(Color.blue.darker());
-                                break;
-                            case "TP" :
-                                rects.bloc[i][j].setBackground(Color.yellow);
-                                break;
-                            case "SemiReflechissant" :
-                                rects.bloc[i][j].setBackground(Color.cyan.brighter());
-                                break;
-                            case "Prisme" :
-                                rects.bloc[i][j].setBackground(Color.ORANGE.brighter());
-                                break;
-                            case "" :
-                                rects.bloc[i][j].setBackground(Color.MAGENTA.brighter());
-                                break;
-                            default : rects.bloc[i][j].setBackground(Color.black);
-                            break;
-                        }
                     rects.bloc[i][j].setLayout(null);
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     rects.bloc[i][j].setName("Label22");
-                    rects.bloc[i][j].setText("BlocRaf");
+                    System.out.println(plat.getCase(i, j).getType());
+//                    switch(plat.getCase(i, j).getType()){
+//                            case "Reflechissant" :
+//                                rects.bloc[i][j].setBackground(Color.gray.darker());
+//                                rects.bloc[i][j].setText("BlocR");
+//                                break;
+//                            case "Opaque" :
+//                                rects.bloc[i][j].setBackground(Color.blue.darker());
+//                                rects.bloc[i][j].setText("BlocO");
+//                                break;
+//                            case "TP" :
+//                                rects.bloc[i][j].setBackground(Color.yellow);
+//                                rects.bloc[i][j].setText("BlocTP");
+//                                break;
+//                            case "SemiReflechissant" :
+//                                rects.bloc[i][j].setBackground(Color.cyan.brighter());
+//                                rects.bloc[i][j].setText("BlocSR");
+//                                break;
+//                            case "Prisme" :
+//                                rects.bloc[i][j].setBackground(Color.ORANGE.brighter());
+//                                rects.bloc[i][j].setText("BlocP");
+//                                break;
+////                            case "" :
+////                                rects.bloc[i][j].setBackground(Color.MAGENTA.brighter());
+////                                break;
+//                            default : rects.bloc[i][j].setBackground(Color.black);
+//                            break;
+//                        }
+                      rects.bloc[i][j].setText("BlocRaf");
                     if (i==2 && j==3){
-                        rects.bloc[i][j].setBackground(Color.BLUE);
-                        rects.bloc[i][j].setText("BlocAB");
+                        rects.bloc[i][j].setBackground(Color.BLUE.darker());
+                        rects.bloc[i][j].setText("OPaque");
+                    }
+                    if (i==5 && j==5){
+                        rects.bloc[i][j].setBackground(Color.cyan);
+                        rects.bloc[i][j].setText("Prisme");
+                    }
+                    if (i==7 && j==7){
+                        rects.bloc[i][j].setBackground(Color.orange.brighter());
+                        rects.bloc[i][j].setText("SemiRefl");
                     }
                     frame.add(rects.bloc[i][j]);
                 }

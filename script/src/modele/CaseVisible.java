@@ -13,32 +13,18 @@ public class CaseVisible extends Case{
 		this.bloc=bloc;
 	}
 
-	/*
-	 * Affichage dans le terminal d'une Case Visible
-	 */
-	@Override
-	public void afficheCase() {
-		if(this.bloc != null){
-			afficheBloc();
-		}
-		System.out.print("|__|");
-	}
 
-	/*
-	 * Affichage d'un bloc
-	 */
-	public void afficheBloc(){
-		System.out.print("| BLOC |  ");
-	}
-
+        @Override
 	public void setBloc(Bloc b){
 		this.bloc = b;
 	}
 
+        @Override
 	public Bloc getBloc(){
 		return this.bloc;
 	}
 
+        @Override
 	public void enleverBloc(){
 		this.bloc = null;
 	}

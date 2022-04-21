@@ -17,6 +17,6 @@ public class BlocOpaque extends Bloc {  //Le bloc Opaque ne reflechit pas la lum
     
     @Override
     public int deviationLaser(int x, int y, int angle){
-        return 0;
+        return -1;
     }
 }

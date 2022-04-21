@@ -18,7 +18,7 @@ public class BlocSemiReflechissant extends Bloc {
 
     @Override
     public int deviationLaser(int x, int y, int angle){
-        return angle;
+        return 225;
     }
 
     public int[] autredev(int x, int y, int angle){

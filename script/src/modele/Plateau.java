@@ -139,24 +139,21 @@ public class Plateau {
         int i = l.x;
         int j = l.y;
         int angletmp = l.orientation;
-        int[] caseVerif = caseAVerifier(i, j, angletmp);
+        int oldtmp = angletmp;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
-             if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()
-                     && "Prisme".equals(getCase(caseVerif[0], caseVerif[1]).getType())){
-                     if(j % 2 == 1){
-                         if(angletmp == 315 || angletmp == 225)
-                             l.points.add(new Point(i+2, j));
-                         else if(angletmp == 45 || angletmp == 135)
-                             l.points.add(new Point(j-2, j));
-                     } else if(i % 2 == 1){
-                         if(angletmp == 315 || angletmp == 45)
-                             l.points.add(new Point(i, j+2));
-                         else if(angletmp == 225 || angletmp == 135)
-                             l.points.add(new Point(j-2, j));
-                     }
-             }
             l.points.add(new Point(i,j));
+            oldtmp = angletmp;
             angletmp = nouvelAngle(i, j, angletmp);
+            if (angletmp == 90 ) {
+                l.points.add(new Point(i, j+2));
+                j += 2;
+                angletmp = oldtmp;
+            }
+            if(angletmp == 180) {
+                l.points.add(new Point(i+2, j));
+                i+=2;
+                angletmp = oldtmp;
+            }
             if (angletmp == 45) {
                 i--;
                 j++;
@@ -175,8 +172,10 @@ public class Plateau {
                 i++;
                 j++;
 
+            } else if (angletmp==0) {
+                i=1-i;
+                j=1-j;
             }
-
         }
 
     }
@@ -204,33 +203,33 @@ public class Plateau {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[5][5] = new CaseVisible(new BlocPrisme(0, 3));
-        plateau[2][3] = new CaseVisible(new BlocSemiReflechissant(0, 2));
+        plateau[3][3] = new CaseVisible(new BlocReflechissant());
+        plateau[5][5] = new CaseVisible(new BlocPrisme());
+        plateau[7][7] = new CaseVisible(new BlocSemiReflechissant());
+        plateau[2][3] = new CaseVisible(new BlocOpaque());
     }
 
     public int nouvelAngle(int x, int y, int angle) {
 
         int[] caseVerif = caseAVerifier(x, y, angle);
+        int[] Prisme = casePrisme(x, y, angle);
         if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
 
-        String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+            //String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+            //System.out.println(nomBloc);
+            
+            b=getCase(caseVerif[0], caseVerif[1]).getBloc();
+            return b.deviationLaser(x, y,angle);
 
-            switch (nomBloc){
-                case "Reflechissant":
-                    b=new BlocReflechissant(0, 0);
-                    return b.deviationLaser(x, y,angle );
+        }
+        if (Prisme != null && getCase(Prisme[0], Prisme[1]).BlocPresent()){
 
-                case "SemiReflechissant":
-                    BlocSemiReflechissant br =new BlocSemiReflechissant(0,0);
-                    return br.deviationLaser(x, y, angle);
-                
-                case "Prisme" : 
-                    b = new BlocPrisme(0, 0);
-                    return b.deviationLaser(x, y, angle);
-                    
-                default : return angle;
-            }
+            //String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+            //System.out.println(nomBloc);
+            
+            b=getCase(Prisme[0], Prisme[1]).getBloc();
+            return b.deviationLaser(x, y,angle );
+
         }
         return angle ;
 
@@ -266,34 +265,34 @@ public class Plateau {
         return res;
     }
     
-//    public int[] caseAPrisme(int x, int y, int angle){
-//        int[] res = new int[2];
-//        if(x < 0 || y < 0 || x >= 2*this.height || y >= 2*this.width){
-//            return null;
-//        }
-//        if(x%2 == 1){
-//            if(angle == 45 || angle == 315){
-//                res[0] = (x+1)/2;
-//                res[1] = (y+2)/2;
-//            }
-//            else if(angle == 225 || angle == 135){
-//                res[0] = (x+1)/2;
-//                res[1] = (y)/2;
-//            }
-//        }
-//        else if(y%2 == 1){
-//            if(angle == 45 || angle == 135){
-//                res[0] = (x)/2;
-//                res[1] = (y+1)/2;
-//            }
-//            else if(angle == 225 || angle == 315){
-//                res[0] = (x+2)/2;
-//                res[1] = (y+1)/2;
-//            }
-//        }
-//        if(res[0] >= this.height || res[1] >= this.width)
-//            return null;
-//        return res;
-//    }
+    public int[] casePrisme(int x, int y, int angle){
+        int[] res = new int[2];
+        if(x < 0 || y < 0 || x >= 2*this.height || y >= 2*this.width){
+            return null;
+        }
+        if(x%2 == 1){
+            if(angle == 45 || angle == 315){
+                res[0] = (x+1);
+                res[1] = y;
+            }
+            else if(angle == 225 || angle == 135){
+                res[0] = x-1;
+                res[1] = y;
+            }
+        }
+        else if(y%2 == 1){
+            if(angle == 45 || angle == 135){
+                res[0] = x;
+                res[1] = y-1;
+            }
+            else if(angle == 225 || angle == 315){
+                res[0] = x;
+                res[1] = y+1;
+            }
+        }
+        if(res[0] >= this.height || res[1] >= this.width || res[0] <= 0 || res[1] <= 0)
+            return null;
+        return res;
+    }
     
 }
