@@ -15,7 +15,7 @@ public class Rectangle extends JPanel {
 
     public Rectangle(Plateau p){
 
-            ma = new MouseAdapter() {
+        ma = new MouseAdapter() {
             JLabel selectionPanel = null;
             Point selectionlabelposition = null;
             Point panelClickposition = null;
@@ -39,7 +39,7 @@ public class Rectangle extends JPanel {
             @Override
             public void mouseReleased(MouseEvent e) {
                 if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
-                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+                        p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                     selectionPanel.setLocation((newJ)*50, (newI)*50);
                     plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
                     plat.initLaser();
@@ -63,7 +63,7 @@ public class Rectangle extends JPanel {
                     newI = newY/50;
                     newJ = newX/50;
                     if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
-                p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+                            p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                         selectionPanel.setLocation((newJ)*50, (newI)*50);
                     }
 
@@ -109,12 +109,12 @@ public class Rectangle extends JPanel {
                         Graphics gpl = (Graphics)g2;
 
                         Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
-                            g2.setColor(Color.red);
-                            g2.setStroke(new BasicStroke((float) 4.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
-                            g2.draw(line);
-                            Line2D lin = new Line2D.Float(50 + 9*25,50 + 0*25, 50 + 2*25, 50 + 3*25);
-                            g2.setColor(Color.BLUE);
-                           // g2.draw(lin);
+                        g2.setColor(Color.red);
+                        g2.setStroke(new BasicStroke((float) 4.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
+                        g2.draw(line);
+                        Line2D lin = new Line2D.Float(50 + 9*25,50 + 0*25, 50 + 2*25, 50 + 3*25);
+                        g2.setColor(Color.BLUE);
+                        // g2.draw(lin);
                     }
                 }
             }

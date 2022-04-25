@@ -1,5 +1,6 @@
+import modele.Laser;
+import modele.Plateau;
 import vue.Rectangle;
-import modele.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,27 +14,18 @@ public class Test  {
 
         LinkedList<Laser[]> tablaser = new LinkedList<>();
         LinkedList<Laser> l = new LinkedList<Laser>();
-        l.add(new Laser(4,5, 45));
-        l.add(new Laser(3,2, 315));
+        l.add(new Laser(4, 5, 45));
+        l.add(new Laser(3, 2, 315));
 
-        Plateau plat = new Plateau(5,5,l);
-
-        //plat.setLasers(l1);
+        Plateau plat = new Plateau(5, 5, l);
         plat.initdemo();
         plat.initLaser();
-
-
-
-
-
-
 
         //Vue vue = new Vue(plat);
 
 
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
-        //rects.setBounds(50,50,300,300);
         rects.setBackground(Color.WHITE);
 
         JFrame frame = new JFrame("Rectangles");

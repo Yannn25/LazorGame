@@ -1,3 +1,4 @@
+
 package vue;
 
 import java.awt.Point;
@@ -22,3 +23,4 @@ public class FinDePartie extends JDialog {
     
     
 }
+
