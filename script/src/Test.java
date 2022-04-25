@@ -3,32 +3,30 @@ import modele.*;
 
 import javax.swing.*;
 import java.awt.*;
-//import java.awt.Graphics2D;
-//import java.awt.Point;
-//import java.awt.Rectangle;
-//import java.awt.Shape;
-//import java.awt.geom.AffineTransform;
-//import java.awt.geom.Line2D;
-//import java.awt.geom.Rectangle2D;
-//import java.util.LinkedList;
+import java.util.LinkedList;
 
 public class Test  {
 
 
     public static void main(String[] args) {
 
-        Plateau plat = new Plateau(5,5);
 
-        Laser[] l = new Laser[1];
-        l[0] = new Laser(1,2 , 315);
+        LinkedList<Laser[]> tablaser = new LinkedList<>();
+        Laser[] l = new Laser[3];
+        l[0] = new Laser(4,5, 45,0);
+        l[1] = new Laser(3,2, 315,1);
+
+        Laser[] l1 = new Laser[3];
+        l1[0] = new Laser(4,5, 45,0);
 
 
-        int[] res = plat.caseAVerifier(2,3,315  );
-        System.out.println("res[0] "+res[0]+" res[1] "+res[1]);
 
-        plat.setLasers(l);
+        Plateau plat = new Plateau(5,5,l);
+
+        //plat.setLasers(l1);
         plat.initdemo();
         plat.initLaser();
+
 
 
 

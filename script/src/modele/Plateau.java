@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.*;
+import java.awt.desktop.SystemEventListener;
 import java.util.LinkedList;
 
 public class Plateau {
@@ -9,15 +10,17 @@ public class Plateau {
     public int height;
     protected Case[][] plateau;
     protected Cible[] cibles; //Toutes les cibles du plateau
-    protected Laser[] lasers; //Tous les lasers du plateau
+    //protected Laser[] lasers; //Tous les lasers du plateau
+    public LinkedList<Laser[]> tablaser;
+    protected Laser[] lasers;
     Bloc b;
-    LinkedList<Laser[]> tablasers = new LinkedList<>();
 
-    public Plateau(int height, int width) {
+    public Plateau(int height, int width,Laser [] las) {
 
         this.height=height;
         this.width=width;
         this.plateau = new Case[height][width];
+        this.lasers = las;
 
     }
 
@@ -38,9 +41,15 @@ public class Plateau {
     public Laser[] getLasers() {
         return lasers;
     }
+
     public void setLasers(Laser[] l) {
         this.lasers = l;
     }
+
+    public void addLaser(LinkedList<Laser> laser){
+
+    }
+
 
     public boolean winCondtion() {
         boolean res=true;
@@ -93,11 +102,11 @@ public class Plateau {
      * point de départ et de son orientation;
      */
     public void initLaser(){
-        for(Laser l : lasers){
-            if (l!=null){
-               l.points = new LinkedList<Point>();
-               tablasers.add(lasers);
-               calculerChemin(l);
+        for(int i=0;i < lasers.length;i++){
+            if (lasers[i]!=null ){
+                lasers[i].points = new LinkedList<Point>();
+                calculerChemin(lasers[i]);
+
             }
         }
     }
@@ -121,36 +130,34 @@ public class Plateau {
         int j = l.y;
         int angletmp = l.orientation;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
-            l.points.add(new Point(i,j ));
             angletmp = nouvelAngle(i, j, angletmp);
-            // System.out.println("i: " + i + ", j:" + j);
+            l.points.add(new Point(i,j ));
+
             if (angletmp == 45) {
                 i--;
                 j++;
             } else if (angletmp == 135) {
-
                 i--;
                 j--;
 
             } else if (angletmp == 225) {
-
                 i++;
                 j--;
 
             } else if (angletmp == 315) {
-
                 i++;
                 j++;
 
             }
+            //Orientation bloc Absorbant
             else if (angletmp==0){
-                System.out.println("i "+i +" j "+j);
                 i=1-i;
                 j=1-j;
-                System.out.println("i "+i +" j "+j);
             }
 
+
         }
+
 
     }
 
@@ -174,8 +181,8 @@ public class Plateau {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[2][3] = new CaseVisible(new BlocSemiReflechissant(0, 2));
+       // plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
+        plateau[2][1] = new CaseVisible(new BlocReflechissant(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
@@ -189,12 +196,10 @@ public class Plateau {
                 case "Reflechissant":{
                     b=new BlocReflechissant(0, 0);
                     return b.deviationLaser(x, y,angle );
-
                 }
-                case "SemiReflechissant":{
-                    BlocSemiReflechissant br =new BlocSemiReflechissant(0,0);
-
-                    return 0;
+                case "Absorbant":{
+                    b=new BlocAbsorbant(0, 0);
+                    return b.deviationLaser(x, y, angle);
                 }
             }
         }
@@ -212,6 +217,7 @@ public class Plateau {
                 res[0] = (x+1)/2;
                 res[1] = (y+2)/2;
             }
+
             else if(angle == 225 || angle == 135){
                 res[0] = (x+1)/2;
                 res[1] = (y)/2;

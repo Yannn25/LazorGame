@@ -96,27 +96,31 @@ public class Rectangle extends JPanel {
 
     public void TraceLaser(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        int i=0;
+        //int i=0;
         for (Laser l : plat.getLasers()) {
             //on vérifie bien que l n'est pas null
             if(l != null){
                 //on parcours l'ensemble des points de notre laser
-                for(Point p : l.getPoints()){
-                    if( i < l.getPoints().size()-1){//ici on vérifie que i n'est pas a la dernière position
-                        if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
-                            Point suiv = l.getPoints().get(i+1);
-                            Graphics gpl = (Graphics)g2;
+                Point p, suiv;
+                for(int i = 0; i<l.getPoints().size()-1; i++){
+                    if(l.getPoints().get(i+1) != null){//et la on vérifie que le point suivant n'est pas null
+                        p = l.getPoints().get(i);
+                        suiv = l.getPoints().get(i+1);
+                        Graphics gpl = (Graphics)g2;
 
-                            Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
+                        Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
                             g2.setColor(Color.red);
                             g2.setStroke(new BasicStroke((float) 4.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
                             g2.draw(line);
-                            i++;
-                        }
+                            Line2D lin = new Line2D.Float(50 + 9*25,50 + 0*25, 50 + 2*25, 50 + 3*25);
+                            g2.setColor(Color.BLUE);
+                           // g2.draw(lin);
                     }
                 }
             }
         }
+
+
     }
 
     public void Plateau(Graphics g) {
