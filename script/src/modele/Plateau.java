@@ -11,11 +11,11 @@ public class Plateau {
     protected Case[][] plateau;
     protected Cible[] cibles; //Toutes les cibles du plateau
     //protected Laser[] lasers; //Tous les lasers du plateau
-    public LinkedList<Laser[]> tablaser;
-    protected Laser[] lasers;
+    //protected Laser[] lasers;
+    protected LinkedList<Laser> lasers;
     Bloc b;
 
-    public Plateau(int height, int width,Laser [] las) {
+    public Plateau(int height, int width,LinkedList<Laser> las) {
 
         this.height=height;
         this.width=width;
@@ -38,11 +38,11 @@ public class Plateau {
     public void setCase(int x, int y,Case c){
         plateau[x][y] = c;
     }
-    public Laser[] getLasers() {
+    public LinkedList<Laser> getLasers() {
         return lasers;
     }
 
-    public void setLasers(Laser[] l) {
+    public void setLasers(LinkedList<Laser> l) {
         this.lasers = l;
     }
 
@@ -102,10 +102,10 @@ public class Plateau {
      * point de départ et de son orientation;
      */
     public void initLaser(){
-        for(int i=0;i < lasers.length;i++){
-            if (lasers[i]!=null ){
-                lasers[i].points = new LinkedList<Point>();
-                calculerChemin(lasers[i]);
+        for(int i=0;i < lasers.size();i++){
+            if (lasers.get(i)!=null ){
+                lasers.get(i).points = new LinkedList<Point>();
+                calculerChemin(lasers.get(i));
 
             }
         }
@@ -182,7 +182,7 @@ public class Plateau {
             }
         }
        // plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[2][1] = new CaseVisible(new BlocReflechissant(0, 2));
+        plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
@@ -194,12 +194,25 @@ public class Plateau {
 
             switch (nomBloc){
                 case "Reflechissant":{
-                    b=new BlocReflechissant(0, 0);
-                    return b.deviationLaser(x, y,angle );
+                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y,angle);
                 }
-                case "Absorbant":{
-                    b=new BlocAbsorbant(0, 0);
-                    return b.deviationLaser(x, y, angle);
+                case "SemiReflechissant":{
+                    switch (angle) {
+                        case 45:
+                            lasers.add(new Laser(x - 1, y + 1, angle));
+                        case 135:
+                            lasers.add(new Laser(x - 1, y - 1, angle));
+                        case 225:
+                            lasers.add(new Laser(x + 1, y - 1, angle));
+                        case 315:
+                            lasers.add(new Laser(x + 1, y + 1, angle));
+                    }
+                    //b=new BlocSemiReflechissant(0, 0);
+                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
+                }
+
+                case "Prisme":{
+
                 }
             }
         }

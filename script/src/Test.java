@@ -12,14 +12,9 @@ public class Test  {
 
 
         LinkedList<Laser[]> tablaser = new LinkedList<>();
-        Laser[] l = new Laser[3];
-        l[0] = new Laser(4,5, 45,0);
-        l[1] = new Laser(3,2, 315,1);
-
-        Laser[] l1 = new Laser[3];
-        l1[0] = new Laser(4,5, 45,0);
-
-
+        LinkedList<Laser> l = new LinkedList<Laser>();
+        l.add(new Laser(4,5, 45));
+        l.add(new Laser(3,2, 315));
 
         Plateau plat = new Plateau(5,5,l);
 

@@ -11,17 +11,16 @@ public class Laser {
     // Orientation en degré ?
     // Ou orientation avec un vecteur ? Vx, Vy ?
     protected int orientation;
-    protected int indexlaser;
+
 
     protected LinkedList<Point> points; //LinkedList des points parcouru par le laser
 
-    public Laser(int x,int y, int orientation,int indexLaser) {
+    public Laser(int x,int y, int orientation) {
 
         this.x=x;
         this.y=y;
         this.orientation=orientation;
         this.points = new LinkedList<>();
-        this.indexlaser=indexLaser;
 
     }
 
@@ -42,14 +41,6 @@ public class Laser {
 
     public int getY(){
         return this.y;
-    }
-
-    public int getIndexlaser(){
-        return this.indexlaser;
-    }
-
-    public void setIndexlaser(int index){
-        this.indexlaser=index;
     }
 
     public void recupPointdeviation(int x ,int yCasVisible){
