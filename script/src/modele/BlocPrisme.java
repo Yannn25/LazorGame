@@ -15,18 +15,6 @@ public class BlocPrisme extends Bloc {
 
     @Override
     public int deviationLaser(int x, int y, int angle){
-        if (x % 2 == 1 && y % 2 == 0) {
-            switch (angle) {
-                case 45:
-                    return 135;
-                case 135:
-                    return 45;
-                case 225:
-                    return 315;
-                case 315:
-                    return 225;
-            }
-        }
-        return angle;
+        return 0;
     }   
 }

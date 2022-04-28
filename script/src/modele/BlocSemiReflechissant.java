@@ -40,4 +40,5 @@ public class BlocSemiReflechissant extends Bloc {
         return angle;
     }
 
+
 }

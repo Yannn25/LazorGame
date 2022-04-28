@@ -6,11 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Line2D;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
 
-public class Rectangle extends JPanel {
+public class Rectangle extends JLabel {
     protected Plateau plat;
     public JLabel[][] bloc;
+    public JLabel[][] cases;
     public MouseAdapter ma;
+
+    public static final String PATH="Icone\\";
+
+
 
 
     public Rectangle(Plateau p){
@@ -27,7 +34,7 @@ public class Rectangle extends JPanel {
             @Override
             public void mousePressed(MouseEvent e) {
                 Component pressedComp = findComponentAt(e.getX(), e.getY());
-                if (pressedComp != null && pressedComp instanceof JLabel) {
+                if (pressedComp != null && pressedComp instanceof JLabel && pressedComp.getName()=="Bloc") {
 
                     selectionPanel = (JLabel) pressedComp;
                     selectionlabelposition = selectionPanel.getLocation();
@@ -107,14 +114,11 @@ public class Rectangle extends JPanel {
                         p = l.getPoints().get(i);
                         suiv = l.getPoints().get(i+1);
                         Graphics gpl = (Graphics)g2;
-
                         Line2D line = new Line2D.Float(50 + p.y*25,50 + p.x*25, 50 + suiv.y*25, 50 + suiv.x*25);
                         g2.setColor(Color.red);
                         g2.setStroke(new BasicStroke((float) 4.0,BasicStroke.CAP_BUTT,BasicStroke.JOIN_MITER));
                         g2.draw(line);
-                        Line2D lin = new Line2D.Float(50 + 9*25,50 + 0*25, 50 + 2*25, 50 + 3*25);
-                        g2.setColor(Color.BLUE);
-                        // g2.draw(lin);
+
                     }
                 }
             }
@@ -129,15 +133,41 @@ public class Rectangle extends JPanel {
             for(int j=1; j < plat.getWidth(); j++){
                 if(plat.getCase(i, j) instanceof CaseVisible){
                     g2.setColor(Color.gray.brighter());
-                    g2.drawRect(j*50, i*50, 50, 50);
+                    int thickness = 2;
+                    Stroke oldStroke = g2.getStroke();
+                    g2.setStroke(new BasicStroke(thickness));
+                    //g2.fillRect(j*50, i*50, 47, 47);
+                    //g2.drawRect(x, y, width, height);
+                   Image img1 = Toolkit.getDefaultToolkit().getImage(PATH+"case.png");
+                    g2.drawImage(img1, j*50, i*50, this);
                     if(plat.getCase(i, j).BlocPresent()){
                         g2.fillRect(j*50, i*50, 50, 50);
+
                     }
                 }
             }
         }
-
     }
+
+    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setComposite(AlphaComposite.Src);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(Color.WHITE);
+        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+
+        g2.dispose();
+
+        return output;
+    }
+
 
 }
 
