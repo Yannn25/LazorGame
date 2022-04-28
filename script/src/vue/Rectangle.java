@@ -63,10 +63,20 @@ public class Rectangle extends JPanel {
                 newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
                 newI = newY/50;
                 newJ = newX/50;
+
                 if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
-            p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+                   p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+                        selectionPanel.setLocation((newJ)*50, (newI)*50);
+                }else{
+                    newX = selectionlabelposition.x; 
+                    newY = selectionlabelposition.y;
+                    newI = newY/50;
+                    newJ = newX/50;
+
                     selectionPanel.setLocation((newJ)*50, (newI)*50);
+        
                 }
+                
 
             }
         }
