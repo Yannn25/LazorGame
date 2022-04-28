@@ -10,7 +10,7 @@ public class Plateau {
     protected Case[][] plateau;
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
-    protected int taille_deslasers;
+    protected final int nblasers;
     Bloc b;
 
     public Plateau(int height, int width,LinkedList<Laser> las) {
@@ -19,6 +19,7 @@ public class Plateau {
         this.width=width;
         this.plateau = new Case[height][width];
         this.lasers = las;
+        this.nblasers = lasers.size();
 
     }
 
@@ -100,10 +101,11 @@ public class Plateau {
      * point de départ et de son orientation;
      */
     public void initLaser(){
+        for(int i = nblasers; i< lasers.size(); i++){
+            lasers.remove(i);
+        }
         System.out.println("nbre lasers : "+lasers.size());
         for(int i=0;i < lasers.size();i++){
-            taille_deslasers=lasers.size();
-
             if (lasers.get(i)!=null ){
                 lasers.get(i).points = new LinkedList<Point>();
                 calculerChemin(lasers.get(i));
@@ -183,7 +185,7 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
+        plateau[2][1] = new CaseVisible(new BlocPrisme(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {
@@ -211,7 +213,6 @@ public class Plateau {
                                 break;
                             case 315:
                                 lasers.add(new Laser(x + 1, y + 1, angle));
-                                System.out.println("nbre lasers : "+lasers.size());
                                 break;
                             default:
 
@@ -222,7 +223,7 @@ public class Plateau {
                     return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
 
 
-               /* case "Prisme":{
+                case "Prisme":{
                     if (x%2 == 0 && y%2==1) {
                     switch (angle) {
                             case 45:
@@ -245,13 +246,13 @@ public class Plateau {
                     if (x%2 == 1 && y%2==0) {
                         switch (angle) {
                             case 45:
-                                lasers.add(new Laser(x , y - 2 , angle));
+                                lasers.add(new Laser(x , y + 2 , angle));
                                 break;
                             case 135:
                                 lasers.add(new Laser(x , y - 2 , angle));
                                 break;
                             case 225:
-                                lasers.add(new Laser(x  , y + 2  , angle));
+                                lasers.add(new Laser(x  , y - 2  , angle));
                                 break;
                             case 315:
                                 lasers.add(new Laser(x  , y + 2 , angle));
@@ -262,7 +263,7 @@ public class Plateau {
                     }
                     return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
 
-                }*/
+                }
 
             }
         }

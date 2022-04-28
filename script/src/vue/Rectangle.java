@@ -12,7 +12,6 @@ import java.awt.image.BufferedImage;
 public class Rectangle extends JLabel {
     protected Plateau plat;
     public JLabel[][] bloc;
-    public JLabel[][] cases;
     public MouseAdapter ma;
 
     public static final String PATH="Icone\\";
