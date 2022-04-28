@@ -1,4 +1,6 @@
 package modele;
+
+import java.awt.List;
 import java.awt.Point;
 import java.util.LinkedList;
 
@@ -9,7 +11,6 @@ public class Laser {
     // Orientation en degré ?
     // Ou orientation avec un vecteur ? Vx, Vy ?
     protected int orientation;
-
 
     protected LinkedList<Point> points; //LinkedList des points parcouru par le laser
 

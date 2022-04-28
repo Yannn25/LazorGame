@@ -13,6 +13,7 @@ public class Rectangle extends JLabel {
     protected Plateau plat;
     public JLabel[][] bloc;
     public MouseAdapter ma;
+    public FinDePartie fin;
 
     public static final String PATH="Icone\\";
 
@@ -72,7 +73,14 @@ public class Rectangle extends JLabel {
                             p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
                         selectionPanel.setLocation((newJ)*50, (newI)*50);
                     }
+                    else {
+                        newX = selectionlabelposition.x;
+                        newY = selectionlabelposition.y;
+                        newI = newY / 50;
+                        newJ = newX / 50;
 
+                        selectionPanel.setLocation((newJ) * 50, (newI) * 50);
+                    }
                 }
             }
         };
@@ -98,6 +106,20 @@ public class Rectangle extends JLabel {
         super.paintComponent(g);
         Plateau(g);
         TraceLaser(g);
+        Cible(g);
+        if(plat.isWin()){
+            fin = new FinDePartie();
+        }
+    }
+    
+    public void TerminerPartie(Graphics g) {
+      
+    }
+    public void paintFin(Graphics g) {
+        //super.paintComponent(g);
+        Plateau(g);
+        TraceLaser(g);
+        Cible(g);
     }
 
     public void TraceLaser(Graphics g){
@@ -166,7 +188,22 @@ public class Rectangle extends JLabel {
 
         return output;
     }
-
+    
+    public void Cible(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        for(int i = 0; i < plat.getCibles().length; i++) {
+            int x = plat.getCibles()[i].getPoint().x;
+            int y = plat.getCibles()[i].getPoint().y;
+            int diametre = 7;
+            if(plat.getCibles()[i].isAtteint()) {
+                g2.setColor(Color.GREEN);
+                g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
+            } else {
+                 g2.setColor(Color.red);
+                 g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
+            }
+               
+        }  
+    }
 
 }
-

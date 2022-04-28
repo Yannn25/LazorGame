@@ -1,6 +1,7 @@
 package modele;
 
 import java.awt.*;
+
 import java.util.LinkedList;
 
 public class Plateau {
@@ -11,7 +12,7 @@ public class Plateau {
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
     protected final int nblasers;
-    Bloc b;
+    protected  boolean win;
 
     public Plateau(int height, int width,LinkedList<Laser> las) {
 
@@ -40,30 +41,40 @@ public class Plateau {
     public LinkedList<Laser> getLasers() {
         return lasers;
     }
-
     public void setLasers(LinkedList<Laser> l) {
         this.lasers = l;
     }
-
-    public void addLaser(LinkedList<Laser> laser){
-
+    public Cible[] getCibles() {
+        return cibles;
     }
+    public void setCibles(Cible[] cibles) {
+        this.cibles = cibles;
+    }
+    public boolean isWin() {
+        return win;
+    }  
 
 
     public boolean winCondtion() {
         boolean res=true;
-        for(Cible c:this.cibles) {
+        for(Cible c : this.cibles) {
             boolean b = false;
             for(Laser l:this.lasers) {
-                if(l.points.contains(c)) {
-                    b=true;
-                    break;
-                }
+                for(Point p : l.points){
+                    if( c.getPoint().x == p.x && c.getPoint().y == p.y) {
+                        b=true;
+                        break;
+                    }
+                } 
             }
             if(!b) {
                 res = false;
                 break;
             }
+        }
+        if(res){
+            System.out.println("VICTOIRE");
+            win = true;
         }
         return res;
     }
@@ -104,7 +115,6 @@ public class Plateau {
         for(int i = nblasers; i< lasers.size(); i++){
             lasers.remove(i);
         }
-        System.out.println("nbre lasers : "+lasers.size());
         for(int i=0;i < lasers.size();i++){
             if (lasers.get(i)!=null ){
                 lasers.get(i).points = new LinkedList<Point>();
@@ -112,10 +122,8 @@ public class Plateau {
 
             }
         }
-    }
-
-    public void addLaser(){
-
+        CibleAtteinte();
+        winCondtion();
     }
 
     public boolean deplacementPossible(int x1, int y1, int x2, int y2){
@@ -165,10 +173,12 @@ public class Plateau {
     }
 
     public void CibleAtteinte(){
-
         for( Laser l : lasers) {
+            for(int i = 0; i < cibles.length; i++){
+                    cibles[i].atteint = false;
+                }
             for(Point point : l.points){
-                for(int i = 0; i < cibles.length; i++){
+                for(int i = 0; i < cibles.length && cibles[i].atteint == false; i++){
                     if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
                         cibles[i].atteint = true;
                 }

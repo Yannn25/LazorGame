@@ -1,6 +1,4 @@
-import modele.CaseVisible;
-import modele.Laser;
-import modele.Plateau;
+import modele.*;
 import vue.Rectangle;
 
 import javax.swing.*;
@@ -12,13 +10,17 @@ public class Test  {
     public static final String PATH="Icone\\";
     public static void main(String[] args) {
 
-
         LinkedList<Laser[]> tablaser = new LinkedList<>();
         LinkedList<Laser> l = new LinkedList<Laser>();
         l.add(new Laser(3, 2, 315));
         l.add(new Laser(4, 5, 45));
 
-        Plateau plat = new Plateau(5, 5, l);
+        Plateau plat = new Plateau(10, 10, l);
+
+        
+        Cible[] c = new Cible[1];
+        c[0] = new Cible(7, 4);
+        plat.setCibles(c);
         plat.initdemo();
         plat.initLaser();
 
