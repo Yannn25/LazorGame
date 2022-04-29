@@ -195,7 +195,8 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[2][1] = new CaseVisible(new BlocPrisme(0, 2));
+        plateau[4][3] = new CaseVisible(new BlocTP(0, 2));
+        plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
     }
 
     public int nouvelAngle(int x, int y, int angle) {

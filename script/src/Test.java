@@ -18,8 +18,10 @@ public class Test  {
         Plateau plat = new Plateau(10, 10, l);
 
         
-        Cible[] c = new Cible[1];
+        Cible[] c = new Cible[2];
         c[0] = new Cible(7, 4);
+
+        c[1] = new Cible(13, 8);
         plat.setCibles(c);
         plat.initdemo();
         plat.initLaser();
@@ -35,7 +37,7 @@ public class Test  {
         JFrame frame = new JFrame("Rectangles");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(rects);
-        frame.setSize(1000, 1000);
+        frame.setSize(800, 800);
         frame.setLocationRelativeTo(null);
         frame.setContentPane(rects);
 
@@ -67,7 +69,12 @@ public class Test  {
                     if (plat.getCase(i, j).getBloc().getType()=="Absorbant"){
                         rects.bloc[i][j].setIcon(new ImageIcon(PATH+"Blocabsorbant.png"));
                     }
+
+                    if (plat.getCase(i, j).getBloc().getType()=="Teleporteur"){
+                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"tp.png"));
+                    }
                     frame.add(rects.bloc[i][j]);
+
                 }
             }
         }
