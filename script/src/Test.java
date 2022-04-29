@@ -24,12 +24,11 @@ public class Test  {
         Plateau plat = new Plateau(10,10);
 
         Laser[] l = new Laser[1];
-        l[0] = new Laser(6,5 , 315);
+        l[0] = new Laser(6,7 , 315);
 
 
         Cible [] c = new Cible[1];
         c[0] = new Cible(7, 4);
-System.out.println("marchemarche");
 
         plat.setLasers(l);
         plat.setCibles(c);
@@ -60,39 +59,12 @@ System.out.println("marchemarche");
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     rects.bloc[i][j].setName("Label22");
                     System.out.println(plat.getCase(i, j).getType());
-//                    switch(plat.getCase(i, j).getType()){
-//                            case "Reflechissant" :
-//                                rects.bloc[i][j].setBackground(Color.gray.darker());
-//                                rects.bloc[i][j].setText("BlocR");
-//                                break;
-//                            case "Opaque" :
-//                                rects.bloc[i][j].setBackground(Color.blue.darker());
-//                                rects.bloc[i][j].setText("BlocO");
-//                                break;
-//                            case "TP" :
-//                                rects.bloc[i][j].setBackground(Color.yellow);
-//                                rects.bloc[i][j].setText("BlocTP");
-//                                break;
-//                            case "SemiReflechissant" :
-//                                rects.bloc[i][j].setBackground(Color.cyan.brighter());
-//                                rects.bloc[i][j].setText("BlocSR");
-//                                break;
-//                            case "Prisme" :
-//                                rects.bloc[i][j].setBackground(Color.ORANGE.brighter());
-//                                rects.bloc[i][j].setText("BlocP");
-//                                break;
-////                            case "" :
-////                                rects.bloc[i][j].setBackground(Color.MAGENTA.brighter());
-////                                break;
-//                            default : rects.bloc[i][j].setBackground(Color.black);
-//                            break;
-//                        }
-                      rects.bloc[i][j].setText("BlocRaf");
+                    rects.bloc[i][j].setText("BlocRaf");
                     if (i==2 && j==3){
                         rects.bloc[i][j].setBackground(Color.BLUE.darker());
                         rects.bloc[i][j].setText("OPaque");
                     }
-                    if (i==5 && j==5){
+                    if (i==8 && j==1){
                         rects.bloc[i][j].setBackground(Color.cyan);
                         rects.bloc[i][j].setText("Prisme");
                     }

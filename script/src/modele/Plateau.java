@@ -52,8 +52,6 @@ public class Plateau {
         return win;
     }    
 
-
-
     public boolean winCondtion() {
         boolean res=true;
         for(Cible c : this.cibles) {
@@ -143,7 +141,7 @@ public class Plateau {
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
             l.points.add(new Point(i,j));
             oldtmp = angletmp;
-            angletmp = nouvelAngle(i, j, angletmp);
+            angletmp = nouvelAngle(i, j, angletmp,l);
             if (angletmp == 90 ) {
                 l.points.add(new Point(i, j+2));
                 j += 2;
@@ -182,7 +180,7 @@ public class Plateau {
                 i++;
                 j++;
 
-            } else if (angletmp==0) {
+            } else if (angletmp == -1) {
                 i=1-i;
                 j=1-j;
             }
@@ -214,35 +212,18 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant());
-        plateau[5][5] = new CaseVisible(new BlocPrisme());
+        plateau[8][1] = new CaseVisible(new BlocPrisme());
         plateau[7][7] = new CaseVisible(new BlocSemiReflechissant());
         plateau[2][3] = new CaseVisible(new BlocOpaque());
     }
 
-    public int nouvelAngle(int x, int y, int angle) {
-
+    public int nouvelAngle(int x, int y, int angle, Laser l) {
         int[] caseVerif = caseAVerifier(x, y, angle);
-        int[] Prisme = casePrisme(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
-
-            //String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
-            //System.out.println(nomBloc);
-            
+        if(caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
             b=getCase(caseVerif[0], caseVerif[1]).getBloc();
             return b.deviationLaser(x, y,angle);
-
-        }
-        if (Prisme != null && getCase(Prisme[0], Prisme[1]).BlocPresent()){
-
-            //String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
-            //System.out.println(nomBloc);
-            
-            b=getCase(Prisme[0], Prisme[1]).getBloc();
-            return b.deviationLaser(x, y,angle );
-
-        }
+        }  
         return angle ;
-
     }
 
     public int[] caseAVerifier(int x, int y, int angle){
@@ -275,34 +256,4 @@ public class Plateau {
         return res;
     }
     
-    public int[] casePrisme(int x, int y, int angle){
-        int[] res = new int[2];
-        if(x < 0 || y < 0 || x >= 2*this.height || y >= 2*this.width){
-            return null;
-        }
-        if(x%2 == 1){
-            if(angle == 45 || angle == 315){
-                res[0] = (x+1);
-                res[1] = y;
-            }
-            else if(angle == 225 || angle == 135){
-                res[0] = x-1;
-                res[1] = y;
-            }
-        }
-        else if(y%2 == 1){
-            if(angle == 45 || angle == 135){
-                res[0] = x;
-                res[1] = y-1;
-            }
-            else if(angle == 225 || angle == 315){
-                res[0] = x;
-                res[1] = y+1;
-            }
-        }
-        if(res[0] >= this.height || res[1] >= this.width || res[0] <= 0 || res[1] <= 0)
-            return null;
-        return res;
-    }
-    
-}
+} 
