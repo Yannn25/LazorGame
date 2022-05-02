@@ -1,7 +1,14 @@
 package modele;
 
 import java.awt.*;
-
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.util.LinkedList;
 
 public class Plateau {
@@ -266,6 +273,46 @@ public class Plateau {
         if(res[0] >= this.height || res[1] >= this.width)
             return null;
         return res;
+    }
+
+    /*
+            MÉTHODE DE SAUVEGARDE DU PLATEAU
+    */
+
+    public void SAUVEGARDE(String filename) {
+        try {
+            FileOutputStream file = new FileOutputStream("./script/src/resources/"+filename+".ser");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(this);
+
+            out.close();
+            file.close();
+
+            System.out.println("sauvegarde effectué");
+        } catch (FileNotFoundException f) {
+         System.out.println(f.getMessage());   
+        }catch(IOException i){
+           System.out.println("partie non sauvegardé"); 
+        }
+    }
+
+    public Plateau reprisepartie(String filename) throws ClassNotFoundException {
+        try {
+            FileInputStream file = new FileInputStream("./script/src/resources/"+filename+".ser");
+            ObjectInputStream in = new ObjectInputStream(file);
+            
+            Plateau p = (Plateau)in.readObject();
+
+            in.close();
+            file.close();
+
+            return p;
+        } catch (FileNotFoundException f) {
+         System.out.println(f.getMessage());   
+        }catch(IOException i){
+           System.out.println("partie non sauvegardé"); 
+        }
+        return null;
     }
     
 } 
