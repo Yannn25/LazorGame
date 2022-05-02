@@ -15,8 +15,8 @@ public class Rectangle extends JLabel {
     public MouseAdapter ma;
     public FinDePartie fin;
 
-    public static final String PATH="./src/icones/";
-    //public static final String PATH="script\\src\\icones\\";
+    //public static final String PATH="./src/icones/";
+    public static final String PATH="script/src/icones/";
 
 
 
