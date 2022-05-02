@@ -16,11 +16,8 @@ public class Rectangle extends JLabel {
     public FinDePartie fin;
 
     public static final String PATH="./src/icones/";
-    //public static final String PATH="script\\src\\icones\\";
-
-
-
-
+    //public static final String PATH="./script/src/icones/";
+    
     public Rectangle(Plateau p){
 
         ma = new MouseAdapter() {
@@ -35,7 +32,7 @@ public class Rectangle extends JLabel {
             @Override
             public void mousePressed(MouseEvent e) {
                 Component pressedComp = findComponentAt(e.getX(), e.getY());
-                if (pressedComp != null && pressedComp instanceof JLabel && pressedComp.getName()=="Bloc") {
+                if (pressedComp != null && pressedComp instanceof JLabel && "Bloc".equals(pressedComp.getName())) {
 
                     selectionPanel = (JLabel) pressedComp;
                     selectionlabelposition = selectionPanel.getLocation();
