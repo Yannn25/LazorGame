@@ -15,7 +15,8 @@ public class Rectangle extends JLabel {
     public MouseAdapter ma;
     public FinDePartie fin;
 
-    public static final String PATH="Icone\\";
+    public static final String PATH="./src/icones/";
+    //public static final String PATH="script\\src\\icones\\";
 
 
 
@@ -120,6 +121,7 @@ public class Rectangle extends JLabel {
         Plateau(g);
         TraceLaser(g);
         Cible(g);
+        //makeRoundedCorner(image, PROPERTIES);
     }
 
     public void TraceLaser(Graphics g){

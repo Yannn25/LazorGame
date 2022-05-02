@@ -3,21 +3,19 @@ import vue.Rectangle;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.LinkedList;
 
 public class Test  {
 
-    public static final String PATH="Icone\\";
     public static void main(String[] args) {
 
-        LinkedList<Laser[]> tablaser = new LinkedList<>();
         LinkedList<Laser> l = new LinkedList<Laser>();
         l.add(new Laser(3, 2, 315));
         l.add(new Laser(4, 5, 45));
 
         Plateau plat = new Plateau(10, 10, l);
 
-        
         Cible[] c = new Cible[2];
         c[0] = new Cible(7, 4);
 
@@ -26,13 +24,13 @@ public class Test  {
         plat.initdemo();
         plat.initLaser();
 
-        //Vue vue = new Vue(plat);
-
-
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
         rects.setOpaque(true);
-        rects.setIcon(new ImageIcon(PATH+"arriereplan.png"));
+        rects.setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        
+        
+        //System.out.println(System.getProperty("user.dir"));
 
         JFrame frame = new JFrame("Rectangles");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,25 +51,25 @@ public class Test  {
                     rects.bloc[i][j].setName("Bloc");
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     if (plat.getCase(i, j) instanceof CaseVisible){
-                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"case.png"));
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
                     }
-                    if (plat.getCase(i, j).getBloc().getType()=="Reflechissant"){
-                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"Blocreflechissant.png"));
+                    if ("Reflechissant".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
                     }
-                    if (plat.getCase(i, j).getBloc().getType()=="SemiReflechissant"){
-                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"Blocsemireflechissant.png"));
-                    }
-
-                    if (plat.getCase(i, j).getBloc().getType()=="Prisme"){
-                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"Blocprismatique.png"));
+                    if ("SemiReflechissant".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocsemireflechissant.png"));
                     }
 
-                    if (plat.getCase(i, j).getBloc().getType()=="Absorbant"){
-                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"Blocabsorbant.png"));
+                    if ("Prisme".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocprismatique.png"));
                     }
 
-                    if (plat.getCase(i, j).getBloc().getType()=="Teleporteur"){
-                        rects.bloc[i][j].setIcon(new ImageIcon(PATH+"tp.png"));
+                    if ("Absorbant".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocabsorbant.png"));
+                    }
+
+                    if ("Teleporteur".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"tp.png"));
                     }
                     frame.add(rects.bloc[i][j]);
 

@@ -55,9 +55,9 @@ public class Plateau {
     }  
 
 
-    public boolean winCondtion() {
+    public boolean winCondition() {
         boolean res=true;
-        for(Cible c : this.cibles) {
+        /*for(Cible c : this.cibles) {
             boolean b = false;
             for(Laser l:this.lasers) {
                 for(Point p : l.points){
@@ -71,6 +71,10 @@ public class Plateau {
                 res = false;
                 break;
             }
+        }*/
+        for(Cible c: this.cibles){
+            if(!c.isAtteint())
+                res = false;
         }
         if(res){
             System.out.println("VICTOIRE");
@@ -123,7 +127,7 @@ public class Plateau {
             }
         }
         CibleAtteinte();
-        winCondtion();
+        winCondition();
     }
 
     public boolean deplacementPossible(int x1, int y1, int x2, int y2){
@@ -142,7 +146,7 @@ public class Plateau {
         int angletmp = l.orientation;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
             angletmp = nouvelAngle(i, j, angletmp);
-            l.points.add(new Point(i,j ));
+            l.points.add(new Point(i,j));
 
             if (angletmp == 45) {
                 i--;
@@ -169,16 +173,15 @@ public class Plateau {
 
         }
 
-
     }
 
     public void CibleAtteinte(){
-        for( Laser l : lasers) {
-            for(int i = 0; i < cibles.length; i++){
-                    cibles[i].atteint = false;
-                }
+        for(int i = 0; i < cibles.length; i++){
+            cibles[i].atteint = false;
+        }
+        for(Laser l : lasers) {
             for(Point point : l.points){
-                for(int i = 0; i < cibles.length && cibles[i].atteint == false; i++){
+                for(int i = 0; i < cibles.length; i++){
                     if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
                         cibles[i].atteint = true;
                 }
