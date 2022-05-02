@@ -159,13 +159,21 @@ public class Rectangle extends JLabel {
                     int thickness = 2;
                     Stroke oldStroke = g2.getStroke();
                     g2.setStroke(new BasicStroke(thickness));
-                    //g2.fillRect(j*50, i*50, 47, 47);
-                    //g2.drawRect(x, y, width, height);
-                   Image img1 = Toolkit.getDefaultToolkit().getImage(PATH+"case.png");
+                    Image img1 = Toolkit.getDefaultToolkit().getImage(PATH+"case.png");
                     g2.drawImage(img1, j*50, i*50, this);
                     if(plat.getCase(i, j).BlocPresent()){
                         g2.fillRect(j*50, i*50, 50, 50);
 
+                    }
+                }
+                if(plat.getCase(i, j).BlocPresent()){
+                    bloc[i][j]=new JLabel();
+                    bloc[i][j].setOpaque(true);
+                    bloc[i][j].setLayout(null);
+                    bloc[i][j].setName("Bloc");
+                    bloc[i][j].setBounds(50*j, 50*i, 50, 50);
+                    if (plat.getCase(i, j) instanceof CaseVisible){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
                     }
                 }
             }

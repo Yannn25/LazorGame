@@ -1,4 +1,4 @@
-package modele;
+ package modele;
 
 public class BlocSemiReflechissant extends Bloc {
     
@@ -6,6 +6,10 @@ public class BlocSemiReflechissant extends Bloc {
 	public BlocSemiReflechissant(int x,int y) {
 		super(x,y,false);
 	}
+        
+    public BlocSemiReflechissant(){
+        super(0,0,false);
+    }    
         
     @Override
     public String getType(){

@@ -7,7 +7,9 @@ public class BlocOpaque extends Bloc {  //Le bloc Opaque ne reflechit pas la lum
 	super(x,y,true);
 
     }
-    
+    public BlocOpaque(){
+        super(0,0,false);
+    }
     @Override
     public String getType() {
         return "Opaque";
@@ -15,7 +17,6 @@ public class BlocOpaque extends Bloc {  //Le bloc Opaque ne reflechit pas la lum
     
     @Override
     public int deviationLaser(int x, int y, int angle){
-
-        return 0;
+        return -1;
     }
 }

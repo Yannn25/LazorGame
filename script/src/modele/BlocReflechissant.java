@@ -9,6 +9,10 @@ public class BlocReflechissant extends Bloc {
             super(x,y,false);
 
     }
+    
+    public BlocReflechissant(){
+        super(0,0,false);
+    }
 
         
     @Override
@@ -43,10 +47,6 @@ public class BlocReflechissant extends Bloc {
             }
         }
         return angle;
-    }
-
-    public static void main(String[] args) {
-
     }
 
 }

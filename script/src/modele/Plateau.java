@@ -54,24 +54,8 @@ public class Plateau {
         return win;
     }  
 
-
     public boolean winCondition() {
         boolean res=true;
-        /*for(Cible c : this.cibles) {
-            boolean b = false;
-            for(Laser l:this.lasers) {
-                for(Point p : l.points){
-                    if( c.getPoint().x == p.x && c.getPoint().y == p.y) {
-                        b=true;
-                        break;
-                    }
-                } 
-            }
-            if(!b) {
-                res = false;
-                break;
-            }
-        }*/
         for(Cible c: this.cibles){
             if(!c.isAtteint())
                 res = false;
@@ -144,10 +128,31 @@ public class Plateau {
         int i = l.x;
         int j = l.y;
         int angletmp = l.orientation;
+        int oldtmp = angletmp;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
-            angletmp = nouvelAngle(i, j, angletmp);
             l.points.add(new Point(i,j));
-
+            oldtmp = angletmp;
+            angletmp = nouvelAngle(i, j, angletmp);
+            if (angletmp == 90 ) {
+                l.points.add(new Point(i, j+2));
+                j += 2;
+                angletmp = oldtmp;
+            }
+            if(angletmp == 270){
+                l.points.add(new Point(i, j-2));
+                j -= 2;
+                angletmp = oldtmp;
+            }
+            if(angletmp == 180) {
+                l.points.add(new Point(i+2, j));
+                i+=2;
+                angletmp = oldtmp;
+            }
+            if(angletmp == 0){
+                l.points.add(new Point(i-2, j));
+                i-=2;
+                angletmp = oldtmp;
+            }
             if (angletmp == 45) {
                 i--;
                 j++;
@@ -163,14 +168,10 @@ public class Plateau {
                 i++;
                 j++;
 
-            }
-            //Orientation bloc Absorbant
-            else if (angletmp==0){
+            } else if (angletmp == -1) {
                 i=1-i;
                 j=1-j;
             }
-
-
         }
 
     }
@@ -200,89 +201,40 @@ public class Plateau {
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
         plateau[4][3] = new CaseVisible(new BlocTP(0, 2));
         plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
+        plateau [5][8] = new CaseVisible(new BlocPrisme());
     }
 
     public int nouvelAngle(int x, int y, int angle) {
-
         int[] caseVerif = caseAVerifier(x, y, angle);
         if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
-
-        String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+            String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
 
             switch (nomBloc){
-                case "Reflechissant":{
-                   return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
-                }
-                case "SemiReflechissant":
+                case "SemiReflechissant":{
                     int k=0;
                     switch (angle) {
-                            case 45:
-                                lasers.add(new Laser(x - 1, y + 1, angle));
-                                break;
-                            case 135:
-                                lasers.add(new Laser(x - 1, y - 1, angle));
-                                 break;
-                            case 225:
-                                lasers.add(new Laser(x + 1, y - 1, angle));
-                                break;
-                            case 315:
-                                lasers.add(new Laser(x + 1, y + 1, angle));
-                                break;
-                            default:
-
+                        case 45:
+                        lasers.add(new Laser(x - 1, y + 1, angle));
+                            break;
+                        case 135:
+                            lasers.add(new Laser(x - 1, y - 1, angle));
+                            break;
+                        case 225:
+                            lasers.add(new Laser(x + 1, y - 1, angle));
+                            break;
+                        case 315:
+                            lasers.add(new Laser(x + 1, y + 1, angle));
+                            break;
+                        default:
                     }
                     return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
-
-                case "Absorbant":
-                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
-
-
-                case "Prisme":{
-                    if (x%2 == 0 && y%2==1) {
-                    switch (angle) {
-                            case 45:
-                                lasers.add(new Laser(x - 2, y , angle));
-                                break;
-                            case 135:
-                                lasers.add(new Laser(x - 2, y , angle));
-                                break;
-                            case 225:
-                                lasers.add(new Laser(x + 2 , y , angle));
-                                break;
-                            case 315:
-                                lasers.add(new Laser(x + 2 , y , angle));
-                                break;
-
-                        }
-
-                    }
-
-                    if (x%2 == 1 && y%2==0) {
-                        switch (angle) {
-                            case 45:
-                                lasers.add(new Laser(x , y + 2 , angle));
-                                break;
-                            case 135:
-                                lasers.add(new Laser(x , y - 2 , angle));
-                                break;
-                            case 225:
-                                lasers.add(new Laser(x  , y - 2  , angle));
-                                break;
-                            case 315:
-                                lasers.add(new Laser(x  , y + 2 , angle));
-                                break;
-
-                        }
-
-                    }
-                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
-
                 }
-
+                default:{
+                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
+                }
             }
         }
         return angle ;
-
     }
 
     public int[] caseAVerifier(int x, int y, int angle){
@@ -315,4 +267,5 @@ public class Plateau {
             return null;
         return res;
     }
-}
+    
+} 

@@ -2,6 +2,9 @@ import modele.*;
 import vue.Rectangle;
 
 import javax.swing.*;
+
+import modele.*;
+
 import java.awt.*;
 import java.io.File;
 import java.util.LinkedList;
@@ -46,7 +49,6 @@ public class Test  {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
                     rects.bloc[i][j].setOpaque(true);
-                    rects.bloc[i][j].setBackground(Color.LIGHT_GRAY);
                     rects.bloc[i][j].setLayout(null);
                     rects.bloc[i][j].setName("Bloc");
                     rects.bloc[i][j].setBounds(50*j, 50*i, 50, 50);
