@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
 import vue.Rectangle;
 
@@ -19,6 +19,7 @@ public class ButtonMenu extends JButton implements ActionListener{
 
     public ButtonMenu(int x,int y,int CommandNumber,Rectangle ecran) {
         addActionListener(this);
+        setBorderPainted(true);
         this.setBounds(x, y, 200, 100);
         this.CommandNumber = CommandNumber;
         this.rect = ecran;
@@ -26,20 +27,40 @@ public class ButtonMenu extends JButton implements ActionListener{
         setOpaque(true);
 
         if (CommandNumber == 1) 
-        setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
 
         if (CommandNumber == 2) 
-        setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+    }
+
+    public ButtonMenu(int x,int y,int CommandNumber,MenuBar jBar) {
+        addActionListener(this);
+        setBackground(Color.black);
+        if (CommandNumber == 4) {
+            setIcon(new ImageIcon(Rectangle.PATH+"fleche.png"));
+            setBounds(x, y, 50, 50);
+        }
+        
     }
 
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (CommandNumber == 1) 
-            rect.SetState(1);
+       switch (CommandNumber) {
+            case 1:
+               rect.SetState(1);
+               break;
+       
+            case 2:
+            rect.SetState(2);
+               break;
 
-        if (CommandNumber == 2) 
-            rect.SetState(2); 
+            case 3:
+            rect.SetState(rect.GameState-1);
+               break;
+            
+
+       }
     }
 
    @Override

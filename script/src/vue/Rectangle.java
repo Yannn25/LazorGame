@@ -1,6 +1,7 @@
 package vue;
 
 import modele.*;
+import modele.MenuBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ public class Rectangle extends JLabel {
     public static final String PATH="./src/icones/";
     //public static final String PATH="./script/src/icones/";
     //gestion des différents écran
-    private int GameState;
+    public int GameState;
     final int StartState = 0;
     final int LevelsState = 1;
     final int PlayState = 2;
@@ -119,7 +120,7 @@ public class Rectangle extends JLabel {
             String text = "Lazors";
             int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
             int x = this.getWidth()/2 - length/2;
-            int y = this.getHeight()/3;
+            int y = this.getHeight()/4;
             g2.setColor(Color.black);
             g2.drawString(text, x+5, y+5);
             g2.setColor(Color.white);
@@ -134,6 +135,31 @@ public class Rectangle extends JLabel {
         }
 
         if (GameState == LevelsState) {
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+            String text = "Lazors";
+            int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
+            int x = this.getWidth()/2 - length/2;
+            int y = this.getHeight()/4;
+            g2.setColor(Color.black);
+            g2.drawString(text, x+5, y+5);
+            g2.setColor(Color.white);
+            g2.drawString(text, x, y);
+
+            MenuBar mb = new MenuBar(this);
+            add(mb);
+
+            LevelButton lv1 = new LevelButton(100, 250, 1, this);
+            add(lv1);
+            LevelButton lv2 = new LevelButton(100, 350, 2, this);
+            add(lv2);
+            LevelButton lv3 = new LevelButton(100, 450, 3, this);
+            add(lv3);
+            LevelButton lv4 = new LevelButton(450, 250, 4, this);
+            add(lv4);
+            LevelButton lv5 = new LevelButton(450, 350, 5, this);
+            add(lv5);
+            LevelButton lv6 = new LevelButton(450, 450, 6, this);
+            add(lv6);
             
         }
 
