@@ -1,6 +1,8 @@
 package modele;
 
-public abstract class Case {
+import java.io.Serializable;
+
+public abstract class Case implements Serializable{
 	
 	
     public void afficheCase(){ }

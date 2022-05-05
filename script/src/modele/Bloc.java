@@ -1,8 +1,10 @@
 package modele;
 
+import java.io.Serializable;
+
 import javax.swing.*;
 
-public abstract class Bloc {
+public abstract class Bloc implements Serializable{
 
 	protected int x,y;		//Postion du bloc dans le tableau
 	final boolean fixe;//S'il est initialisé à true alors le bloc n'est pas déplaçable

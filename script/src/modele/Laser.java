@@ -2,10 +2,11 @@ package modele;
 
 import java.awt.List;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.LinkedList;
 
 
-public class Laser {
+public class Laser implements Serializable{
 
     protected final int x,y;
     // Orientation en degré ?
