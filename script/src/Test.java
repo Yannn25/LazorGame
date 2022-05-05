@@ -10,24 +10,30 @@ import java.io.File;
 import java.util.LinkedList;
 
 public class Test  {
+    JFrame jFrame;
+    
+   // public Test(JFrame jFrame){
+     //   this.jFrame = jFrame;
+
+    //}
 
     public static void main(String[] args) {
 
-        LinkedList<Laser> l = new LinkedList<Laser>();
-        l.add(new Laser(3, 2, 315));
-        l.add(new Laser(4, 5, 45));
+        
 
-        Plateau plat = new Plateau(10, 10, l);
+        LinkedList<Laser> l1 = new LinkedList<Laser>();
+        l1.add(new Laser(3, 2, 315));
+        Plateau p1 = new Plateau(4, 4, l1);
+        Cible[] c1 = new Cible[1];
+         c1[0] = new Cible(1, 2);
 
-        Cible[] c = new Cible[2];
-        c[0] = new Cible(7, 4);
+        p1.setCibles(c1);
+        p1.initdemo();
+        p1.initLaser();
 
-        c[1] = new Cible(13, 8);
-        plat.setCibles(c);
-        plat.initdemo();
-        plat.initLaser();
-
-        Rectangle rects = new Rectangle(plat);
+        
+        
+        Rectangle rects = new Rectangle(p1);
         rects.setLayout(null);
         rects.setOpaque(true);
         //rects.setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
@@ -44,7 +50,7 @@ public class Test  {
 
         rects.addMouseListener(rects.ma);
         rects.addMouseMotionListener(rects.ma);
-        for (int i = 0; i < plat.height; i++) {
+        /*for (int i = 0; i < plat.height; i++) {
             for (int j = 0; j < plat.width; j++) {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
@@ -81,7 +87,7 @@ public class Test  {
                     frame.add(rects.bloc[i][j]);
                 }
             }
-        }
+        }*/
 
         /*JLabel cases[][]= new JLabel[plat.getHeight()][plat.getWidth()];
 

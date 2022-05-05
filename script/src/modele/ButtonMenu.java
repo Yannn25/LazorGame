@@ -35,10 +35,12 @@ public class ButtonMenu extends JButton implements ActionListener{
 
     public ButtonMenu(int x,int y,int CommandNumber,MenuBar jBar) {
         addActionListener(this);
-        setBackground(Color.black);
+        this.rect = jBar.rec;
+        setLayout(null);
+        setOpaque(true);
         if (CommandNumber == 4) {
-            setIcon(new ImageIcon(Rectangle.PATH+"fleche.png"));
-            setBounds(x, y, 50, 50);
+           setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+            setBounds(x, y, 80, 50);
         }
         
     }
@@ -46,17 +48,18 @@ public class ButtonMenu extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
        switch (CommandNumber) {
             case 1:
                rect.SetState(1);
                break;
        
             case 2:
-            rect.SetState(2);
+                rect.SetState(2);
                break;
 
-            case 3:
-            rect.SetState(rect.GameState-1);
+            case 4:
+                rect.SetState(0);
                break;
             
 
@@ -70,13 +73,16 @@ public class ButtonMenu extends JButton implements ActionListener{
         Graphics2D g2 = (Graphics2D) g;
 
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,40F));
-        String text = "";
+        String text = "<";
 
         if (CommandNumber == 1) 
             text = "Play";
 
         if (CommandNumber == 2)
             text = "Continue";
+
+        //if (CommandNumber == 4) 
+          //  text = "<";
 
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = this.getWidth()/2 - length/2;

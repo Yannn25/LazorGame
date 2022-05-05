@@ -1,15 +1,18 @@
 package modele;
 
 import java.awt.*;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Plateau {
+public class Plateau implements Serializable{
 
     public int width;
     public int height;
@@ -17,7 +20,9 @@ public class Plateau {
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
     protected final int nblasers;
-    protected  boolean win;
+    protected boolean win;
+    //int Niveau;
+    
 
     public Plateau(int height, int width,LinkedList<Laser> las) {
 
@@ -28,6 +33,8 @@ public class Plateau {
         this.nblasers = lasers.size();
 
     }
+
+   
 
     public int getWidth() {
         return width;
@@ -120,6 +127,7 @@ public class Plateau {
         winCondition();
     }
 
+    
     public boolean deplacementPossible(int x1, int y1, int x2, int y2){
         if(x1 == x2 && y1 == y2){
             return true;
@@ -204,9 +212,9 @@ public class Plateau {
             }
         }
         plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-      //  plateau[4][3] = new CaseVisible(new BlocTP(0, 2));
+        //plateau[4][3] = new CaseVisible(new BlocTP(0, 2));
         plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
-       // plateau [5][8] = new CaseVisible(new BlocPrisme());
+        //plateau [5][8] = new CaseVisible(new BlocPrisme());
         //plateau[8][9] = new CaseVisible(new BlocOpaque());
     }
 
@@ -314,40 +322,68 @@ public class Plateau {
     /*
             MÉTHODE DE SAUVEGARDE DU PLATEAU
     */
-    public void sauvegarde(String filename) {
+
+    public void Sauvegarde (String fileName) throws IOException {
+
         try {
-            FileOutputStream file = new FileOutputStream("./script/src/resources/"+filename+".ser");
+
+            FileOutputStream file = new FileOutputStream("./src/resources/"+fileName+".ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
+
             out.writeObject(this);
 
-            out.close();
-            file.close();
+            System.out.println("données de l'objet sauvegardé");
+            System.out.println("heigth "+this.getHeight());
+            System.out.println("width "+this.getWidth());
 
-            System.out.println("sauvegarde effectuée");
-        } catch (FileNotFoundException f) {
-         System.out.println(f.getMessage());   
-        }catch(IOException i){
-           System.out.println("partie non sauvegardée");
+            out.close();
+            
+
+            System.out.println("Partie enregistrée");
+
+        }catch(FileNotFoundException fnf){
+            System.out.println("fichier de sauvegarde non trouvé");
         }
+        catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Partie non sauvegardée erreur (fichier de sauvegarde?)");
+        }catch(NullPointerException np){
+            System.out.println("ressource pas trouvée");
+        }
+
     }
 
-    public Plateau reprisepartie(String filename) throws ClassNotFoundException {
+    public static Plateau ReprisePartie (String filename) throws ClassNotFoundException{
+        Plateau p = null;
         try {
-            FileInputStream file = new FileInputStream("./script/src/resources/"+filename+".ser");
+
+            FileInputStream file = new FileInputStream("./src/resources/"+filename+".ser");
             ObjectInputStream in = new ObjectInputStream(file);
-            
-            Plateau p = (Plateau)in.readObject();
+
+            p = (Plateau)in.readObject();
+
+            System.out.println("données de l'objet recuperer");
+            System.out.println("heigth "+((Plateau) p).getHeight());
+            System.out.println("width "+((Plateau) p).getWidth());
 
             in.close();
-            file.close();
+            
 
-            return p;
-        } catch (FileNotFoundException f) {
-         System.out.println(f.getMessage());   
-        }catch(IOException i){
-           System.out.println("partie non sauvegardée");
+            return (Plateau)p;
         }
-        return null;
+
+        catch(FileNotFoundException fnf) {
+            System.out.println("fichier non trouvé");
+        
+        } catch (IOException e) {
+            System.out.println("erreur");
+        }catch(NullPointerException np){
+            System.out.println("ressource pas trouvée");
+        }
+        return p;
     }
+
+    
+
     
 } 

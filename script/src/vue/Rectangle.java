@@ -169,6 +169,7 @@ public class Rectangle extends JLabel {
             
             Plateau(g);
             TraceLaser(g);
+          //  initbloc();
             Cible(g);
             if(plat.isWin()){
                 fin = new FinDePartie();
@@ -184,6 +185,7 @@ public class Rectangle extends JLabel {
         //super.paintComponent(g);
         Plateau(g);
         TraceLaser(g);
+        
         Cible(g);
         //makeRoundedCorner(image, PROPERTIES);
     }
@@ -283,11 +285,52 @@ public class Rectangle extends JLabel {
     public void SetState(int state) {
         clear();
         this.GameState = state;
+        paintComponent(this.getGraphics());
+        if (state == 2) {
+            initbloc();
+        }
     }
 
     public void clear() {
         removeAll();
         repaint();
+    }
+
+    public void initbloc() {
+        for (int i = 0; i < plat.height; i++) {
+            for (int j = 0; j < plat.width; j++) {
+                if(plat.getCase(i, j).BlocPresent()){
+                    bloc[i][j]=new JLabel();
+                    bloc[i][j].setOpaque(true);
+                    bloc[i][j].setLayout(null);
+                    bloc[i][j].setName("Bloc");
+                    bloc[i][j].setBounds(50*j, 50*i, 50, 50);
+                    if (plat.getCase(i, j) instanceof CaseVisible){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
+                    }
+                    if ("Reflechissant".equals(plat.getCase(i, j).getBloc().getType())){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
+                    }
+                    if ("SemiReflechissant".equals(plat.getCase(i, j).getBloc().getType())){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocsemireflechissant.png"));
+                    }
+
+                    if ("Prisme".equals(plat.getCase(i, j).getBloc().getType())){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocprismatique.png"));
+                    }
+
+                    if ("Opaque".equals(plat.getCase(i, j).getBloc().getType())){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocabsorbant.png"));
+                    }
+
+                    if ("Teleporteur".equals(plat.getCase(i, j).getBloc().getType())){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"tp.png"));
+                    }
+                    add(bloc[i][j]);
+                    
+                }
+            }
+        }
     }
 
 }

@@ -1,9 +1,10 @@
 package modele;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Cible {
+public class Cible implements Serializable{
 
     protected final Point p;
     protected boolean atteint;

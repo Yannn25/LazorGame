@@ -40,6 +40,7 @@ public class LevelButton extends JButton implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         rect.SetState(2);
+        
     }
 
     @Override
