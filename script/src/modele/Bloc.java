@@ -6,13 +6,15 @@ public abstract class Bloc {
 
 	protected int x,y;		//Postion du bloc dans le tableau
 	final boolean fixe;//S'il est initialisé à true alors le bloc n'est pas déplaçable
-	
-	public Bloc(int x, int y, boolean fixe) {
-		
-		this.x=x;
-		this.y=y;
+
+	public Bloc(int x, int y, boolean fixe){
+		this.x = x;
+		this.y = y;
+		this.fixe = fixe;
+	}
+
+	public Bloc(boolean fixe) {
 		this.fixe=fixe;
-		
 	}
 
 	public int getX(){
@@ -23,7 +25,6 @@ public abstract class Bloc {
 		return this.y;
 	}
 
-
 	public void setX(int x){
 		this.x=x;
 	}
@@ -32,7 +33,7 @@ public abstract class Bloc {
 		this.y=y;
 	}
         
-        public String getType(){
+	public String getType(){
             return "";
         }
 
