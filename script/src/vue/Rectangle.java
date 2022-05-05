@@ -91,7 +91,8 @@ public class Rectangle extends JLabel {
                 }
             }
         };
-
+        addMouseListener(ma);
+        addMouseMotionListener(ma);
         bloc = new JLabel[p.getHeight()][p.getWidth()];
 
         this.plat = p;
@@ -308,24 +309,8 @@ public class Rectangle extends JLabel {
                     if (plat.getCase(i, j) instanceof CaseVisible){
                         bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
                     }
-                    if ("Reflechissant".equals(plat.getCase(i, j).getBloc().getType())){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
-                    }
-                    if ("SemiReflechissant".equals(plat.getCase(i, j).getBloc().getType())){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocsemireflechissant.png"));
-                    }
-
-                    if ("Prisme".equals(plat.getCase(i, j).getBloc().getType())){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocprismatique.png"));
-                    }
-
-                    if ("Opaque".equals(plat.getCase(i, j).getBloc().getType())){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocabsorbant.png"));
-                    }
-
-                    if ("Teleporteur".equals(plat.getCase(i, j).getBloc().getType())){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"tp.png"));
-                    }
+                    String type = plat.getCase(i, j).getBloc().getType();
+                    bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
                     add(bloc[i][j]);
                     
                 }
