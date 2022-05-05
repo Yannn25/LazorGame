@@ -19,11 +19,10 @@ public class Test  {
 
     public static void main(String[] args) {
 
-        
-
         LinkedList<Laser> l1 = new LinkedList<Laser>();
         l1.add(new Laser(3, 2, 315));
-        Plateau p1 = new Plateau(4, 4, l1);
+        l1.add(new Laser(5, 6, 45));
+        Plateau p1 = new Plateau(10, 10, l1);
         Cible[] c1 = new Cible[1];
          c1[0] = new Cible(1, 2);
 
