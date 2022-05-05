@@ -1,18 +1,21 @@
 package modele;
 
-public class BlocPrisme extends Bloc {
+public class BlocPrismatique extends Bloc {
     
     
-    public BlocPrisme(int x, int y) {
+    public BlocPrismatique(int x, int y) {
             super(x,y,false);
     }
-    public BlocPrisme(){
+    public BlocPrismatique(int x, int y, boolean fixe) {
+        super(x,y,fixe);
+    }
+    public BlocPrismatique(){
         super(0,0,false);
     }
         
     @Override
     public String getType() {
-        return "Prisme";
+        return "BlocPrismatique";
     } 
 
 

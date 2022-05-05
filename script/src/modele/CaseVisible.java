@@ -14,17 +14,17 @@ public class CaseVisible extends Case{
 	}
 
 
-        @Override
+	@Override
 	public void setBloc(Bloc b){
 		this.bloc = b;
 	}
 
-        @Override
+	@Override
 	public Bloc getBloc(){
 		return this.bloc;
 	}
 
-        @Override
+	@Override
 	public void enleverBloc(){
 		this.bloc = null;
 	}

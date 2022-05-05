@@ -4,12 +4,12 @@ import java.awt.*;
 
 public class BlocReflechissant extends Bloc {
 
-    public BlocReflechissant(int x,int y)
-    {
+    public BlocReflechissant(int x,int y){
             super(x,y,false);
-
     }
-    
+    public BlocReflechissant(int x,int y, boolean fixe){
+        super(x,y,fixe);
+    }
     public BlocReflechissant(){
         super(0,0,false);
     }
@@ -17,7 +17,7 @@ public class BlocReflechissant extends Bloc {
         
     @Override
     public String getType() {
-        return "Reflechissant";
+        return "BlocReflechissant";
     }
 
 

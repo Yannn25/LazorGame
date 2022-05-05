@@ -31,9 +31,6 @@ public class Test  {
         rects.setLayout(null);
         rects.setOpaque(true);
         rects.setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
-        
-        
-        //System.out.println(System.getProperty("user.dir"));
 
         JFrame frame = new JFrame("Rectangles");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,26 +52,9 @@ public class Test  {
                     if (plat.getCase(i, j) instanceof CaseVisible){
                         rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
                     }
-                    if ("Reflechissant".equals(plat.getCase(i, j).getBloc().getType())){
-                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
-                    }
-                    if ("SemiReflechissant".equals(plat.getCase(i, j).getBloc().getType())){
-                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocsemireflechissant.png"));
-                    }
-
-                    if ("Prisme".equals(plat.getCase(i, j).getBloc().getType())){
-                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocprismatique.png"));
-                    }
-
-                    if ("Absorbant".equals(plat.getCase(i, j).getBloc().getType())){
-                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocabsorbant.png"));
-                    }
-
-                    if ("Teleporteur".equals(plat.getCase(i, j).getBloc().getType())){
-                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"tp.png"));
-                    }
+                    String type = plat.getCase(i, j).getBloc().getType();
+                    rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
                     frame.add(rects.bloc[i][j]);
-
                 }
             }
         }
@@ -94,9 +74,6 @@ public class Test  {
             }
         }*/
         frame.setVisible(true);
-
-
-
 
     }
 

@@ -6,14 +6,16 @@ public class BlocSemiReflechissant extends Bloc {
 	public BlocSemiReflechissant(int x,int y) {
 		super(x,y,false);
 	}
-        
+    public BlocSemiReflechissant(int x,int y, boolean fixe) {
+        super(x,y,fixe);
+    }
     public BlocSemiReflechissant(){
         super(0,0,false);
     }    
         
     @Override
     public String getType(){
-            return "SemiReflechissant";
+            return "BlocSemiReflechissant";
         }
 
     @Override

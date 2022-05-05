@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.util.LinkedList;
 
 public class Plateau {
@@ -107,8 +105,9 @@ public class Plateau {
      * point de départ et de son orientation;
      */
     public void initLaser(){
-        for(int i = nblasers; i< lasers.size(); i++){
-            lasers.remove(i);
+        int size = lasers.size();
+        for(int i = nblasers; i<size; i++){
+            lasers.remove(nblasers);
         }
         for(int i=0;i < lasers.size();i++){
             if (lasers.get(i)!=null ){
@@ -117,7 +116,7 @@ public class Plateau {
 
             }
         }
-        CibleAtteinte();
+        calculerCibles();
         winCondition();
     }
 
@@ -135,7 +134,7 @@ public class Plateau {
         int i = l.x;
         int j = l.y;
         int angletmp = l.orientation;
-        int oldtmp = angletmp;
+        int oldtmp;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
             l.points.add(new Point(i,j));
             oldtmp = angletmp;
@@ -180,10 +179,9 @@ public class Plateau {
                 j=1-j;
             }
         }
-
     }
 
-    public void CibleAtteinte(){
+    public void calculerCibles(){
         for(int i = 0; i < cibles.length; i++){
             cibles[i].atteint = false;
         }
@@ -205,10 +203,13 @@ public class Plateau {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
-        plateau[4][3] = new CaseVisible(new BlocTP(0, 2));
-        plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
-        plateau [5][8] = new CaseVisible(new BlocPrisme());
+        plateau[3][3] = new CaseVisible(new BlocReflechissant());
+        plateau[4][3] = new CaseVisible(new BlocTeleporteur());
+        plateau[5][3] = new CaseVisible(new BlocReflechissant());
+        plateau[2][1] = new CaseVisible(new BlocAbsorbant());
+        plateau[5][8] = new CaseVisible(new BlocPrismatique());
+        plateau[6][8] = new CaseVisible(new BlocTeleporteur());
+
     }
 
     public int nouvelAngle(int x, int y, int angle) {
@@ -217,7 +218,7 @@ public class Plateau {
             String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
 
             switch (nomBloc){
-                case "SemiReflechissant":{
+                case "BlocSemiReflechissant":{
                     int k=0;
                     switch (angle) {
                         case 45:
@@ -236,6 +237,43 @@ public class Plateau {
                     }
                     return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
                 }
+                case "BlocTeleporteur":
+                    int a = 0,b = 0;
+                    for (int i = 0; i < this.height; i++) {
+                        for (int j = 0; j < this.width; j++) {
+                            if (!(caseVerif[0] == i && caseVerif[1] == j) && getCase(i,j).getBloc() instanceof BlocTeleporteur) {
+                                a = i;
+                                b = j;
+                            }
+                        }
+                    }
+                    int diff_i = caseVerif[0]-a;
+                    int diff_j = caseVerif[1]-b;
+                    if (x%2 == 1 && y%2==0) {
+                        switch (angle){
+                            case 45:
+                            case 315:
+                                lasers.add(new Laser(x - 2*diff_i, y - 2*diff_j + 2, angle));
+                                break;
+                            case 135:
+                            case 225:
+                                lasers.add(new Laser(x - 2*diff_i, y - 2*diff_j - 2, angle));
+                                break;
+                        }
+                    }
+                    if (x%2 == 0 && y%2==1) {
+                        switch (angle){
+                            case 45:
+                            case 135:
+                                lasers.add(new Laser(x - 2*diff_i - 2, y - 2*diff_j, angle));
+                                break;
+                            case 315:
+                            case 225:
+                                lasers.add(new Laser(x - 2*diff_i + 2, y - 2*diff_j, angle));
+                                break;
+                        }
+                    }
+                    return -1;
                 default:{
                     return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
                 }
@@ -278,8 +316,7 @@ public class Plateau {
     /*
             MÉTHODE DE SAUVEGARDE DU PLATEAU
     */
-
-    public void SAUVEGARDE(String filename) {
+    public void sauvegarde(String filename) {
         try {
             FileOutputStream file = new FileOutputStream("./script/src/resources/"+filename+".ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
@@ -288,11 +325,11 @@ public class Plateau {
             out.close();
             file.close();
 
-            System.out.println("sauvegarde effectué");
+            System.out.println("sauvegarde effectuée");
         } catch (FileNotFoundException f) {
          System.out.println(f.getMessage());   
         }catch(IOException i){
-           System.out.println("partie non sauvegardé"); 
+           System.out.println("partie non sauvegardée");
         }
     }
 
@@ -310,7 +347,7 @@ public class Plateau {
         } catch (FileNotFoundException f) {
          System.out.println(f.getMessage());   
         }catch(IOException i){
-           System.out.println("partie non sauvegardé"); 
+           System.out.println("partie non sauvegardée");
         }
         return null;
     }
