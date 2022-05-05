@@ -15,11 +15,19 @@ public class Rectangle extends JLabel {
     public MouseAdapter ma;
     public FinDePartie fin;
 
-    //public static final String PATH="./src/icones/";
-    public static final String PATH="./script/src/icones/";
+    public static final String PATH="./src/icones/";
+    //public static final String PATH="./script/src/icones/";
+    //gestion des différents écran
+    private int GameState;
+    final int StartState = 0;
+    final int LevelsState = 1;
+    final int PlayState = 2;
+    final int VictoryState = 3;
+    final int WrongState = -1;
+
     
     public Rectangle(Plateau p){
-
+        GameState = 2;
         ma = new MouseAdapter() {
             JLabel selectionPanel = null;
             Point selectionlabelposition = null;
@@ -101,13 +109,26 @@ public class Rectangle extends JLabel {
     }
 
     public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Plateau(g);
-        TraceLaser(g);
-        Cible(g);
-        if(plat.isWin()){
-            fin = new FinDePartie();
+        if (GameState == StartState) {
+            
         }
+
+        if (GameState == LevelsState) {
+            
+        }
+
+        
+
+        if (GameState == PlayState) {
+            super.paintComponent(g);
+            Plateau(g);
+            TraceLaser(g);
+            Cible(g);
+            if(plat.isWin()){
+                fin = new FinDePartie();
+            }
+        }
+       
     }
     
     public void TerminerPartie(Graphics g) {
@@ -211,6 +232,16 @@ public class Rectangle extends JLabel {
             }
                
         }  
+    }
+
+    public void SetState(int state) {
+        clear();
+        this.GameState = state;
+    }
+
+    public void clear() {
+        removeAll();
+        repaint();
     }
 
 }
