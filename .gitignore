@@ -192,8 +192,9 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,java,vscode,linux,windows,macos,eclipse
 
-# intelliji
+# intellij
 .idea
+out
 
 *.iml
 
