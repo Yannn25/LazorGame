@@ -27,7 +27,7 @@ public class Rectangle extends JLabel {
 
     
     public Rectangle(Plateau p){
-        GameState = 2;
+        GameState = 0;
         ma = new MouseAdapter() {
             JLabel selectionPanel = null;
             Point selectionlabelposition = null;
@@ -94,10 +94,12 @@ public class Rectangle extends JLabel {
         bloc = new JLabel[p.getHeight()][p.getWidth()];
 
         this.plat = p;
-        setLayout(null);
+        
         this.setFocusable(true);
-        this.setLayout(null);
+        setLayout(null);
+        setOpaque(true);
 
+        setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
 
     }
 
@@ -109,8 +111,26 @@ public class Rectangle extends JLabel {
     }
 
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
         if (GameState == StartState) {
-            
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
+            String text = "Lazors";
+            int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
+            int x = this.getWidth()/2 - length/2;
+            int y = this.getHeight()/3;
+            g2.setColor(Color.black);
+            g2.drawString(text, x+5, y+5);
+            g2.setColor(Color.white);
+            g2.drawString(text, x, y);
+
+           
+            ButtonMenu bm1 = new ButtonMenu(300, 400, 1, this);
+            ButtonMenu bm2 = new ButtonMenu(300, 600, 2, this);
+
+            add(bm1);
+            add(bm2);
         }
 
         if (GameState == LevelsState) {
@@ -120,7 +140,7 @@ public class Rectangle extends JLabel {
         
 
         if (GameState == PlayState) {
-            super.paintComponent(g);
+            
             Plateau(g);
             TraceLaser(g);
             Cible(g);

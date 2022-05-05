@@ -30,7 +30,10 @@ public class Test  {
         Rectangle rects = new Rectangle(plat);
         rects.setLayout(null);
         rects.setOpaque(true);
-        rects.setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        //rects.setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        
+        
+        //System.out.println(System.getProperty("user.dir"));
 
         JFrame frame = new JFrame("Rectangles");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,7 +44,7 @@ public class Test  {
 
         rects.addMouseListener(rects.ma);
         rects.addMouseMotionListener(rects.ma);
-        for (int i = 0; i < plat.height; i++) {
+        /*for (int i = 0; i < plat.height; i++) {
             for (int j = 0; j < plat.width; j++) {
                 if(plat.getCase(i, j).BlocPresent()){
                     rects.bloc[i][j]=new JLabel();
@@ -52,8 +55,29 @@ public class Test  {
                     if (plat.getCase(i, j) instanceof CaseVisible){
                         rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
                     }
+<<<<<<< HEAD
                     String type = plat.getCase(i, j).getBloc().getType();
                     rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
+=======
+                    if ("Reflechissant".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
+                    }
+                    if ("SemiReflechissant".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocsemireflechissant.png"));
+                    }
+
+                    if ("Prisme".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocprismatique.png"));
+                    }
+
+                    if ("Opaque".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"Blocabsorbant.png"));
+                    }
+
+                    if ("Teleporteur".equals(plat.getCase(i, j).getBloc().getType())){
+                        rects.bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"tp.png"));
+                    }
+>>>>>>> 8423421 (menu accueil ok)
                     frame.add(rects.bloc[i][j]);
                 }
             }

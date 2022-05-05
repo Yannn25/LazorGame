@@ -203,13 +203,11 @@ public class Plateau {
                 plateau[i][j] = new CaseVisible();
             }
         }
-        plateau[3][3] = new CaseVisible(new BlocReflechissant());
-        plateau[4][3] = new CaseVisible(new BlocTeleporteur());
-        plateau[5][3] = new CaseVisible(new BlocReflechissant());
-        plateau[2][1] = new CaseVisible(new BlocAbsorbant());
-        plateau[5][8] = new CaseVisible(new BlocPrismatique());
-        plateau[6][8] = new CaseVisible(new BlocTeleporteur());
-
+        plateau[3][3] = new CaseVisible(new BlocReflechissant(0, 2));
+      //  plateau[4][3] = new CaseVisible(new BlocTP(0, 2));
+        plateau[2][1] = new CaseVisible(new BlocSemiReflechissant(0, 2));
+       // plateau [5][8] = new CaseVisible(new BlocPrisme());
+        //plateau[8][9] = new CaseVisible(new BlocOpaque());
     }
 
     public int nouvelAngle(int x, int y, int angle) {
