@@ -1,12 +1,15 @@
 package modele;
 
-import java.awt.List;
 import java.awt.Point;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
 
 
 public class Laser implements Serializable{
+
+    @Serial
+    private static final long serialVersionUID = 3296324048652923361L;
 
     protected final int x,y;
     // Orientation en degré ?
