@@ -79,6 +79,8 @@ public class Controleur {
 		return plateau;
 	}
 
+	
+
 	public void commencerJeu(){
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

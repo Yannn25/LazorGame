@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import modele.Plateau;
 import vue.Rectangle;
 
 import java.awt.Graphics;
@@ -39,6 +40,23 @@ public class LevelButton extends JButton implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        switch (BlocNumber) {
+            case 1:
+            rect.setPlat(new Plateau(1));
+            break;
+    
+            case 2:
+            rect.setPlat(new Plateau(2));
+                break;
+
+            case 3:
+            rect.setPlat(new Plateau(2));
+            break;
+            case 4:
+            rect.setPlat(new Plateau(2));
+                break;
+         
+        }
         rect.SetState(2);
         
     }
