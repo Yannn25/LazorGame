@@ -16,8 +16,8 @@ public class Rectangle extends JLabel {
     public FinDePartie fin;
 
 
-    //public static final String PATH="./src/icones/";
-    public static final String PATH="./script/src/icones/";
+    public static final String PATH="./src/icones/";
+    //public static final String PATH="./script/src/icones/";
     //gestion des différents écran
     public int GameState;
     final int StartState = 0;
@@ -147,6 +147,8 @@ public class Rectangle extends JLabel {
             g2.setColor(Color.white);
             g2.drawString(text, x, y);
 
+            MenuBar mb = new MenuBar(this);
+            add(mb);
 
             LevelButton lv1 = new LevelButton(100, 250, 1, this);
             add(lv1);
@@ -158,14 +160,7 @@ public class Rectangle extends JLabel {
             add(lv4);
 
 
-           lv1.addActionListener(new ActionListener() {
-               @Override
-               public void actionPerformed(ActionEvent e) {
-                   SetState(2);
-
-               }
-           });
-
+           
 
             
         }
@@ -175,6 +170,9 @@ public class Rectangle extends JLabel {
            Plateau(g);
            TraceLaser(g);
            Cible(g);
+           MenuBar mb = new MenuBar(this);
+            add(mb);
+            
            if(plat.isWin()){
                fin = new FinDePartie();
            }
@@ -274,9 +272,10 @@ public class Rectangle extends JLabel {
     }
 
     public void SetState(int state) {
+        
         clear();
         this.GameState = state;
-        //paintComponent(this.getGraphics());
+        paintComponent(this.getGraphics());
         if (state == 2) {
             initbloc();
         }

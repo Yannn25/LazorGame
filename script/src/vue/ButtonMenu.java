@@ -31,19 +31,13 @@ public class ButtonMenu extends JButton implements ActionListener{
 
         if (CommandNumber == 2) 
         setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+        if (CommandNumber == 4) {
+            setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+             setBounds(x, y, 80, 50);
+         }
     }
 
-    public ButtonMenu(int x,int y,int CommandNumber,MenuBar jBar) {
-        addActionListener(this);
-        this.rect = jBar.rec;
-        setLayout(null);
-        setOpaque(true);
-        if (CommandNumber == 4) {
-           setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
-            setBounds(x, y, 80, 50);
-        }
-        
-    }
+  
 
 
     @Override
@@ -59,7 +53,7 @@ public class ButtonMenu extends JButton implements ActionListener{
                break;
 
             case 4:
-                rect.SetState(0);
+                rect.SetState(rect.GameState-1);
                break;
             
 
@@ -81,8 +75,8 @@ public class ButtonMenu extends JButton implements ActionListener{
         if (CommandNumber == 2)
             text = "Continue";
 
-        //if (CommandNumber == 4) 
-          //  text = "<";
+        if (CommandNumber == 4) 
+           text = "<";
 
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = this.getWidth()/2 - length/2;

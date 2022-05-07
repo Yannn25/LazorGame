@@ -1,13 +1,13 @@
 package modele;
 
 import java.awt.Point;
-import java.io.Serial;
+//import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedList;
 
 public class Cible implements Serializable{
 
-    @Serial
+
     private static final long serialVersionUID = 7073363957831599093L;
 
     protected final Point p;
