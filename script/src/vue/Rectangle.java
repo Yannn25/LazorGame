@@ -24,9 +24,6 @@ public class Rectangle extends JLabel {
     final int LevelsState = 1;
     final int Niveau1 = 2;
 
-    public Rectangle(){
-
-    }
 
     public Rectangle(Plateau p){
         GameState = 0;
@@ -147,7 +144,7 @@ public class Rectangle extends JLabel {
             g2.setColor(Color.white);
             g2.drawString(text, x, y);
 
-            ButtonMenu retour = new ButtonMenu(700, 10, 4, this);
+            ButtonMenu retour = new ButtonMenu(20, this.getHeight()-150, 4, this);
             add(retour);
 
             LevelButton lv1 = new LevelButton(100, 250, 1, this);
@@ -170,7 +167,7 @@ public class Rectangle extends JLabel {
            Plateau(g);
            TraceLaser(g);
            Cible(g);
-           ButtonMenu retour = new ButtonMenu(700, 10, 4, this);
+           ButtonMenu retour = new ButtonMenu(20, this.getHeight()-150, 4, this);
            add(retour);
             
            if(plat.isWin()){

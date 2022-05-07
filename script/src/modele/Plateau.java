@@ -4,6 +4,8 @@ import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 
+import controleur.Controleur;
+
 public class Plateau implements Serializable{
 
     private static final long serialVersionUID = 1371416004898345184L;
@@ -359,5 +361,10 @@ public class Plateau implements Serializable{
         }
         return p;
     }
+
+    /*public static void main(String[] args) throws IOException {
+        Plateau trois = Controleur.initNiveau3();
+        trois.sauvegarder("Niveau3");
+    }*/
 
 } 

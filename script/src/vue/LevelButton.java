@@ -50,7 +50,7 @@ public class LevelButton extends JButton implements ActionListener{
                 break;
 
             case 3:
-            rect.setPlat(new Plateau(2));
+            rect.setPlat(new Plateau(3));
             break;
             case 4:
             rect.setPlat(new Plateau(2));

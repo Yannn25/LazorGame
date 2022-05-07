@@ -79,7 +79,29 @@ public class Controleur {
 		return plateau;
 	}
 
-	
+	/*public static Plateau initNiveau3() {
+		LinkedList<Laser> l1 = new LinkedList<Laser>();
+		l1.add(new Laser(0, 0, 225));
+		Cible[] c1 = new Cible[1];
+		c1[0] = new Cible(2, 0);
+
+		Plateau plateau = new Plateau(5, 5, l1, c1);
+
+		for (int i = 0; i < plateau.height; i++) {
+			for (int j = 0; j < plateau.width; j++) {
+				plateau.cases[i][j] = new CaseVisible();
+			}
+		}
+
+		plateau.cases[1][0] = new CaseVisible(new BlocAbsorbant());
+		plateau.cases[0][1] = new CaseVisible(new BlocReflechissant());
+		plateau.cases[0][2] = new CaseVisible(new BlocAbsorbant());
+		plateau.cases[1][1] = new CaseVisible(new BlocAbsorbant());
+		plateau.cases[2][1] = new CaseVisible(new BlocAbsorbant());
+		plateau.cases[2][2] = new CaseVisible(new BlocAbsorbant());
+		plateau.initLaser();
+		return plateau;
+	}*/
 
 	public void commencerJeu(){
 		JFrame frame = new JFrame();
