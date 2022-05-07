@@ -147,8 +147,8 @@ public class Rectangle extends JLabel {
             g2.setColor(Color.white);
             g2.drawString(text, x, y);
 
-            MenuBar mb = new MenuBar(this);
-            add(mb);
+            ButtonMenu retour = new ButtonMenu(700, 10, 4, this);
+            add(retour);
 
             LevelButton lv1 = new LevelButton(100, 250, 1, this);
             add(lv1);
@@ -170,8 +170,8 @@ public class Rectangle extends JLabel {
            Plateau(g);
            TraceLaser(g);
            Cible(g);
-           MenuBar mb = new MenuBar(this);
-            add(mb);
+           ButtonMenu retour = new ButtonMenu(700, 10, 4, this);
+           add(retour);
             
            if(plat.isWin()){
                fin = new FinDePartie();
@@ -275,7 +275,7 @@ public class Rectangle extends JLabel {
         
         clear();
         this.GameState = state;
-        paintComponent(this.getGraphics());
+       // paintComponent(this.getGraphics());
         if (state == 2) {
             initbloc();
         }
