@@ -1,4 +1,4 @@
-package modele;
+package vue;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -21,7 +21,8 @@ public class MenuBar extends JMenuBar{
         this.setForeground(Color.black);
         this.setBackground(Color.black);
         this.setBounds(0, 0, rect.getWidth(), 50);
-        this.retour = new ButtonMenu(0, 0, 4, this);
+        this.retour = new ButtonMenu(0, 0, 4, rect);
+        
         add(retour);
     }
 

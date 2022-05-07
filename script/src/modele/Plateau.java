@@ -1,40 +1,39 @@
 package modele;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.LinkedList;
 
 public class Plateau implements Serializable{
 
-    public int width;
-    public int height;
-    protected Case[][] plateau;
+    private static final long serialVersionUID = 1371416004898345184L;
+
+    public final int width;
+    public final int height;
+    public Case[][] cases;
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
     protected final int nblasers;
     protected boolean win;
-    //int Niveau;
-    
 
-    public Plateau(int height, int width,LinkedList<Laser> las) {
-
+    public Plateau(int height, int width, LinkedList<Laser> las, Cible[] cibles) {
         this.height=height;
         this.width=width;
-        this.plateau = new Case[height][width];
+        this.cases = new Case[height][width];
         this.lasers = las;
         this.nblasers = lasers.size();
-
+        this.cibles = cibles;
     }
 
-   
+    public Plateau(int niveau){
+        Plateau sauvegarde = reprisePartie("Niveau" + niveau);
+        this.height = sauvegarde.height;
+        this.width = sauvegarde.width;
+        this.cases = sauvegarde.cases;
+        this.lasers = (LinkedList<Laser>) sauvegarde.lasers.clone();
+        this.cibles = sauvegarde.getCibles();
+        this.nblasers = sauvegarde.lasers.size();
+    }
 
     public int getWidth() {
         return width;
@@ -45,10 +44,10 @@ public class Plateau implements Serializable{
     }
 
     public Case getCase(int x, int y){
-        return plateau[x][y];
+        return cases[x][y];
     }
     public void setCase(int x, int y,Case c){
-        plateau[x][y] = c;
+        cases[x][y] = c;
     }
     public LinkedList<Laser> getLasers() {
         return lasers;
@@ -104,7 +103,7 @@ public class Plateau implements Serializable{
      * sur la case en question
      */
     public boolean estVisible(int x, int y){
-        return plateau[x][y] instanceof CaseVisible;
+        return cases[x][y] instanceof CaseVisible;
     }
 
     /*
@@ -201,22 +200,6 @@ public class Plateau implements Serializable{
                 }
             }
         }
-    }
-
-    /* Initialisation des plateau un peu commme des niveaux*/
-
-    public void initdemo() {
-        for (int i = 0; i <height; i++) {
-            for (int j = 0; j < width; j++) {
-                plateau[i][j] = new CaseVisible();
-            }
-        }
-        plateau[3][3] = new CaseVisible(new BlocReflechissant());
-        plateau[4][3] = new CaseVisible(new BlocTeleporteur());
-        plateau[5][3] = new CaseVisible(new BlocTeleporteur());
-        plateau[2][1] = new CaseVisible(new BlocSemiReflechissant());
-        plateau [5][8] = new CaseVisible(new BlocPrismatique());
-        plateau[8][9] = new CaseVisible(new BlocAbsorbant());
     }
 
     public int nouvelAngle(int x, int y, int angle) {
@@ -324,23 +307,16 @@ public class Plateau implements Serializable{
             MÉTHODE DE SAUVEGARDE DU PLATEAU
     */
 
-    public void Sauvegarde (String fileName) throws IOException {
-
+    public void sauvegarder(String fileName) throws IOException {
         try {
 
-            FileOutputStream file = new FileOutputStream("./src/resources/"+fileName+".ser");
+            FileOutputStream file = new FileOutputStream("./src/niveaux/"+fileName+".ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             out.writeObject(this);
 
-            System.out.println("données de l'objet sauvegardé");
-            System.out.println("heigth "+this.getHeight());
-            System.out.println("width "+this.getWidth());
-
+            System.out.println(fileName + " sauvegardé");
             out.close();
-            
-
-            System.out.println("Partie enregistrée");
 
         }catch(FileNotFoundException fnf){
             System.out.println("fichier de sauvegarde non trouvé");
@@ -354,37 +330,34 @@ public class Plateau implements Serializable{
 
     }
 
-    public static Plateau ReprisePartie (String filename) throws ClassNotFoundException{
+    public static Plateau reprisePartie (String filename){
         Plateau p = null;
         try {
-
-            FileInputStream file = new FileInputStream("./src/resources/"+filename+".ser");
+            System.out.println("./src/niveaux/"+filename+".ser");
+            FileInputStream file = new FileInputStream("./src/niveaux/"+filename+".ser");
             ObjectInputStream in = new ObjectInputStream(file);
 
             p = (Plateau)in.readObject();
 
             System.out.println("données de l'objet recuperer");
-            System.out.println("heigth "+((Plateau) p).getHeight());
-            System.out.println("width "+((Plateau) p).getWidth());
 
             in.close();
-            
-
             return (Plateau)p;
         }
-
-        catch(FileNotFoundException fnf) {
+        catch(FileNotFoundException e) {
             System.out.println("fichier non trouvé");
-        
-        } catch (IOException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
             System.out.println("erreur");
-        }catch(NullPointerException np){
+            e.printStackTrace();
+        }catch(NullPointerException e) {
             System.out.println("ressource pas trouvée");
+            e.printStackTrace();
+        }catch(ClassNotFoundException e){
+            System.out.println("L'objet n'est pas de la bonne classe");
+            e.printStackTrace();
         }
         return p;
     }
 
-    
-
-    
 } 

@@ -1,4 +1,4 @@
-package modele;
+package vue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

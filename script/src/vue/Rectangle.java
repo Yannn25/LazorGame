@@ -1,7 +1,6 @@
 package vue;
 
 import modele.*;
-import modele.MenuBar;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,17 +15,19 @@ public class Rectangle extends JLabel {
     public MouseAdapter ma;
     public FinDePartie fin;
 
+
     public static final String PATH="./src/icones/";
     //public static final String PATH="./script/src/icones/";
     //gestion des différents écran
     public int GameState;
     final int StartState = 0;
     final int LevelsState = 1;
-    final int PlayState = 2;
-    final int VictoryState = 3;
-    final int WrongState = -1;
+    final int Niveau1 = 2;
 
-    
+    public Rectangle(){
+
+    }
+
     public Rectangle(Plateau p){
         GameState = 0;
         ma = new MouseAdapter() {
@@ -157,38 +158,25 @@ public class Rectangle extends JLabel {
             add(lv3);
             LevelButton lv4 = new LevelButton(450, 250, 4, this);
             add(lv4);
-            LevelButton lv5 = new LevelButton(450, 350, 5, this);
-            add(lv5);
-            LevelButton lv6 = new LevelButton(450, 450, 6, this);
-            add(lv6);
+
+
+           
+
             
         }
-
         
 
-        if (GameState == PlayState) {
+       if (GameState == Niveau1) {
+           Plateau(g);
+           TraceLaser(g);
+           Cible(g);
+           MenuBar mb = new MenuBar(this);
+            add(mb);
             
-            Plateau(g);
-            TraceLaser(g);
-          //  initbloc();
-            Cible(g);
-            if(plat.isWin()){
-                fin = new FinDePartie();
-            }
+           if(plat.isWin()){
+               fin = new FinDePartie();
+           }
         }
-       
-    }
-    
-    public void TerminerPartie(Graphics g) {
-      
-    }
-    public void paintFin(Graphics g) {
-        //super.paintComponent(g);
-        Plateau(g);
-        TraceLaser(g);
-        
-        Cible(g);
-        //makeRoundedCorner(image, PROPERTIES);
     }
 
     public void TraceLaser(Graphics g){
@@ -284,6 +272,7 @@ public class Rectangle extends JLabel {
     }
 
     public void SetState(int state) {
+        
         clear();
         this.GameState = state;
         paintComponent(this.getGraphics());
