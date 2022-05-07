@@ -341,7 +341,7 @@ public class Plateau implements Serializable{
 
             p = (Plateau)in.readObject();
 
-            System.out.println("données de l'objet recuperer");
+            System.out.println("objet recuperé");
 
             in.close();
             return (Plateau)p;
@@ -362,9 +362,6 @@ public class Plateau implements Serializable{
         return p;
     }
 
-    /*public static void main(String[] args) throws IOException {
-        Plateau trois = Controleur.initNiveau3();
-        trois.sauvegarder("Niveau3");
-    }*/
+    
 
 } 
