@@ -7,7 +7,7 @@ public abstract class Case implements Serializable{
 	
     public void afficheCase(){ }
     public void setBloc(Bloc b){}
-    public abstract boolean BlocPresent();
+    public abstract boolean blocPresent();
     public abstract String getType();
     public abstract Bloc getBloc();
     public abstract void enleverBloc();

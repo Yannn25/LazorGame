@@ -15,18 +15,8 @@ public class Controleur {
 
         /*  CONSTRUCTEUR  */
 	public Controleur(){
-		this.plateau = initNiveau2();
-		this.rect = new Rectangle(plateau);
-	}
-
-	public Controleur(Plateau plateau){
-		this.plateau = plateau;
-		rect = new Rectangle(plateau);
-	}
-
-	public Controleur(int niveau){
-		this.plateau = new Plateau(niveau);
-		rect = new Rectangle(plateau);
+		this.plateau = initNiveau1();
+		this.rect = new Rectangle();
 	}
 
 	public Controleur(Plateau plateau, Rectangle rect){
@@ -54,9 +44,9 @@ public class Controleur {
 		plateau.cases[4][1] = new CaseCachee();
 		plateau.cases[4][4] = new CaseCachee();
 
-		plateau.cases[1][2] = new CaseVisible(new BlocReflechissant(false));
-		plateau.cases[2][1] = new CaseVisible(new BlocReflechissant(false));
-		plateau.cases[4][3] = new CaseVisible(new BlocReflechissant(false));
+		plateau.cases[1][2] = new CaseVisible(new BlocReflechissant());
+		plateau.cases[2][1] = new CaseVisible(new BlocReflechissant());
+		plateau.cases[4][3] = new CaseVisible(new BlocReflechissant());
 		plateau.initLaser();
 		return plateau;
 	}
@@ -106,7 +96,7 @@ public class Controleur {
 		plat.initLaser();
 		return plat;
 	}
-	public static Plateau initNiveau4() {
+    public static Plateau initNiveau4() {
 		LinkedList<Laser> l = new LinkedList<Laser>();
 		l.add(new Laser(0, 3, 225));
                 l.add(new Laser(3, 4, 45));
@@ -134,7 +124,7 @@ public class Controleur {
 		plat.initLaser();
 		return plat;
 	}
-	public static Plateau initNiveau5() {
+    public static Plateau initNiveau5() {
 		LinkedList<Laser> l = new LinkedList<Laser>();
 		l.add(new Laser(5, 0, 315));
 		Cible[] c = new Cible[4];
@@ -161,7 +151,10 @@ public class Controleur {
 		plat.initLaser();
 		return plat;
 	}
-	public static Plateau initNiveau6() {
+        
+        
+        
+    public static Plateau initNiveau6() {
 		LinkedList<Laser> l = new LinkedList<Laser>();
 		l.add(new Laser(0, 5, 225));
 		Cible[] c = new Cible[2];

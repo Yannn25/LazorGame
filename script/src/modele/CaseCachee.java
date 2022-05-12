@@ -3,7 +3,7 @@ package modele;
 public class CaseCachee extends Case {
 
     @Override
-    public boolean BlocPresent() {
+    public boolean blocPresent() {
         return false;
     }
 
