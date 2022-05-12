@@ -23,7 +23,7 @@ public class VuePlateau extends JLabel {
 
 
 	//public static final String PATH="./src/icones/";
-	public static final String PATH="./script/src/icones/";
+	public static final String PATH="./icones/";
 	//gestion des différents écran
 	public int GameState;
 	final int StartState = 0;

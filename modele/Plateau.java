@@ -18,7 +18,7 @@ public class Plateau implements Serializable{
     public int niveau;
     protected final int nblasers;
     protected boolean win;
-    public static String PATH = "./script/src/";
+    public static String PATH = "./";
     //public static String PATH = "./src/";
 
     /*  CONSTRUCTEUR   */
