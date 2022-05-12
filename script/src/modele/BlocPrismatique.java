@@ -1,18 +1,14 @@
 package modele;
 
 public class BlocPrismatique extends Bloc {
-    
-    
-    public BlocPrismatique(int x, int y) {
-            super(x,y,false);
-    }
-    public BlocPrismatique(int x, int y, boolean fixe) {
-        super(x,y,fixe);
-    }
+
     public BlocPrismatique(){
-        super(0,0,false);
+        super(false);
     }
-        
+    public BlocPrismatique(boolean fixe){
+        super(fixe);
+    }
+
     @Override
     public String getType() {
         return "BlocPrismatique";

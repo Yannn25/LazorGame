@@ -1,18 +1,14 @@
  package modele;
 
 public class BlocSemiReflechissant extends Bloc {
-    
-    
-	public BlocSemiReflechissant(int x,int y) {
-		super(x,y,false);
-	}
-    public BlocSemiReflechissant(int x,int y, boolean fixe) {
-        super(x,y,fixe);
+
+    public BlocSemiReflechissant() {
+        super(false);
     }
-    public BlocSemiReflechissant(){
-        super(0,0,false);
-    }    
-        
+    public BlocSemiReflechissant(boolean fixe){
+        super(fixe);
+    }
+
     @Override
     public String getType(){
             return "BlocSemiReflechissant";

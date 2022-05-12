@@ -54,9 +54,9 @@ public class Controleur {
 		plateau.cases[4][1] = new CaseCachee();
 		plateau.cases[4][4] = new CaseCachee();
 
-		plateau.cases[1][2] = new CaseVisible(new BlocReflechissant());
-		plateau.cases[2][1] = new CaseVisible(new BlocReflechissant());
-		plateau.cases[4][3] = new CaseVisible(new BlocReflechissant());
+		plateau.cases[1][2] = new CaseVisible(new BlocReflechissant(false));
+		plateau.cases[2][1] = new CaseVisible(new BlocReflechissant(false));
+		plateau.cases[4][3] = new CaseVisible(new BlocReflechissant(false));
 		plateau.initLaser();
 		return plateau;
 	}

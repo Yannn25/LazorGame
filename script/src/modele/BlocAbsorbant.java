@@ -11,7 +11,10 @@ public class BlocAbsorbant extends Bloc {
         super(x,y,fixe);
     }
     public BlocAbsorbant(){
-        super(0,0,false);
+        super(false);
+    }
+    public BlocAbsorbant(boolean fixe){
+        super(fixe);
     }
     
     

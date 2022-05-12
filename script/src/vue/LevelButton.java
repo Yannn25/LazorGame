@@ -27,13 +27,13 @@ public class LevelButton extends JButton implements ActionListener{
         this.BlocNumber = CommandNumber;
         setLayout(null);
         setOpaque(true);
-        setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        setIcon(new ImageIcon(Rectangle.PATH +"arriereplan.png"));
 
         JLabel blocPanel = new JLabel();
         blocPanel.setLayout(null);
         blocPanel.setOpaque(true);
         blocPanel.setBounds(225, 15, 50, 50);
-        blocPanel.setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
+        blocPanel.setIcon(new ImageIcon(Rectangle.PATH + "Blocreflechissant.png"));
         add(blocPanel);
         addActionListener(this);
         
