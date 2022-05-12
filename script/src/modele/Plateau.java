@@ -15,10 +15,11 @@ public class Plateau implements Serializable{
     public Case[][] cases;
     protected Cible[] cibles; //Toutes les cibles du plateau
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
+    public int niveau;
     protected final int nblasers;
     protected boolean win;
     public static String PATH = "./script/src/";
-    //public static PATH = "./src/";
+    //public static String PATH = "./src/";
 
     /*  CONSTRUCTEUR   */
     public Plateau(int height, int width, LinkedList<Laser> las, Cible[] cibles) {
@@ -31,6 +32,7 @@ public class Plateau implements Serializable{
     }
 
     public Plateau(int niveau){
+        this.niveau = niveau;
         Plateau sauvegarde = reprisePartie("Niveau" + niveau);
         this.height = sauvegarde.height;
         this.width = sauvegarde.width;
@@ -38,6 +40,7 @@ public class Plateau implements Serializable{
         this.lasers = (LinkedList<Laser>) sauvegarde.lasers.clone();
         this.cibles = sauvegarde.getCibles();
         this.nblasers = sauvegarde.lasers.size();
+       
     }
     
     /* GETTER ET SETTER */

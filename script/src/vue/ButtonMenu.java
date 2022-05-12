@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
+import modele.Plateau;
 import vue.Rectangle;
 
 /*  CLASSE QUI GERE LE MENU  */
@@ -33,9 +34,14 @@ public class ButtonMenu extends JButton implements ActionListener{
 
         if (CommandNumber == 2) 
         setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+
         if (CommandNumber == 4) {
             setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
              setBounds(x, y, 80, 60);
+         }
+         if (CommandNumber == 5) {
+            setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+             setBounds(x, y, 150, 60);
          }
     }
 
@@ -55,7 +61,10 @@ public class ButtonMenu extends JButton implements ActionListener{
                 rect.SetState(rect.GameState-1);
                break;
             
-
+            case 5:
+                
+                rect.setPlat(new Plateau(rect.plat.niveau+1));
+                break;
        }
     }
 
@@ -76,6 +85,9 @@ public class ButtonMenu extends JButton implements ActionListener{
 
         if (CommandNumber == 4) 
            text = "<";
+
+        if (CommandNumber == 5) 
+           text = "next >";
 
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = this.getWidth()/2 - length/2;
