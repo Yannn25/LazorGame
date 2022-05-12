@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 /*  L'AIRE DE JEU  */
 
 public class Rectangle extends JLabel {
-	protected Plateau plat;
+    protected Plateau plat;
 	public JLabel[][] bloc;
 	public MouseAdapter ma;
 	public FinDePartie fin;
@@ -26,7 +26,8 @@ public class Rectangle extends JLabel {
 	final int LevelsState = 1;
 	final int Niveau = 2;
 
-
+    /*   CONSTRUCTEUR  */
+    //initialise aussi les deplacements avec un mouseAdapter
 	public Rectangle(){
 		GameState = 0;
 		ma = new MouseAdapter() {
@@ -145,17 +146,25 @@ public class Rectangle extends JLabel {
 			add(retour);
 
 			LevelButton lv1 = new LevelButton(100, 250, 1, this);
-			add(lv1);
-			LevelButton lv2 = new LevelButton(100, 350, 2, this);
-			add(lv2);
-			LevelButton lv3 = new LevelButton(100, 450, 3, this);
-			add(lv3);
-			LevelButton lv4 = new LevelButton(450, 250, 4, this);
-			add(lv4);
-			LevelButton lv5 = new LevelButton(450, 350, 5, this);
-			add(lv5);
-			LevelButton lv6 = new LevelButton(450, 450, 6, this);
-			add(lv6);
+            add(lv1);
+            LevelButton lv2 = new LevelButton(100, 320, 2, this);
+            add(lv2);
+            LevelButton lv3 = new LevelButton(100, 390, 3, this);
+            add(lv3);
+            LevelButton lv4 = new LevelButton(100, 460, 4, this);
+            add(lv4);
+            LevelButton lv5 = new LevelButton(100, 530, 5, this);
+            add(lv5);
+            LevelButton lv6 = new LevelButton(450, 250, 6, this);
+            add(lv6);
+            LevelButton lv7 = new LevelButton(450, 320, 7, this);
+            add(lv7);
+            LevelButton lv8 = new LevelButton(450, 390, 8, this);
+            add(lv8);
+            LevelButton lv9 = new LevelButton(450, 460, 9, this);
+            add(lv9);
+            LevelButton lv10 = new LevelButton(450, 530, 10, this);
+            add(lv10);
 			
 		}
 		
@@ -172,10 +181,13 @@ public class Rectangle extends JLabel {
 		   	}
 		}
 	}
-
+    /**
+     * Affichage des lasers.
+     * Trace un trait entre chaque point du laser
+     * @param g "feuille" sur laquelle on peint
+     */
 	public void TraceLaser(Graphics g){
 		Graphics2D g2 = (Graphics2D) g;
-		//int i=0;
 		for (Laser l : plat.getLasers()) {
 			//on vérifie bien que l n'est pas null
 			if(l != null){
@@ -198,7 +210,10 @@ public class Rectangle extends JLabel {
 
 
 	}
-
+    /**
+     * Affichage de l'ensemble du plateau
+     * @param g "feuille" sur laquelle on peint
+     */
 	public void Plateau(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		for(int i=1; i < plat.getHeight(); i++){
@@ -229,25 +244,10 @@ public class Rectangle extends JLabel {
 		}
 	}
 
-	public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
-		int w = image.getWidth();
-		int h = image.getHeight();
-		BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-
-		Graphics2D g2 = output.createGraphics();
-
-		g2.setComposite(AlphaComposite.Src);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.setColor(Color.WHITE);
-		g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
-		g2.setComposite(AlphaComposite.SrcAtop);
-		g2.drawImage(image, 0, 0, null);
-
-		g2.dispose();
-
-		return output;
-	}
-	
+	/**
+     * Affichage des cibles
+     * @param g "feuille" sur laquelle on peint
+     */
 	public void Cible(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		for(int i = 0; i < plat.getCibles().length; i++) {
@@ -265,21 +265,9 @@ public class Rectangle extends JLabel {
 		}  
 	}
 
-	public void SetState(int state) {
-		
-		clear();
-		this.GameState = state;
-		//paintComponent(this.getGraphics());
-		if (state == 2) {
-			initbloc();
-		}
-	}
-
-	public void clear() {
-		removeAll();
-		repaint();
-	}
-
+    /**
+     * Affichage des différentes image(dans le package icone)
+     */
 	public void initbloc() {
 		bloc = new JLabel[plat.getHeight()][plat.getWidth()];
 		for (int i = 0; i < plat.height; i++) {
@@ -306,5 +294,50 @@ public class Rectangle extends JLabel {
 			}
 		}
 	}
+    
+    /**
+     * Arrondi une image.
+     * @param image
+     * @param cornerRadius
+     * @return le paramètres image arrondi
+     */
+    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setComposite(AlphaComposite.Src);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(Color.WHITE);
+        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+
+        g2.dispose();
+
+        return output;
+    }
+    /**
+     * Change l'état actuel du jeu(de la scène).
+     * @param state etat actuel du jeu
+     */
+    public void SetState(int state) {
+        
+        clear();
+        this.GameState = state;
+       // paintComponent(this.getGraphics());
+        if (state == 2) {
+            initbloc();
+        }
+    }
+
+    /**
+     * Efface toute l'aire de jeu, avant de la repaindre
+     */
+    public void clear() {
+        removeAll();
+        repaint();
+    }
 }

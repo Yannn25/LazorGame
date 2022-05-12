@@ -12,6 +12,9 @@ public class Main {
             Controleur.initNiveau4().sauvegarder("Niveau4");
             Controleur.initNiveau5().sauvegarder("Niveau5");
             Controleur.initNiveau6().sauvegarder("Niveau6");
+            Controleur.initNiveau7().sauvegarder("Niveau7");
+            Controleur.initNiveau9().sauvegarder("Niveau9");*/
+            Controleur.initNiveau10().sauvegarder("Niveau10");
         }
         catch(Exception e){
             e.printStackTrace();
