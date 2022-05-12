@@ -297,7 +297,7 @@ public class VuePlateau extends JLabel {
 					}
 					String type = plat.getCase(i, j).getBloc().getType();
 					if(plat.getCase(i, j).getBloc().fixe){
-						bloc[i][j].setName("Blo");
+						bloc[i][j].setName("BlocFixe");
 						bloc[i][j].setIcon(new ImageIcon(VuePlateau.PATH + type+ "Fixe" + ".png"));
 					}else{
 						bloc[i][j].setName("Bloc");

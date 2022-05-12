@@ -37,18 +37,18 @@ public class ButtonMenu extends JButton implements ActionListener{
 
         if (CommandNumber == 4) {
             setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
-             setBounds(x, y, 80, 60);
-         }
-         if (CommandNumber == 5) {
+            setBounds(x, y, 80, 60);
+        }
+        if (CommandNumber == 5) {
             setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
-             setBounds(x, y, 150, 60);
-         }
+            setBounds(x, y, 150, 60);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
-       switch (CommandNumber) {
+        switch (CommandNumber) {
             case 1:
                rect.SetState(1);
                break;
@@ -59,18 +59,15 @@ public class ButtonMenu extends JButton implements ActionListener{
 
             case 4:
                 rect.SetState(rect.GameState-1);
-               break;
-            
+                break;
             case 5:
-                
                 rect.setPlat(new Plateau(rect.plat.niveau+1));
                 break;
        }
     }
 
-   @Override
-   protected void paintComponent(Graphics g) {
-
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
@@ -96,10 +93,6 @@ public class ButtonMenu extends JButton implements ActionListener{
         g2.drawString(text, x+5, y+5);
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
-   }
+    }
 
-  
-
-   
-    
 }
