@@ -134,16 +134,9 @@ public class Plateau implements Serializable{
         if(x1 == x2 && y1 == y2){
             return true;
         }
-        System.out.println( x1 + " " + y1 + " cachée: " + ((getCase(x1, y1) instanceof CaseCachee)));
-        System.out.println( x2 + " " + y2 + " cachée: " + ((getCase(x2, y2) instanceof CaseCachee)));
-        System.out.println( x2 + " " + y2 + " bloc présent: " + getCase(x2, y2).BlocPresent());
-        System.out.println("res: " + (!(getCase(x1, y1) instanceof CaseCachee) &&
-        !(getCase(x2, y2) instanceof CaseCachee) &&
-        !getCase(x2, y2).BlocPresent()));
-        //System.out.println(!getCase(x1, y1).getBloc().fixe);
         return (!(getCase(x1, y1) instanceof CaseCachee) &&
         !(getCase(x2, y2) instanceof CaseCachee) &&
-        !getCase(x2, y2).BlocPresent());
+        !getCase(x2, y2).blocPresent());
     }
 
     //calcule les points touchés par le laser passé en paramètre
@@ -214,7 +207,7 @@ public class Plateau implements Serializable{
 
     public int nouvelAngle(int x, int y, int angle) {
         int[] caseVerif = caseAVerifier(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
+        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).blocPresent()){
             String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
 
             switch (nomBloc){

@@ -25,7 +25,7 @@ public class Rectangle extends JLabel {
 	final int Niveau = 2;
 
 
-	public Rectangle(Plateau p){
+	public Rectangle(){
 		GameState = 0;
 		ma = new MouseAdapter() {
 			JLabel selectionPanel = null;
@@ -49,20 +49,6 @@ public class Rectangle extends JLabel {
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
-				if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
-						p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
-					selectionPanel.setLocation((newJ)*50, (newI)*50);
-					plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
-					plat.initLaser();
-					selectionlabelposition.y = newI*50;
-					selectionlabelposition.x = newJ*50;
-					repaint();
-				}
-
-			}
-
-			@Override
 			public void mouseDragged(MouseEvent e) {
 				if (selectionPanel != null
 						&& selectionlabelposition != null
@@ -74,8 +60,8 @@ public class Rectangle extends JLabel {
 					newY = selectionlabelposition.y + (newPanelClickPoint.y - panelClickposition.y);
 					newI = newY/50;
 					newJ = newX/50;
-					if(newI > 0 && newJ > 0 && newJ < p.getWidth() && newI < p.getHeight() &&
-							p.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+					if(newI > 0 && newJ > 0 && newJ < plat.getWidth() && newI < plat.getHeight() &&
+							plat.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
 						selectionPanel.setLocation((newJ)*50, (newI)*50);
 					}
 					else {
@@ -88,12 +74,22 @@ public class Rectangle extends JLabel {
 					}
 				}
 			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if(newI > 0 && newJ > 0 && newJ < plat.getWidth() && newI < plat.getHeight() &&
+						plat.deplacementPossible(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ)){
+					selectionPanel.setLocation((newJ)*50, (newI)*50);
+					plat.deplacerBloc(selectionlabelposition.y/50, selectionlabelposition.x/50, newI, newJ);
+					plat.initLaser();
+					selectionlabelposition.y = newI*50;
+					selectionlabelposition.x = newJ*50;
+					repaint();
+				}
+			}
 		};
 		addMouseListener(ma);
 		addMouseMotionListener(ma);
-		bloc = new JLabel[p.getHeight()][p.getWidth()];
-
-		this.plat = p;
 		
 		this.setFocusable(true);
 		setLayout(null);
@@ -212,16 +208,16 @@ public class Rectangle extends JLabel {
 					g2.setStroke(new BasicStroke(thickness));
 					Image img1 = Toolkit.getDefaultToolkit().getImage(PATH + "case.png");
 					g2.drawImage(img1, j*50, i*50, this);
-					if(plat.getCase(i, j).BlocPresent()){
+					if(plat.getCase(i, j).blocPresent()){
 						g2.fillRect(j*50, i*50, 50, 50);
 
 					}
 				}
-				if(plat.getCase(i, j).BlocPresent()){
+				if(plat.getCase(i, j).blocPresent()){
 					bloc[i][j]=new JLabel();
 					bloc[i][j].setOpaque(true);
 					bloc[i][j].setLayout(null);
-				   // bloc[i][j].setName("Bloc");
+				    //bloc[i][j].setName("Bloc");
 					bloc[i][j].setBounds(50*j, 50*i, 50, 50);
 					if (plat.getCase(i, j) instanceof CaseVisible){
 						bloc[i][j].setIcon(new ImageIcon(PATH + "case.png"));
@@ -271,7 +267,7 @@ public class Rectangle extends JLabel {
 		
 		clear();
 		this.GameState = state;
-	   // paintComponent(this.getGraphics());
+		//paintComponent(this.getGraphics());
 		if (state == 2) {
 			initbloc();
 		}
@@ -283,9 +279,10 @@ public class Rectangle extends JLabel {
 	}
 
 	public void initbloc() {
+		bloc = new JLabel[plat.getHeight()][plat.getWidth()];
 		for (int i = 0; i < plat.height; i++) {
 			for (int j = 0; j < plat.width; j++) {
-				if(plat.getCase(i, j).BlocPresent()){
+				if(plat.getCase(i, j).blocPresent()){
 					bloc[i][j]=new JLabel();
 					bloc[i][j].setOpaque(true);
 					bloc[i][j].setLayout(null);
