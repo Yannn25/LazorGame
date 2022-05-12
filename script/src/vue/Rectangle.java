@@ -188,8 +188,11 @@ public class Rectangle extends JLabel {
                 g2.setFont(g2.getFont().deriveFont(Font.BOLD,26F));
                 g2.setColor(Color.black);
 			    g2.drawString("GAGNÉ", 650, 200);
-                ButtonMenu next = new ButtonMenu(650, this.getHeight()-150, 5, this);
-                add(next);
+				if (plat.niveau <10) {
+					ButtonMenu next = new ButtonMenu(650, this.getHeight()-150, 5, this);
+                	add(next);
+				}
+                
 		   	}
 		}
 	}
