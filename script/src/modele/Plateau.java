@@ -4,6 +4,8 @@ import java.awt.*;
 import java.io.*;
 import java.util.LinkedList;
 
+import controleur.Controleur;
+
 public class Plateau implements Serializable{
 
     private static final long serialVersionUID = 1371416004898345184L;
@@ -339,7 +341,7 @@ public class Plateau implements Serializable{
 
             p = (Plateau)in.readObject();
 
-            System.out.println("données de l'objet recuperer");
+            System.out.println("objet recuperé");
 
             in.close();
             return (Plateau)p;
@@ -359,5 +361,7 @@ public class Plateau implements Serializable{
         }
         return p;
     }
+
+    
 
 } 

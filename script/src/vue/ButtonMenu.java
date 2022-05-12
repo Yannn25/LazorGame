@@ -33,7 +33,7 @@ public class ButtonMenu extends JButton implements ActionListener{
         setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
         if (CommandNumber == 4) {
             setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
-             setBounds(x, y, 80, 50);
+             setBounds(x, y, 80, 60);
          }
     }
 

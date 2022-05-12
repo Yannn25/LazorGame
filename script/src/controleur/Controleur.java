@@ -12,7 +12,7 @@ public class Controleur {
 	private Rectangle rect;
 
 	public Controleur(){
-		this.plateau = initNiveau1();
+		this.plateau = initNiveau2();
 		this.rect = new Rectangle(plateau);
 	}
 
@@ -77,6 +77,116 @@ public class Controleur {
 		plateau.cases[2][4] = new CaseVisible(new BlocReflechissant());
 		plateau.initLaser();
 		return plateau;
+	}
+
+	public static Plateau initNiveau3() {
+		LinkedList<Laser> l = new LinkedList<Laser>();
+		l.add(new Laser(6, 1, 45));
+		Cible[] c = new Cible[2];
+		c[0] = new Cible(2, 5);
+                c[1] = new Cible(5, 6);
+                
+		Plateau plat = new Plateau(4, 5, l, c);
+
+		for (int i = 0; i < plat.height; i++) {
+			for (int j = 0; j < plat.width; j++) {
+				plat.cases[i][j] =  new CaseVisible();
+			}
+		}
+
+                
+		plat.cases[2][4] = new CaseVisible(new BlocPrismatique());
+		plat.cases[1][2] = new CaseVisible(new BlocReflechissant());
+                plat.cases[2][1] = new CaseVisible(new BlocReflechissant());
+                plat.cases[3][4] = new CaseVisible(new BlocReflechissant());
+
+		plat.initLaser();
+		return plat;
+	}
+        public static Plateau initNiveau4() {
+		LinkedList<Laser> l = new LinkedList<Laser>();
+		l.add(new Laser(0, 3, 225));
+                l.add(new Laser(3, 4, 45));
+                l.add(new Laser(6, 3, 135));
+                l.add(new Laser(6, 1, 45));
+		Cible[] c = new Cible[2];
+		c[0] = new Cible(3, 0);
+                c[1] = new Cible(1, 6);
+                
+		Plateau plat = new Plateau(4, 4, l, c);
+
+		for (int i = 0; i < plat.height; i++) {
+			for (int j = 0; j < plat.width; j++) {
+				plat.cases[i][j] =  new CaseVisible();
+			}
+		}
+                
+                plat.cases[1][1] = new CaseCachee();
+                plat.cases[3][3] = new CaseCachee();
+                
+		plat.cases[2][1] = new CaseVisible(new BlocAbsorbant());
+		plat.cases[2][2] = new CaseVisible(new BlocAbsorbant());
+                plat.cases[2][3] = new CaseVisible(new BlocAbsorbant());
+
+		plat.initLaser();
+		return plat;
+	}
+        public static Plateau initNiveau5() {
+		LinkedList<Laser> l = new LinkedList<Laser>();
+		l.add(new Laser(5, 0, 315));
+		Cible[] c = new Cible[4];
+		c[0] = new Cible(2, 5);
+                c[1] = new Cible(5, 2);
+                c[2] = new Cible(5, 8);
+                c[3] = new Cible(8, 5);
+                
+		Plateau plat = new Plateau(6, 6, l, c);
+
+		for (int i = 0; i < plat.height; i++) {
+			for (int j = 0; j < plat.width; j++) {
+				plat.cases[i][j] =  new CaseVisible();
+			}
+		}
+                
+                plat.cases[1][5] = new CaseCachee();
+                plat.cases[5][3] = new CaseCachee();
+                
+		plat.cases[2][5] = new CaseVisible(new BlocReflechissant());
+		plat.cases[4][5] = new CaseVisible(new BlocTeleporteur());
+                plat.cases[5][4] = new CaseVisible(new BlocTeleporteur());
+
+		plat.initLaser();
+		return plat;
+	}
+        
+        
+        
+        public static Plateau initNiveau6() {
+		LinkedList<Laser> l = new LinkedList<Laser>();
+		l.add(new Laser(0, 5, 225));
+		Cible[] c = new Cible[2];
+		c[0] = new Cible(3, 0);
+                c[1] = new Cible(5, 6);
+
+                
+		Plateau plat = new Plateau(4, 4, l, c);
+
+		for (int i = 0; i < plat.height; i++) {
+			for (int j = 0; j < plat.width; j++) {
+				plat.cases[i][j] =  new CaseVisible();
+			}
+		}
+		plat.cases[3][2] = new CaseCachee();
+                plat.cases[3][3] = new CaseCachee();
+                
+		plat.cases[1][1] = new CaseVisible(new BlocPrismatique());
+		plat.cases[1][2] = new CaseVisible(new BlocAbsorbant());
+                plat.cases[2][2] = new CaseVisible(new BlocReflechissant());
+                plat.cases[3][1] = new CaseVisible(new BlocSemiReflechissant());
+
+
+		plat.initLaser();
+		return plat;
 	}
 
 	public void commencerJeu(){
