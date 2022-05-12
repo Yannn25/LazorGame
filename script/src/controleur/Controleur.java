@@ -12,18 +12,8 @@ public class Controleur {
 	private Rectangle rect;
 
 	public Controleur(){
-		this.plateau = initNiveau2();
+		this.plateau = initNiveau1();
 		this.rect = new Rectangle(plateau);
-	}
-
-	public Controleur(Plateau plateau){
-		this.plateau = plateau;
-		rect = new Rectangle(plateau);
-	}
-
-	public Controleur(int niveau){
-		this.plateau = new Plateau(niveau);
-		rect = new Rectangle(plateau);
 	}
 
 	public Controleur(Plateau plateau, Rectangle rect){
