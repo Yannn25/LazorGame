@@ -155,8 +155,10 @@ public class Rectangle extends JLabel {
             add(lv3);
             LevelButton lv4 = new LevelButton(450, 250, 4, this);
             add(lv4);
-
-
+            LevelButton lv5 = new LevelButton(450, 350, 5, this);
+            add(lv5);
+            LevelButton lv6 = new LevelButton(450, 450, 6, this);
+            add(lv6);
            
 
             

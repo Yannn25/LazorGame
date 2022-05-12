@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LevelButton extends JButton implements ActionListener{
-    private int BlocNumber; /* 1-absorbant,2-Opaque,3-prisme,4-Reflechissant,5-semi-reflechissant,§-tp*/
+    private int BlocNumber; /* 1-absorbant,2-Opaque,3-prisme,4-Reflechissant,5-semi-reflechissant,6-tp*/
     Rectangle rect;
 
     public LevelButton(int x,int y,int CommandNumber,Rectangle ecran) {
@@ -42,20 +42,23 @@ public class LevelButton extends JButton implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         switch (BlocNumber) {
             case 1:
-            rect.setPlat(new Plateau(1));
-            break;
-    
+                rect.setPlat(new Plateau(1));
+                break;
             case 2:
-            rect.setPlat(new Plateau(2));
+                rect.setPlat(new Plateau(2));
                 break;
-
             case 3:
-            rect.setPlat(new Plateau(3));
-            break;
-            case 4:
-            rect.setPlat(new Plateau(2));
+                rect.setPlat(new Plateau(3));
                 break;
-         
+            case 4:
+                rect.setPlat(new Plateau(4));
+                break;
+            case 5:
+                rect.setPlat(new Plateau(5));
+                break;
+            case 6:
+                rect.setPlat(new Plateau(6));
+                break;
         }
         rect.SetState(2);
         
@@ -87,7 +90,7 @@ public class LevelButton extends JButton implements ActionListener{
             text = "Niveau 5";
 
         if (BlocNumber == 6)
-            text = "Niveau 7";
+            text = "Niveau 6";
         
 
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
