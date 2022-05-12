@@ -21,7 +21,11 @@ public class Cible implements Serializable{
         return atteint;
     }
 
+    //Il ne peut que y qvoir des cibles à des positions (paire, impaire) où (impaire, paire)
     public Cible(int x, int y) {
+        if(((x%2 == 0) && (y%2==0)) || ((x%2 == 1) && (y%2==1))){
+            throw new IllegalArgumentException("Il ne peut pas y avoir de cible à cet endroit là: " + x + ", " + y);
+        }
         atteint = false;
         this.p=new Point(x,y);
     }

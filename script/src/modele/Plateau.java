@@ -235,18 +235,19 @@ public class Plateau implements Serializable{
     }
 
    /**
-    * Un nouvelle angle est renvvoyer en fonction du type de bloc présent 
-    * aux alentours du point (x,y).
-    * Pour les bloc SemiReflechissant et Teleporteur, ont traitera ces cas
+    * Un nouvelle angle est renvoyer en fonction du type de bloc présent 
+    * aux alentours du point (x,y) (coordonnées de type cible).
+    * Pour les bloc SemiReflechissant et Teleporteur, on traitera ces cas
     * directement dans la méthode, étant donné qu'elle nécesite l'ajout d'un 
     * nouveau laser.
     * @param x le point i
     * @param y le point j
     * @param angle l'orientaion de base du laser
     * @return le nouvel angle d'orientation du laser
+ * @throws Exception
     */
 
-    public int nouvelAngle(int x, int y, int angle) {
+    public int nouvelAngle(int x, int y, int angle){
         int[] caseVerif = caseAVerifier(x, y, angle);
         if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).blocPresent()){
             String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
@@ -255,8 +256,8 @@ public class Plateau implements Serializable{
                 case "BlocSemiReflechissant":{
                     int k=0;
                     switch (angle) {
-                        case 45:
-                        lasers.add(new Laser(x - 1, y + 1, angle));
+                            case 45:
+                            lasers.add(new Laser(x - 1, y + 1, angle));
                             break;
                         case 135:
                             lasers.add(new Laser(x - 1, y - 1, angle));
@@ -268,6 +269,8 @@ public class Plateau implements Serializable{
                             lasers.add(new Laser(x + 1, y + 1, angle));
                             break;
                         default:
+                        
+                        
                     }
                     return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
                 }
@@ -317,12 +320,10 @@ public class Plateau implements Serializable{
     }
     
     /**
-     * Vérifie si un bloc est présent aux alentours du point (x,y).
-     * @param x le point i
-     * @param y le point j
-     * @param angle l'orientaion de base du laser
-     * @return un tableau de taille 2, composé des coordonées du bloc 
-     * le plus proche des coordonées x et y.
+     * Retourne les coordonnées du bloc à côté du point x, y (type cible) en regardant dans la direction "angle"
+     * @param x, y: coordonnées de type "laser"
+     * @param angle: la direction dans laquelle il faut regarder
+     * @return un tableau de taille 2, composé des coordonées du bloc
      */
     public int[] caseAVerifier(int x, int y, int angle){
         int[] res = new int[2];
@@ -391,7 +392,7 @@ public class Plateau implements Serializable{
 
             p = (Plateau)in.readObject();
 
-            System.out.println("objet recuperé");
+            System.out.println("objet récupéré");
 
             in.close();
             return (Plateau)p;
@@ -411,7 +412,5 @@ public class Plateau implements Serializable{
         }
         return p;
     }
-
-    
 
 } 
