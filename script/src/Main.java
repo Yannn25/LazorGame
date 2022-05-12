@@ -13,6 +13,7 @@ public class Main {
             Controleur.initNiveau5().sauvegarder("Niveau5");
             Controleur.initNiveau6().sauvegarder("Niveau6");
             Controleur.initNiveau7().sauvegarder("Niveau7");
+            Controleur.initNiveau8().sauvegarder("Niveau8");
             Controleur.initNiveau9().sauvegarder("Niveau9");
             Controleur.initNiveau10().sauvegarder("Niveau10");
         }
