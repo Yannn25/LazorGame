@@ -17,6 +17,8 @@ public class Plateau implements Serializable{
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
     protected final int nblasers;
     protected boolean win;
+    public static String PATH = "./script/src/";
+    //public static PATH = "./src/";
 
     public Plateau(int height, int width, LinkedList<Laser> las, Cible[] cibles) {
         this.height=height;
@@ -74,7 +76,6 @@ public class Plateau implements Serializable{
                 res = false;
         }
         if(res){
-            System.out.println("VICTOIRE");
             win = true;
         }
         return res;
@@ -312,7 +313,7 @@ public class Plateau implements Serializable{
     public void sauvegarder(String fileName) throws IOException {
         try {
 
-            FileOutputStream file = new FileOutputStream("./src/niveaux/"+fileName+".ser");
+            FileOutputStream file = new FileOutputStream(Plateau.PATH + "niveaux/"+fileName+".ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             out.writeObject(this);
@@ -335,8 +336,8 @@ public class Plateau implements Serializable{
     public static Plateau reprisePartie (String filename){
         Plateau p = null;
         try {
-            System.out.println("./src/niveaux/"+filename+".ser");
-            FileInputStream file = new FileInputStream("./src/niveaux/"+filename+".ser");
+            System.out.println(Plateau.PATH + "niveaux/"+filename+".ser");
+            FileInputStream file = new FileInputStream(Plateau.PATH + "niveaux/"+filename+".ser");
             ObjectInputStream in = new ObjectInputStream(file);
 
             p = (Plateau)in.readObject();
