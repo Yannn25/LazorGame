@@ -235,57 +235,66 @@ public class Plateau implements Serializable{
     }
 
    /**
-    * Un nouvelle angle est renvoyer en fonction du type de bloc présent 
-    * aux alentours du point (x,y) (coordonnées de type cible).
+    * Renvoie l'angle que le laser va avoir après être passé par le point (x, y) 
+    * (coordonnées de type cible)
+    * Cet angle est calculé en fonction du type de bloc présent 
+    * à côté du point (x,y) dans la direction "angle".
     * Pour les bloc SemiReflechissant et Teleporteur, on traitera ces cas
-    * directement dans la méthode, étant donné qu'elle nécesite l'ajout d'un 
+    * directement dans cette méthode, étant donné qu'elle nécesite l'ajout d'un 
     * nouveau laser.
-    * @param x le point i
-    * @param y le point j
-    * @param angle l'orientaion de base du laser
-    * @return le nouvel angle d'orientation du laser
- * @throws Exception
+    * Pour les autres types de blocs, on appelle leur méthode déviationLaser pour calculer l'angle
+    * @param x, y: les coordonnées du laser
+    * @param angle d'orientaion du laser
+    * @return le nouvel angle d'orientation du laser après être passé par le point x, y
     */
-
     public int nouvelAngle(int x, int y, int angle){
-        int[] caseVerif = caseAVerifier(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).blocPresent()){
-            String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
+        Point caseVerif = caseAVerifier(x, y, angle);
+        if (caseVerif!=null && getCase(caseVerif.x, caseVerif.y).blocPresent()){
+            String nomBloc=getCase(caseVerif.x, caseVerif.y).getBloc().getType();
 
             switch (nomBloc){
                 case "BlocSemiReflechissant":{
                     int k=0;
+                    //point où on doit ajouter un nouveau laser (si il n'existe pas déjà)
+                    Point newLaserCoords;
                     switch (angle) {
-                            case 45:
+                            case 45:{
+                            newLaserCoords = new Point(x - 1, y + 1);
                             lasers.add(new Laser(x - 1, y + 1, angle));
                             break;
-                        case 135:
+                        }
+                        case 135:{
+                            newLaserCoords = new Point();
                             lasers.add(new Laser(x - 1, y - 1, angle));
                             break;
-                        case 225:
+                        }
+                        case 225:{
+                            newLaserCoords = new Point();
                             lasers.add(new Laser(x + 1, y - 1, angle));
                             break;
-                        case 315:
+                        }
+                        case 315:{
+                            
+                            newLaserCoords = new Point();
                             lasers.add(new Laser(x + 1, y + 1, angle));
                             break;
+                        }
                         default:
-                        
-                        
                     }
-                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
+                    return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
                 }
                 case "BlocTeleporteur":
                     int a = 0,b = 0;
                     for (int i = 0; i < this.height; i++) {
                         for (int j = 0; j < this.width; j++) {
-                            if (!(caseVerif[0] == i && caseVerif[1] == j) && getCase(i,j).getBloc() instanceof BlocTeleporteur) {
+                            if (!(caseVerif.x == i && caseVerif.y == j) && getCase(i,j).getBloc() instanceof BlocTeleporteur) {
                                 a = i;
                                 b = j;
                             }
                         }
                     }
-                    int diff_i = caseVerif[0]-a;
-                    int diff_j = caseVerif[1]-b;
+                    int diff_i = caseVerif.x-a;
+                    int diff_j = caseVerif.y-b;
                     if (x%2 == 1 && y%2==0) {
                         switch (angle){
                             case 45:
@@ -312,46 +321,57 @@ public class Plateau implements Serializable{
                     }
                     return -1;
                 default:{
-                    return getCase(caseVerif[0], caseVerif[1]).getBloc().deviationLaser(x, y, angle);
+                    return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
                 }
             }
         }
         return angle ;
     }
-    
+
+    //retourne true si le laser "laser" est déjà présent dans la liste "this.lasers" et false sinon
+    public boolean dejaPresent(Laser laser){
+        for(Laser l: this.lasers){
+            if(l.equals(laser)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Retourne les coordonnées du bloc à côté du point x, y (type cible) en regardant dans la direction "angle"
      * @param x, y: coordonnées de type "laser"
      * @param angle: la direction dans laquelle il faut regarder
      * @return un tableau de taille 2, composé des coordonées du bloc
      */
-    public int[] caseAVerifier(int x, int y, int angle){
-        int[] res = new int[2];
+    public Point caseAVerifier(int x, int y, int angle){
+        //int[] res = new int[2];
+        Point res = new Point();
         if(x < 0 || y < 0 || x >= 2*this.height || y >= 2*this.width){
             return null;
         }
         if(x%2 == 1){
             if(angle == 45 || angle == 315){
-                res[0] = (x+1)/2;
-                res[1] = (y+2)/2;
+                res.x = (x+1)/2;
+                res.y = (y+2)/2;
             }
 
             else if(angle == 225 || angle == 135){
-                res[0] = (x+1)/2;
-                res[1] = (y)/2;
+                res.x = (x+1)/2;
+                res.y = (y)/2;
             }
         }
         else if(y%2 == 1){
             if(angle == 45 || angle == 135){
-                res[0] = (x)/2;
-                res[1] = (y+1)/2;
+                res.x = (x)/2;
+                res.y = (y+1)/2;
             }
             else if(angle == 225 || angle == 315){
-                res[0] = (x+2)/2;
-                res[1] = (y+1)/2;
+                res.x = (x+2)/2;
+                res.y = (y+1)/2;
             }
         }
-        if(res[0] >= this.height || res[1] >= this.width)
+        if(res.x >= this.height || res.y >= this.width)
             return null;
         return res;
     }
@@ -359,7 +379,6 @@ public class Plateau implements Serializable{
     /*
             MÉTHODE DE SAUVEGARDE DU PLATEAU
     */
-
     public void sauvegarder(String fileName) throws IOException {
         try {
 
