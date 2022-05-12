@@ -18,8 +18,8 @@ public class Rectangle extends JLabel {
     public FinDePartie fin;
 
 
-    //public static final String PATH="./src/icones/";
-    public static final String PATH="./script/src/icones/";
+    public static final String PATH="./src/icones/";
+   //public static final String PATH="./script/src/icones/";
     //gestion des différents écran
     public int GameState;
     final int StartState = 0;

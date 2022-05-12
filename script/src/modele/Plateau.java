@@ -17,8 +17,8 @@ public class Plateau implements Serializable{
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
     protected final int nblasers;
     protected boolean win;
-    public static String PATH = "./script/src/";
-    //public static PATH = "./src/";
+    //public static String PATH = "./script/src/";
+    public static String  PATH = "./src/";
 
     /*  CONSTRUCTEUR   */
     public Plateau(int height, int width, LinkedList<Laser> las, Cible[] cibles) {
