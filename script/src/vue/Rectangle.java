@@ -152,16 +152,25 @@ public class Rectangle extends JLabel {
 
             LevelButton lv1 = new LevelButton(100, 250, 1, this);
             add(lv1);
-            LevelButton lv2 = new LevelButton(100, 350, 2, this);
+            LevelButton lv2 = new LevelButton(100, 320, 2, this);
             add(lv2);
-            LevelButton lv3 = new LevelButton(100, 450, 3, this);
+            LevelButton lv3 = new LevelButton(100, 390, 3, this);
             add(lv3);
-            LevelButton lv4 = new LevelButton(450, 250, 4, this);
+            LevelButton lv4 = new LevelButton(100, 460, 4, this);
             add(lv4);
-            LevelButton lv5 = new LevelButton(450, 350, 5, this);
+            LevelButton lv5 = new LevelButton(100, 530, 5, this);
             add(lv5);
-            LevelButton lv6 = new LevelButton(450, 450, 6, this);
+            LevelButton lv6 = new LevelButton(450, 250, 6, this);
             add(lv6);
+            LevelButton lv7 = new LevelButton(450, 320, 7, this);
+            add(lv7);
+            LevelButton lv8 = new LevelButton(450, 390, 8, this);
+            add(lv8);
+            LevelButton lv9 = new LevelButton(450, 460, 9, this);
+            add(lv9);
+            LevelButton lv10 = new LevelButton(450, 530, 10, this);
+            add(lv10);
+
            
 
             

@@ -22,7 +22,7 @@ public class LevelButton extends JButton implements ActionListener{
     Rectangle rect;
 
     public LevelButton(int x,int y,int CommandNumber,Rectangle ecran) {
-        this.setBounds(x, y, 280, 80);
+        this.setBounds(x, y, 280, 60);
         this.rect = ecran;
         this.BlocNumber = CommandNumber;
         setLayout(null);
@@ -32,7 +32,7 @@ public class LevelButton extends JButton implements ActionListener{
         JLabel blocPanel = new JLabel();
         blocPanel.setLayout(null);
         blocPanel.setOpaque(true);
-        blocPanel.setBounds(225, 15, 50, 50);
+        blocPanel.setBounds(225, 5, 50, 50);
         blocPanel.setIcon(new ImageIcon(Rectangle.PATH + "Blocreflechissant.png"));
         add(blocPanel);
         addActionListener(this);
@@ -60,6 +60,18 @@ public class LevelButton extends JButton implements ActionListener{
                 break;
             case 6:
                 rect.setPlat(new Plateau(6));
+                break;
+            case 7:
+                rect.setPlat(new Plateau(7));
+                break;
+            case 8:
+                rect.setPlat(new Plateau(8));
+                break;
+            case 9:
+                rect.setPlat(new Plateau(9));
+                break;
+            case 10:
+                rect.setPlat(new Plateau(10));
                 break;
         }
         rect.SetState(2);
@@ -93,6 +105,18 @@ public class LevelButton extends JButton implements ActionListener{
 
         if (BlocNumber == 6)
             text = "Niveau 6";
+
+        if (BlocNumber == 7)
+            text = "Niveau 7";
+
+        if (BlocNumber == 8)
+            text = "Niveau 8";
+
+        if (BlocNumber == 9)
+            text = "Niveau 9";
+
+        if (BlocNumber == 10)
+            text = "Niveau 10";
         
 
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
