@@ -9,6 +9,8 @@ import java.awt.geom.Line2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 
+/*  L'AIRE DE JEU  */
+
 public class Rectangle extends JLabel {
     protected Plateau plat;
     public JLabel[][] bloc;
@@ -24,7 +26,8 @@ public class Rectangle extends JLabel {
     final int LevelsState = 1;
     final int Niveau1 = 2;
 
-
+    /*   CONSTRUCTEUR  */
+    //initialise aussi les deplacements avec un mouseAdapter
     public Rectangle(Plateau p){
         GameState = 0;
         ma = new MouseAdapter() {
@@ -177,10 +180,13 @@ public class Rectangle extends JLabel {
            }
         }
     }
-
+    /**
+     * Affichage des lasers.
+     * Trace un trait entre chaque point du laser
+     * @param g "feuille" sur laquelle on peint
+     */
     public void TraceLaser(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        //int i=0;
         for (Laser l : plat.getLasers()) {
             //on vérifie bien que l n'est pas null
             if(l != null){
@@ -203,7 +209,10 @@ public class Rectangle extends JLabel {
 
 
     }
-
+    /**
+     * Affichage de l'ensemble du plateau
+     * @param g "feuille" sur laquelle on peint
+     */
     public void Plateau(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         for(int i=1; i < plat.getHeight(); i++){
@@ -233,26 +242,13 @@ public class Rectangle extends JLabel {
             }
         }
     }
-
-    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
-        int w = image.getWidth();
-        int h = image.getHeight();
-        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g2 = output.createGraphics();
-
-        g2.setComposite(AlphaComposite.Src);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(Color.WHITE);
-        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
-        g2.setComposite(AlphaComposite.SrcAtop);
-        g2.drawImage(image, 0, 0, null);
-
-        g2.dispose();
-
-        return output;
-    }
     
+
+    
+    /**
+     * Affichage des cibles
+     * @param g "feuille" sur laquelle on peint
+     */
     public void Cible(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         for(int i = 0; i < plat.getCibles().length; i++) {
@@ -269,22 +265,10 @@ public class Rectangle extends JLabel {
                
         }  
     }
-
-    public void SetState(int state) {
-        
-        clear();
-        this.GameState = state;
-       // paintComponent(this.getGraphics());
-        if (state == 2) {
-            initbloc();
-        }
-    }
-
-    public void clear() {
-        removeAll();
-        repaint();
-    }
-
+    
+    /**
+     * Affichage des différentes image(dans le package icone)
+     */
     public void initbloc() {
         for (int i = 0; i < plat.height; i++) {
             for (int j = 0; j < plat.width; j++) {
@@ -305,5 +289,52 @@ public class Rectangle extends JLabel {
             }
         }
     }
+    
+        /**
+     * Arrondi une image.
+     * @param image
+     * @param cornerRadius
+     * @return le paramètres image arrondi
+     */
+    public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
+        int w = image.getWidth();
+        int h = image.getHeight();
+        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2 = output.createGraphics();
+
+        g2.setComposite(AlphaComposite.Src);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setColor(Color.WHITE);
+        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius));
+        g2.setComposite(AlphaComposite.SrcAtop);
+        g2.drawImage(image, 0, 0, null);
+
+        g2.dispose();
+
+        return output;
+    }
+    /**
+     * Change l'état actuel du jeu(de la scène).
+     * @param state etat actuel du jeu
+     */
+    public void SetState(int state) {
+        
+        clear();
+        this.GameState = state;
+       // paintComponent(this.getGraphics());
+        if (state == 2) {
+            initbloc();
+        }
+    }
+
+    /**
+     * Efface toute l'aire de jeu, avant de la repaindre
+     */
+    public void clear() {
+        removeAll();
+        repaint();
+    }
+
 
 }

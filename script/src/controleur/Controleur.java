@@ -6,11 +6,14 @@ import vue.*;
 import javax.swing.*;
 import java.util.LinkedList;
 
+/*  */
+
 public class Controleur {
 
 	private Plateau plateau;
 	private Rectangle rect;
 
+        /*  CONSTRUCTEUR  */
 	public Controleur(){
 		this.plateau = initNiveau2();
 		this.rect = new Rectangle(plateau);
@@ -30,6 +33,8 @@ public class Controleur {
 		this.plateau = plateau;
 		this.rect = rect;
 	}
+        
+        /*   LES DIFFERENTS NIVEAUX   */
 
 	public static Plateau initNiveau1(){
 		LinkedList<Laser> l1 = new LinkedList<Laser>();
@@ -148,7 +153,7 @@ public class Controleur {
 			}
 		}
                 
-                plat.cases[1][5] = new CaseCachee();
+                plat.cases[4][5] = new CaseCachee();
                 plat.cases[5][3] = new CaseCachee();
                 
 		plat.cases[2][5] = new CaseVisible(new BlocReflechissant());
