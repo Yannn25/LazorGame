@@ -105,24 +105,6 @@ public class Plateau implements Serializable{
             }
         }
     }
-
-    /**
-     * 
-     * @param x1 x de départ
-     * @param y1 y de départ
-     * @param x2 x d'arriver
-     * @param y2 y d'arriver
-     * @return vrai si il est possible de deplacer un bloc
-     * d'un point (x1,y1) a un autre point (x2,y2)
-     * */
-    public boolean deplacementPossible(int x1, int y1, int x2, int y2){
-        if(x1 == x2 && y1 == y2){
-            return true;
-        }
-        return !(getCase(x1, y1) instanceof CaseCachee) &&
-        !(getCase(x2, y2) instanceof CaseCachee) &&
-        !getCase(x2, y2).BlocPresent();
-    }
      
     /**
      *  Va effectuer le déplacement d'un bloc sur le plateau
@@ -176,6 +158,23 @@ public class Plateau implements Serializable{
         winCondition();
     }
 
+        /**
+     * 
+     * @param x1 x de départ
+     * @param y1 y de départ
+     * @param x2 x d'arriver
+     * @param y2 y d'arriver
+     * @return vrai si il est possible de deplacer un bloc
+     * d'un point (x1,y1) a un autre point (x2,y2)
+     * */
+    public boolean deplacementPossible(int x1, int y1, int x2, int y2){
+        if(x1 == x2 && y1 == y2){
+            return true;
+        }
+        return (!(getCase(x1, y1) instanceof CaseCachee) &&
+        !(getCase(x2, y2) instanceof CaseCachee) &&
+        !getCase(x2, y2).blocPresent());
+    }
 
 
     /**
@@ -190,7 +189,8 @@ public class Plateau implements Serializable{
         int oldtmp;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
             l.points.add(new Point(i,j));
-            oldtmp = angletmp;//cas du bloc prismatique
+            //cas du bloc prismatique
+            oldtmp = angletmp;
             angletmp = nouvelAngle(i, j, angletmp);
             if (angletmp == 90 ) {
                 l.points.add(new Point(i, j+2));
@@ -248,7 +248,7 @@ public class Plateau implements Serializable{
 
     public int nouvelAngle(int x, int y, int angle) {
         int[] caseVerif = caseAVerifier(x, y, angle);
-        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).BlocPresent()){
+        if (caseVerif!=null && getCase(caseVerif[0], caseVerif[1]).blocPresent()){
             String nomBloc=getCase(caseVerif[0], caseVerif[1]).getBloc().getType();
 
             switch (nomBloc){

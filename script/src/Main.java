@@ -4,8 +4,8 @@ import controleur.Controleur;
 
 public class Main {
 
-    public static void main(String[] args) {
-        /*try{
+    public static void main(String[] args){
+        try{
             Controleur.initNiveau1().sauvegarder("Niveau1");
             Controleur.initNiveau2().sauvegarder("Niveau2");
             Controleur.initNiveau3().sauvegarder("Niveau3");
@@ -15,7 +15,7 @@ public class Main {
         }
         catch(Exception e){
             e.printStackTrace();
-        }*/
+        }
         Controleur controleur = new Controleur();
         controleur.commencerJeu();
     }
