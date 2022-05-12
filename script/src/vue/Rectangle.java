@@ -107,6 +107,7 @@ public class Rectangle extends JLabel {
 	}
 	public void setPlat(Plateau plat) {
         clear();
+
 		this.plat = plat;
         initbloc();
         paintComponent(this.getGraphics());
@@ -180,6 +181,9 @@ public class Rectangle extends JLabel {
 		   	add(retour);
 			
 		   	if(plat.isWin()){
+                g2.setFont(g2.getFont().deriveFont(Font.BOLD,26F));
+                g2.setColor(Color.black);
+			    g2.drawString("GAGNÉ", 650, 200);
                 ButtonMenu next = new ButtonMenu(650, this.getHeight()-150, 5, this);
                 add(next);
 		   	}
