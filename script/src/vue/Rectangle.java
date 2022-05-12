@@ -224,7 +224,7 @@ public class Rectangle extends JLabel {
                     bloc[i][j]=new JLabel();
                     bloc[i][j].setOpaque(true);
                     bloc[i][j].setLayout(null);
-                    bloc[i][j].setName("Bloc");
+                   // bloc[i][j].setName("Bloc");
                     bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     if (plat.getCase(i, j) instanceof CaseVisible){
                         bloc[i][j].setIcon(new ImageIcon(PATH + "case.png"));
@@ -292,13 +292,18 @@ public class Rectangle extends JLabel {
                     bloc[i][j]=new JLabel();
                     bloc[i][j].setOpaque(true);
                     bloc[i][j].setLayout(null);
-                    bloc[i][j].setName("Bloc");
                     bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     if (plat.getCase(i, j) instanceof CaseVisible){
                         bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + "case.png"));
                     }
                     String type = plat.getCase(i, j).getBloc().getType();
-                    bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
+                    if(plat.getCase(i, j).getBloc().fixe){
+                        bloc[i][j].setName("Blo");
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type+ "Fixe" + ".png"));
+                    }else{
+                        bloc[i][j].setName("Bloc");
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
+                    }
                     add(bloc[i][j]);
                     
                 }
