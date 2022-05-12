@@ -15,6 +15,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*  BOUTON DES DIFFERENTS NIVEAUX  */
+
 public class LevelButton extends JButton implements ActionListener{
     private int BlocNumber; /* 1-absorbant,2-Opaque,3-prisme,4-Reflechissant,5-semi-reflechissant,6-tp*/
     Rectangle rect;
@@ -25,13 +27,13 @@ public class LevelButton extends JButton implements ActionListener{
         this.BlocNumber = CommandNumber;
         setLayout(null);
         setOpaque(true);
-        setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        setIcon(new ImageIcon(Rectangle.PATH +"arriereplan.png"));
 
         JLabel blocPanel = new JLabel();
         blocPanel.setLayout(null);
         blocPanel.setOpaque(true);
         blocPanel.setBounds(225, 15, 50, 50);
-        blocPanel.setIcon(new ImageIcon(Rectangle.PATH+"Blocreflechissant.png"));
+        blocPanel.setIcon(new ImageIcon(Rectangle.PATH + "Blocreflechissant.png"));
         add(blocPanel);
         addActionListener(this);
         

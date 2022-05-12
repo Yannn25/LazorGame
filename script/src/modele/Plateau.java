@@ -17,7 +17,10 @@ public class Plateau implements Serializable{
     protected LinkedList<Laser> lasers;//Tous les lasers du plateau
     protected final int nblasers;
     protected boolean win;
+    public static String PATH = "./script/src/";
+    //public static PATH = "./src/";
 
+    /*  CONSTRUCTEUR   */
     public Plateau(int height, int width, LinkedList<Laser> las, Cible[] cibles) {
         this.height=height;
         this.width=width;
@@ -36,7 +39,8 @@ public class Plateau implements Serializable{
         this.cibles = sauvegarde.getCibles();
         this.nblasers = sauvegarde.lasers.size();
     }
-
+    
+    /* GETTER ET SETTER */
     public int getWidth() {
         return width;
     }
@@ -67,6 +71,11 @@ public class Plateau implements Serializable{
         return win;
     }  
 
+    
+    /**
+     * Vérifie que toutes les cibles du plateau sont atteinte
+     * et va ensuite passer a vrai notre boolean win
+     */
     public boolean winCondition() {
         boolean res=true;
         for(Cible c: this.cibles){
@@ -74,19 +83,58 @@ public class Plateau implements Serializable{
                 res = false;
         }
         if(res){
-            System.out.println("VICTOIRE");
             win = true;
         }
         return res;
     }
 
+    /**
+     * Pour chaque cibles du plateau, vérifie si un point d'un des lasers
+     * est a la meme coordonées que notre cible.
+     */
+     public void calculerCibles(){
+        for(int i = 0; i < cibles.length; i++){
+            cibles[i].atteint = false;
+        }
+        for(Laser l : lasers) {
+            for(Point point : l.points){
+                for(int i = 0; i < cibles.length; i++){
+                    if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
+                        cibles[i].atteint = true;
+                }
+            }
+        }
+    }
 
     /**
-     *
-     * @return
+     * 
+     * @param x1 x de départ
+     * @param y1 y de départ
+     * @param x2 x d'arriver
+     * @param y2 y d'arriver
+     * @return vrai si il est possible de deplacer un bloc
+     * d'un point (x1,y1) a un autre point (x2,y2)
+     * */
+    public boolean deplacementPossible(int x1, int y1, int x2, int y2){
+        if(x1 == x2 && y1 == y2){
+            return true;
+        }
+        return !(getCase(x1, y1) instanceof CaseCachee) &&
+        !(getCase(x2, y2) instanceof CaseCachee) &&
+        !getCase(x2, y2).BlocPresent();
+    }
+     
+    /**
+     *  Va effectuer le déplacement d'un bloc sur le plateau
+     *  uniquement si cela est possible grace a la méthode deplacementPosible.
+     * @param x1 x de départ
+     * @param y1 y de départ
+     * @param x2 x d'arriver
+     * @param y2 y d'arriver
+     * @return vrai si le bloc a été deplacer.
      */
     public boolean deplacerBloc(int x1,int y1,int x2,int y2) {
-
+        
         if (deplacementPossible(x1, y1, x2, y2) && !(x1 == x2 && y1 == y2)){
             getCase(x2, y2).ajouterBloc(getCase(x1, y1).getBloc());
             getCase(x1, y1).enleverBloc();
@@ -96,7 +144,7 @@ public class Plateau implements Serializable{
         return false;
     }
 
-    /*
+    /**
      * Boolean qui nous permet de savoir si la case a la position
      * (x,y) est une instance de CaseVisible
      * @param x coordonées x
@@ -108,9 +156,10 @@ public class Plateau implements Serializable{
         return cases[x][y] instanceof CaseVisible;
     }
 
-    /*
-     * Méthode qui va initialiser le tracage du laser en fonction de son
-     * point de départ et de son orientation;
+    
+    /**
+     * Méthode qui va initialiser le calcul des points des lasers du plateau.
+     * Tous en vérifiant ses déviations et la condition de victoire.
      */
     public void initLaser(){
         int size = lasers.size();
@@ -121,24 +170,19 @@ public class Plateau implements Serializable{
             if (lasers.get(i)!=null ){
                 lasers.get(i).points = new LinkedList<Point>();
                 calculerChemin(lasers.get(i));
-
             }
         }
         calculerCibles();
         winCondition();
     }
 
-    
-    public boolean deplacementPossible(int x1, int y1, int x2, int y2){
-        if(x1 == x2 && y1 == y2){
-            return true;
-        }
-        return !(getCase(x1, y1) instanceof CaseCachee) &&
-        !(getCase(x2, y2) instanceof CaseCachee) &&
-        !getCase(x2, y2).BlocPresent();
-    }
 
-    //calcule les points touchés par le laser passé en paramètre
+
+    /**
+     * Ajoute au laser l tous les points qu'il traverse, en fonction de 
+     * son point de départ et de son orientation.
+     * @param l le laser en question
+     */
     public void calculerChemin(Laser l){
         int i = l.x;
         int j = l.y;
@@ -146,7 +190,7 @@ public class Plateau implements Serializable{
         int oldtmp;
         while(i <= 2*this.height && j <= 2*this.width && i >=0 && j >=0) {
             l.points.add(new Point(i,j));
-            oldtmp = angletmp;
+            oldtmp = angletmp;//cas du bloc prismatique
             angletmp = nouvelAngle(i, j, angletmp);
             if (angletmp == 90 ) {
                 l.points.add(new Point(i, j+2));
@@ -190,19 +234,17 @@ public class Plateau implements Serializable{
         }
     }
 
-    public void calculerCibles(){
-        for(int i = 0; i < cibles.length; i++){
-            cibles[i].atteint = false;
-        }
-        for(Laser l : lasers) {
-            for(Point point : l.points){
-                for(int i = 0; i < cibles.length; i++){
-                    if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
-                        cibles[i].atteint = true;
-                }
-            }
-        }
-    }
+   /**
+    * Un nouvelle angle est renvvoyer en fonction du type de bloc présent 
+    * aux alentours du point (x,y).
+    * Pour les bloc SemiReflechissant et Teleporteur, ont traitera ces cas
+    * directement dans la méthode, étant donné qu'elle nécesite l'ajout d'un 
+    * nouveau laser.
+    * @param x le point i
+    * @param y le point j
+    * @param angle l'orientaion de base du laser
+    * @return le nouvel angle d'orientation du laser
+    */
 
     public int nouvelAngle(int x, int y, int angle) {
         int[] caseVerif = caseAVerifier(x, y, angle);
@@ -273,7 +315,15 @@ public class Plateau implements Serializable{
         }
         return angle ;
     }
-
+    
+    /**
+     * Vérifie si un bloc est présent aux alentours du point (x,y).
+     * @param x le point i
+     * @param y le point j
+     * @param angle l'orientaion de base du laser
+     * @return un tableau de taille 2, composé des coordonées du bloc 
+     * le plus proche des coordonées x et y.
+     */
     public int[] caseAVerifier(int x, int y, int angle){
         int[] res = new int[2];
         if(x < 0 || y < 0 || x >= 2*this.height || y >= 2*this.width){
@@ -312,7 +362,7 @@ public class Plateau implements Serializable{
     public void sauvegarder(String fileName) throws IOException {
         try {
 
-            FileOutputStream file = new FileOutputStream("./src/niveaux/"+fileName+".ser");
+            FileOutputStream file = new FileOutputStream(Plateau.PATH + "niveaux/"+fileName+".ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             out.writeObject(this);
@@ -335,8 +385,8 @@ public class Plateau implements Serializable{
     public static Plateau reprisePartie (String filename){
         Plateau p = null;
         try {
-            System.out.println("./src/niveaux/"+filename+".ser");
-            FileInputStream file = new FileInputStream("./src/niveaux/"+filename+".ser");
+            System.out.println(Plateau.PATH + "niveaux/"+filename+".ser");
+            FileInputStream file = new FileInputStream(Plateau.PATH + "niveaux/"+filename+".ser");
             ObjectInputStream in = new ObjectInputStream(file);
 
             p = (Plateau)in.readObject();

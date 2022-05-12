@@ -13,6 +13,8 @@ import javax.swing.JMenuBar;
 
 import vue.Rectangle;
 
+/*  CLASSE QUI GERE LE MENU  */
+
 public class ButtonMenu extends JButton implements ActionListener{
     private int CommandNumber; /* 1-play,2-continue,3-son,4-retour */
     Rectangle rect;

@@ -1,7 +1,8 @@
 package modele;
 
-public class BlocAbsorbant extends Bloc {  //Le bloc Opaque ne reflechit pas la lumiere et n'est pas deplacable
+/* Le bloc Opaque ne reflechit pas la lumiere et n'est pas deplacable */
 	
+public class BlocAbsorbant extends Bloc {  
     
     public BlocAbsorbant(int x, int y) {
 	    super(x,y,false);
@@ -10,8 +11,13 @@ public class BlocAbsorbant extends Bloc {  //Le bloc Opaque ne reflechit pas la 
         super(x,y,fixe);
     }
     public BlocAbsorbant(){
-        super(0,0,false);
+        super(false);
     }
+    public BlocAbsorbant(boolean fixe){
+        super(fixe);
+    }
+    
+    
     @Override
     public String getType() {
         return "BlocAbsorbant";

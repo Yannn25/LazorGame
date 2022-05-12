@@ -9,6 +9,8 @@ import java.awt.geom.Line2D;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 
+/*  L'AIRE DE JEU  */
+
 public class Rectangle extends JLabel {
     protected Plateau plat;
     public JLabel[][] bloc;
@@ -16,15 +18,16 @@ public class Rectangle extends JLabel {
     public FinDePartie fin;
 
 
-    public static final String PATH="./src/icones/";
-    //public static final String PATH="./script/src/icones/";
+    //public static final String PATH="./src/icones/";
+    public static final String PATH="./script/src/icones/";
     //gestion des différents écran
     public int GameState;
     final int StartState = 0;
     final int LevelsState = 1;
     final int Niveau1 = 2;
 
-
+    /*   CONSTRUCTEUR  */
+    //initialise aussi les deplacements avec un mouseAdapter
     public Rectangle(Plateau p){
         GameState = 0;
         ma = new MouseAdapter() {
@@ -99,7 +102,7 @@ public class Rectangle extends JLabel {
         setLayout(null);
         setOpaque(true);
 
-        setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+        setIcon(new ImageIcon(Rectangle.PATH + "arriereplan.png"));
 
     }
 
@@ -177,10 +180,13 @@ public class Rectangle extends JLabel {
            }
         }
     }
-
+    /**
+     * Affichage des lasers.
+     * Trace un trait entre chaque point du laser
+     * @param g "feuille" sur laquelle on peint
+     */
     public void TraceLaser(Graphics g){
         Graphics2D g2 = (Graphics2D) g;
-        //int i=0;
         for (Laser l : plat.getLasers()) {
             //on vérifie bien que l n'est pas null
             if(l != null){
@@ -203,7 +209,10 @@ public class Rectangle extends JLabel {
 
 
     }
-
+    /**
+     * Affichage de l'ensemble du plateau
+     * @param g "feuille" sur laquelle on peint
+     */
     public void Plateau(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
         for(int i=1; i < plat.getHeight(); i++){
@@ -213,7 +222,7 @@ public class Rectangle extends JLabel {
                     int thickness = 2;
                     Stroke oldStroke = g2.getStroke();
                     g2.setStroke(new BasicStroke(thickness));
-                    Image img1 = Toolkit.getDefaultToolkit().getImage(PATH+"case.png");
+                    Image img1 = Toolkit.getDefaultToolkit().getImage(PATH + "case.png");
                     g2.drawImage(img1, j*50, i*50, this);
                     if(plat.getCase(i, j).BlocPresent()){
                         g2.fillRect(j*50, i*50, 50, 50);
@@ -224,16 +233,74 @@ public class Rectangle extends JLabel {
                     bloc[i][j]=new JLabel();
                     bloc[i][j].setOpaque(true);
                     bloc[i][j].setLayout(null);
-                    bloc[i][j].setName("Bloc");
+                   // bloc[i][j].setName("Bloc");
                     bloc[i][j].setBounds(50*j, 50*i, 50, 50);
                     if (plat.getCase(i, j) instanceof CaseVisible){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
+                        bloc[i][j].setIcon(new ImageIcon(PATH + "case.png"));
                     }
                 }
             }
         }
     }
+    
 
+    
+    /**
+     * Affichage des cibles
+     * @param g "feuille" sur laquelle on peint
+     */
+    public void Cible(Graphics g) {
+        Graphics2D g2 = (Graphics2D) g;
+        for(int i = 0; i < plat.getCibles().length; i++) {
+            int x = plat.getCibles()[i].getPoint().x;
+            int y = plat.getCibles()[i].getPoint().y;
+            int diametre = 7;
+            if(plat.getCibles()[i].isAtteint()) {
+                g2.setColor(Color.GREEN);
+                g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
+            } else {
+                 g2.setColor(Color.red);
+                 g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
+            }
+               
+        }  
+    }
+    
+    /**
+     * Affichage des différentes image(dans le package icone)
+     */
+    public void initbloc() {
+        for (int i = 0; i < plat.height; i++) {
+            for (int j = 0; j < plat.width; j++) {
+                if(plat.getCase(i, j).BlocPresent()){
+                    bloc[i][j]=new JLabel();
+                    bloc[i][j].setOpaque(true);
+                    bloc[i][j].setLayout(null);
+                    bloc[i][j].setBounds(50*j, 50*i, 50, 50);
+                    if (plat.getCase(i, j) instanceof CaseVisible){
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + "case.png"));
+                    }
+                    String type = plat.getCase(i, j).getBloc().getType();
+                    if(plat.getCase(i, j).getBloc().fixe){
+                        bloc[i][j].setName("Blo");
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type+ "Fixe" + ".png"));
+                    }else{
+                        bloc[i][j].setName("Bloc");
+                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
+                    }
+                    add(bloc[i][j]);
+                    
+                }
+            }
+        }
+    }
+    
+        /**
+     * Arrondi une image.
+     * @param image
+     * @param cornerRadius
+     * @return le paramètres image arrondi
+     */
     public static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
         int w = image.getWidth();
         int h = image.getHeight();
@@ -252,24 +319,10 @@ public class Rectangle extends JLabel {
 
         return output;
     }
-    
-    public void Cible(Graphics g) {
-        Graphics2D g2 = (Graphics2D) g;
-        for(int i = 0; i < plat.getCibles().length; i++) {
-            int x = plat.getCibles()[i].getPoint().x;
-            int y = plat.getCibles()[i].getPoint().y;
-            int diametre = 7;
-            if(plat.getCibles()[i].isAtteint()) {
-                g2.setColor(Color.GREEN);
-                g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
-            } else {
-                 g2.setColor(Color.red);
-                 g2.fillOval(50-diametre/2+y*25, 50-diametre/2+x*25, diametre, diametre);
-            }
-               
-        }  
-    }
-
+    /**
+     * Change l'état actuel du jeu(de la scène).
+     * @param state etat actuel du jeu
+     */
     public void SetState(int state) {
         
         clear();
@@ -280,30 +333,13 @@ public class Rectangle extends JLabel {
         }
     }
 
+    /**
+     * Efface toute l'aire de jeu, avant de la repaindre
+     */
     public void clear() {
         removeAll();
         repaint();
     }
 
-    public void initbloc() {
-        for (int i = 0; i < plat.height; i++) {
-            for (int j = 0; j < plat.width; j++) {
-                if(plat.getCase(i, j).BlocPresent()){
-                    bloc[i][j]=new JLabel();
-                    bloc[i][j].setOpaque(true);
-                    bloc[i][j].setLayout(null);
-                    bloc[i][j].setName("Bloc");
-                    bloc[i][j].setBounds(50*j, 50*i, 50, 50);
-                    if (plat.getCase(i, j) instanceof CaseVisible){
-                        bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH+"case.png"));
-                    }
-                    String type = plat.getCase(i, j).getBloc().getType();
-                    bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
-                    add(bloc[i][j]);
-                    
-                }
-            }
-        }
-    }
 
 }
