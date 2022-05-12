@@ -259,7 +259,7 @@ public class Plateau implements Serializable{
                 case "BlocSemiReflechissant":{
                     int k=0;
                     //point où on doit ajouter un nouveau laser (si il n'existe pas déjà)
-                    Point newLaserCoords;
+                    Point newLaserCoords = null;
                     switch (angle) {
                             case 45:{
                             newLaserCoords = new Point(x - 1, y + 1);
@@ -277,9 +277,7 @@ public class Plateau implements Serializable{
                             newLaserCoords = new Point(x + 1, y + 1);
                             break;
                         }
-                        default:{
-                            return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
-                        }
+                        default:
                     }
                     if(newLaserCoords != null){
                         Laser nouveauLaser = new Laser(newLaserCoords.x, newLaserCoords.y, angle);
@@ -287,6 +285,7 @@ public class Plateau implements Serializable{
                             lasers.add(nouveauLaser);
                         }
                     }
+                    return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
                 }
                 case "BlocTeleporteur":
                     int a = 0,b = 0;
