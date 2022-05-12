@@ -312,7 +312,7 @@ public class Plateau implements Serializable{
     public void sauvegarder(String fileName) throws IOException {
         try {
 
-            FileOutputStream file = new FileOutputStream("./src/niveaux/"+fileName+".ser");
+            FileOutputStream file = new FileOutputStream("./script/src/niveaux/"+fileName+".ser");
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             out.writeObject(this);
@@ -335,8 +335,8 @@ public class Plateau implements Serializable{
     public static Plateau reprisePartie (String filename){
         Plateau p = null;
         try {
-            System.out.println("./src/niveaux/"+filename+".ser");
-            FileInputStream file = new FileInputStream("./src/niveaux/"+filename+".ser");
+            System.out.println("./script/src/niveaux/"+filename+".ser");
+            FileInputStream file = new FileInputStream("./script/src/niveaux/"+filename+".ser");
             ObjectInputStream in = new ObjectInputStream(file);
 
             p = (Plateau)in.readObject();
