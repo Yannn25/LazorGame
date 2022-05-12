@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         /*try{
-            Controleur.initNiveau5().sauvegarder("Niveau5");
+            Controleur.initNiveau6().sauvegarder("Niveau6");
         }
         catch(Exception e){
             e.printStackTrace();
