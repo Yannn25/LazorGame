@@ -2,6 +2,10 @@ package vue;
 
 import modele.*;
 
+import java.util.concurrent.*;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
