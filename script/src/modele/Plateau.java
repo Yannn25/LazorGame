@@ -260,28 +260,30 @@ public class Plateau implements Serializable{
                     switch (angle) {
                             case 45:{
                             newLaserCoords = new Point(x - 1, y + 1);
-                            lasers.add(new Laser(x - 1, y + 1, angle));
                             break;
                         }
                         case 135:{
-                            newLaserCoords = new Point();
-                            lasers.add(new Laser(x - 1, y - 1, angle));
+                            newLaserCoords = new Point(x - 1, y - 1);
                             break;
                         }
                         case 225:{
-                            newLaserCoords = new Point();
-                            lasers.add(new Laser(x + 1, y - 1, angle));
+                            newLaserCoords = new Point(x + 1, y - 1);
                             break;
                         }
                         case 315:{
-                            
-                            newLaserCoords = new Point();
-                            lasers.add(new Laser(x + 1, y + 1, angle));
+                            newLaserCoords = new Point(x + 1, y + 1);
                             break;
                         }
-                        default:
+                        default:{
+                            return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
+                        }
                     }
-                    return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
+                    if(newLaserCoords != null){
+                        Laser nouveauLaser = new Laser(newLaserCoords.x, newLaserCoords.y, angle);
+                        if(!dejaPresent(nouveauLaser)){
+                            lasers.add(nouveauLaser);
+                        }
+                    }
                 }
                 case "BlocTeleporteur":
                     int a = 0,b = 0;
@@ -295,28 +297,39 @@ public class Plateau implements Serializable{
                     }
                     int diff_i = caseVerif.x-a;
                     int diff_j = caseVerif.y-b;
+                    Point newLaserCoords = null;
                     if (x%2 == 1 && y%2==0) {
                         switch (angle){
                             case 45:
-                            case 315:
-                                lasers.add(new Laser(x - 2*diff_i, y - 2*diff_j + 2, angle));
+                            case 315:{
+                                newLaserCoords = new Point(x - 2*diff_i, y - 2*diff_j + 2);
                                 break;
+                            }
                             case 135:
-                            case 225:
-                                lasers.add(new Laser(x - 2*diff_i, y - 2*diff_j - 2, angle));
+                            case 225:{
+                                newLaserCoords = new Point(x - 2*diff_i, y - 2*diff_j - 2);
                                 break;
+                            }
                         }
                     }
                     if (x%2 == 0 && y%2==1) {
                         switch (angle){
                             case 45:
-                            case 135:
-                                lasers.add(new Laser(x - 2*diff_i - 2, y - 2*diff_j, angle));
+                            case 135:{
+                                newLaserCoords = new Point(x - 2*diff_i - 2, y - 2*diff_j);
                                 break;
+                            }
                             case 315:
-                            case 225:
-                                lasers.add(new Laser(x - 2*diff_i + 2, y - 2*diff_j, angle));
+                            case 225:{
+                                newLaserCoords = new Point(x - 2*diff_i + 2, y - 2*diff_j);
                                 break;
+                            }
+                        }
+                    }
+                    if(newLaserCoords != null){
+                        Laser nouveauLaser = new Laser(newLaserCoords.x, newLaserCoords.y, angle);
+                        if(!dejaPresent(nouveauLaser)){
+                            lasers.add(nouveauLaser);
                         }
                     }
                     return -1;
@@ -332,10 +345,10 @@ public class Plateau implements Serializable{
     public boolean dejaPresent(Laser laser){
         for(Laser l: this.lasers){
             if(l.equals(laser)){
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     /**
