@@ -18,8 +18,8 @@ public class Rectangle extends JLabel {
 	public FinDePartie fin;
 
 
-	//public static final String PATH="./src/icones/";
-	public static final String PATH="./script/src/icones/";
+	public static final String PATH="./src/icones/";
+	//public static final String PATH="./script/src/icones/";
 	//gestion des différents écran
 	public int GameState;
 	final int StartState = 0;
@@ -106,7 +106,10 @@ public class Rectangle extends JLabel {
 		return plat;
 	}
 	public void setPlat(Plateau plat) {
+        clear();
 		this.plat = plat;
+        initbloc();
+        paintComponent(this.getGraphics());
 	}
 
 	public void paintComponent(Graphics g) {
@@ -177,7 +180,8 @@ public class Rectangle extends JLabel {
 		   	add(retour);
 			
 		   	if(plat.isWin()){
-			   fin = new FinDePartie();
+                ButtonMenu next = new ButtonMenu(650, this.getHeight()-150, 5, this);
+                add(next);
 		   	}
 		}
 	}
