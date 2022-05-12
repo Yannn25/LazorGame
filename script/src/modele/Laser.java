@@ -18,6 +18,7 @@ public class Laser implements Serializable{
 
     protected LinkedList<Point> points; //LinkedList des points parcouru par le laser
 
+    /*   CONSTRUCTEUR  */
     public Laser(int x,int y, int orientation) {
 
         this.x=x;
@@ -27,29 +28,20 @@ public class Laser implements Serializable{
 
     }
 
+    /*   GETTER ET SETTER   */
     public LinkedList<Point> getPoints() {
         return points;
     }
     public void setPoints(LinkedList<Point> points) {
         this.points = points;
     }
-
-    public void CalculTrajectoire(){
-
-    }
-
+    
     public int getX(){
         return this.x;
     }
 
     public int getY(){
         return this.y;
-    }
-
-    public void recupPointdeviation(int x ,int yCasVisible){
-        for (Point pt: points){
-
-        }
     }
 
 }

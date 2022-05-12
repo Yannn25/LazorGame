@@ -15,6 +15,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/*  BOUTON DES DIFFERENTS NIVEAUX  */
+
 public class LevelButton extends JButton implements ActionListener{
     private int BlocNumber; /* 1-absorbant,2-Opaque,3-prisme,4-Reflechissant,5-semi-reflechissant,6-tp*/
     Rectangle rect;
