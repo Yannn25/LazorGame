@@ -47,4 +47,11 @@ public class Laser implements Serializable{
         return this.y;
     }
 
+    public boolean equals(Laser l){
+        if(this.x == l.x && this.y == l.y && this.orientation == l.orientation){
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -15,15 +15,9 @@ public class Controleur {
 
         /*  CONSTRUCTEUR  */
 	public Controleur(){
-		this.plateau = initNiveau1();
 		this.rect = new Rectangle();
 	}
-
-	public Controleur(Plateau plateau, Rectangle rect){
-		this.plateau = plateau;
-		this.rect = rect;
-	}
-        
+	
         /*   LES DIFFERENTS NIVEAUX   */
 
 	public static Plateau initNiveau1(){
