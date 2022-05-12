@@ -12,15 +12,15 @@ import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
 import modele.Plateau;
-import vue.Rectangle;
+import vue.VuePlateau;
 
 /*  CLASSE QUI GERE LE MENU  */
 
 public class ButtonMenu extends JButton implements ActionListener{
     private int CommandNumber; /* 1-play,2-continue,3-son,4-retour */
-    Rectangle rect;
+    VuePlateau rect;
 
-    public ButtonMenu(int x,int y,int CommandNumber,Rectangle ecran) {
+    public ButtonMenu(int x,int y,int CommandNumber,VuePlateau ecran) {
         addActionListener(this);
         setBorderPainted(true);
         this.setBounds(x, y, 200, 100);
@@ -30,17 +30,17 @@ public class ButtonMenu extends JButton implements ActionListener{
         setOpaque(true);
 
         if (CommandNumber == 1) 
-        setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+        setIcon(new ImageIcon(VuePlateau.PATH+"laz.png"));
 
         if (CommandNumber == 2) 
-        setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+        setIcon(new ImageIcon(VuePlateau.PATH+"laz.png"));
 
         if (CommandNumber == 4) {
-            setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+            setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
              setBounds(x, y, 80, 60);
          }
          if (CommandNumber == 5) {
-            setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
+            setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
              setBounds(x, y, 150, 60);
          }
     }

@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import modele.Plateau;
-import vue.Rectangle;
+import vue.VuePlateau;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -19,21 +19,21 @@ import java.awt.event.ActionListener;
 
 public class LevelButton extends JButton implements ActionListener{
     private int BlocNumber; /* 1-absorbant,2-Opaque,3-prisme,4-Reflechissant,5-semi-reflechissant,6-tp*/
-    Rectangle rect;
+    VuePlateau rect;
 
-    public LevelButton(int x,int y,int CommandNumber,Rectangle ecran) {
+    public LevelButton(int x,int y,int CommandNumber,VuePlateau ecran) {
         this.setBounds(x, y, 280, 60);
         this.rect = ecran;
         this.BlocNumber = CommandNumber;
         setLayout(null);
         setOpaque(true);
-        setIcon(new ImageIcon(Rectangle.PATH +"arriereplan.png"));
+        setIcon(new ImageIcon(VuePlateau.PATH +"arriereplan.png"));
 
         JLabel blocPanel = new JLabel();
         blocPanel.setLayout(null);
         blocPanel.setOpaque(true);
         blocPanel.setBounds(225, 5, 50, 50);
-        blocPanel.setIcon(new ImageIcon(Rectangle.PATH + "Blocreflechissant.png"));
+        blocPanel.setIcon(new ImageIcon(VuePlateau.PATH + "Blocreflechissant.png"));
         add(blocPanel);
         addActionListener(this);
         

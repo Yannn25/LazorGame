@@ -11,15 +11,15 @@ import java.util.LinkedList;
 public class Controleur {
 
 	private Plateau plateau;
-	private Rectangle rect;
+	private VuePlateau rect;
 
         /*  CONSTRUCTEUR  */
 	public Controleur(){
 		this.plateau = initNiveau1();
-		this.rect = new Rectangle();
+		this.rect = new VuePlateau();
 	}
 
-	public Controleur(Plateau plateau, Rectangle rect){
+	public Controleur(Plateau plateau, VuePlateau rect){
 		this.plateau = plateau;
 		this.rect = rect;
 	}
