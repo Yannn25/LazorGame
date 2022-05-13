@@ -36,18 +36,17 @@ public class ButtonMenu extends JButton implements ActionListener{
         setIcon(new ImageIcon(VuePlateau.PATH+"laz.png"));
 
         if (CommandNumber == 4) {
-            setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
-            setBounds(x, y, 80, 60);
+            setIcon(new ImageIcon(VuePlateau.PATH+"fleche-arriere.png"));
+            setBounds(x, y, 103, 74);
         }
         if (CommandNumber == 5) {
-            setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
-            setBounds(x, y, 150, 60);
+            setIcon(new ImageIcon(VuePlateau.PATH+"fleche-avant.png"));
+            setBounds(x, y, 103, 74);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         switch (CommandNumber) {
             case 1:
                rect.SetState(1);
@@ -72,19 +71,23 @@ public class ButtonMenu extends JButton implements ActionListener{
         Graphics2D g2 = (Graphics2D) g;
 
         g2.setFont(g2.getFont().deriveFont(Font.BOLD,40F));
-        String text = "<";
+        String text = "";
 
-        if (CommandNumber == 1) 
+        if (CommandNumber == 1) {
             text = "Play";
+        }
 
-        if (CommandNumber == 2)
+        if (CommandNumber == 2){
             text = "Continue";
+        }
 
-        if (CommandNumber == 4) 
-           text = "<";
+        if (CommandNumber == 4) {
+            //text = "<";
+        }
 
-        if (CommandNumber == 5) 
-           text = "next >";
+        if (CommandNumber == 5) {
+            //text = ">";
+        }
 
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = this.getWidth()/2 - length/2;
