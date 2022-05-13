@@ -11,7 +11,7 @@ Jeu de réflexion qui consiste à faire réfléchir un laser contre des blocs ju
 
 ### Préparation
 
-1.  Cloner le répertoire
+1.  Cloner le dépôt
 ```
 git clone https://gaufre.informatique.univ-paris-diderot.fr/porat/projet-lazor-grp-jeudi-u
 ```
