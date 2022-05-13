@@ -7,6 +7,9 @@ Groupe du Jeudi (jeudi U) ayant pour sujet le projet Lazors !
 
 Jeu de réflexion qui consiste à faire réfléchir un laser contre des blocs jusqu'à ce qu'il atteigne une cible. Plusieurs niveaux sont disponibles.
 
+## Prérequis
+Java Developer Kit, git 
+
 ## Utilisation
 
 ### Préparation
