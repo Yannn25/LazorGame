@@ -3,13 +3,30 @@
 Projet de Programmation 2021-2022 !
 Groupe du Jeudi (jeudi U) ayant pour sujet le projet Lazors !
 
-# Présentation
+## Présentation
 
 Jeu de réflexion qui consiste à faire réfléchir un laser contre des blocs jusqu'à ce qu'il atteigne une cible. Plusieurs niveaux sont disponibles.
 
-# Instructions de lancement
-Pour lancer le jeu :
-- cloner le repertoire
-- cd projet-lazor-grp-jeudi-u
-- javac Main.java
-- java Main
+## Utilisation
+
+### Préparation
+
+1.  Cloner le répertoire
+```
+git clone https://gaufre.informatique.univ-paris-diderot.fr/porat/projet-lazor-grp-jeudi-u
+```
+
+2.  Changer le répertoire
+```
+cd projet-lazor-grp-jeudi-u
+```
+
+3.  Compilation
+```
+javac Main.java
+```
+
+### Lancement
+```
+java Main
+```
