@@ -31,6 +31,17 @@ public class Laser implements Serializable{
 
     }
 
+    public Laser(Point p, int orientation){
+        if(((p.x%2 == 0) && (p.y%2==0)) || ((p.x%2 == 1) && (p.y%2==1))){
+            throw new IllegalArgumentException("Il ne peut pas y avoir de laser à cet endroit là: " + p.x + ", " + p.y);
+        }
+        this.x=p.x;
+        this.y=p.y;
+        this.orientation=orientation;
+        this.points = new LinkedList<>();
+
+    }
+
     /*   GETTER ET SETTER   */
     public LinkedList<Point> getPoints() {
         return points;

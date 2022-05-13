@@ -48,7 +48,7 @@ public class Controleur {
 		LinkedList<Laser> l1 = new LinkedList<Laser>();
 		l1.add(new Laser(7, 8, 225));
 		Cible[] c1 = new Cible[1];
-		c1[0] = new Cible(2, 1);
+		c1[0] = new Cible(4, 1);
 		Plateau plateau = new Plateau(7, 7, l1, c1);
 		for (int i = 0; i < plateau.height; i++) {
 			for (int j = 0; j < plateau.width; j++) {
@@ -61,6 +61,7 @@ public class Controleur {
 		plateau.cases[6][1] = new CaseCachee();
 
 		plateau.cases[3][1] = new CaseVisible(new BlocSemiReflechissant());
+		plateau.cases[3][4] = new CaseVisible(new BlocPlus());
 		plateau.cases[5][2] = new CaseVisible(new BlocReflechissant());
 		plateau.cases[2][4] = new CaseVisible(new BlocReflechissant());
 		plateau.initLaser();
@@ -84,8 +85,9 @@ public class Controleur {
                 
 		plat.cases[2][4] = new CaseVisible(new BlocPrismatique());
 		plat.cases[1][2] = new CaseVisible(new BlocReflechissant());
-                plat.cases[2][1] = new CaseVisible(new BlocReflechissant());
-                plat.cases[3][4] = new CaseVisible(new BlocReflechissant());
+        plat.cases[2][1] = new CaseVisible(new BlocReflechissant());
+        plat.cases[3][4] = new CaseVisible(new BlocReflechissant());
+        plat.cases[3][4] = new CaseVisible(new BlocReflechissant());
 
 		plat.initLaser();
 		return plat;

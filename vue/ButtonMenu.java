@@ -49,13 +49,11 @@ public class ButtonMenu extends JButton implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         switch (CommandNumber) {
             case 1:
-               rect.SetState(1);
-               break;
-       
+                rect.SetState(1);
+                break;
             case 2:
                 rect.SetState(2);
-               break;
-
+                break;
             case 4:
                 rect.SetState(rect.GameState-1);
                 break;

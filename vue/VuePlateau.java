@@ -133,10 +133,10 @@ public class VuePlateau extends JLabel {
 			g2.drawString(text, x, y);
 		   
 			ButtonMenu bm1 = new ButtonMenu(300, 400, 1, this);
-			ButtonMenu bm2 = new ButtonMenu(300, 600, 2, this);
+			//ButtonMenu bm2 = new ButtonMenu(300, 600, 2, this);
 
 			add(bm1);
-			add(bm2);
+			//add(bm2);
 		}
 
 		if (GameState == LevelsState) {

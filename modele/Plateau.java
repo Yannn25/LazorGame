@@ -99,7 +99,7 @@ public class Plateau implements Serializable{
         for(int i = 0; i < cibles.length; i++){
             cibles[i].atteint = false;
         }
-        for(Laser l : lasers) {
+        for(Laser l : lasers){
             for(Point point : l.points){
                 for(int i = 0; i < cibles.length; i++){
                     if(cibles[i].p.x == point.x && cibles[i].p.y == point.y)
@@ -242,7 +242,7 @@ public class Plateau implements Serializable{
     * (coordonnées de type cible)
     * Cet angle est calculé en fonction du type de bloc présent 
     * à côté du point (x,y) dans la direction "angle".
-    * Pour les bloc SemiReflechissant et Teleporteur, on traitera ces cas
+    * Pour les bloc SemiReflechissant Teleporteur et Plus, on traitera ces cas
     * directement dans cette méthode, étant donné qu'elle nécesite l'ajout d'un 
     * nouveau laser.
     * Pour les autres types de blocs, on appelle leur méthode déviationLaser pour calculer l'angle
@@ -261,7 +261,7 @@ public class Plateau implements Serializable{
                     //point où on doit ajouter un nouveau laser (si il n'existe pas déjà)
                     Point newLaserCoords = null;
                     switch (angle) {
-                            case 45:{
+                        case 45:{
                             newLaserCoords = new Point(x - 1, y + 1);
                             break;
                         }
@@ -335,6 +335,29 @@ public class Plateau implements Serializable{
                         }
                     }
                     return -1;
+                case "BlocPlus":{
+                    Point newLaserCoords1 = new Point((caseVerif.x)*2-1, (caseVerif.y)*2);
+                    Laser Laser1 = new Laser(newLaserCoords1, -1);
+                    Point newLaserCoords2 = new Point((caseVerif.x)*2, (caseVerif.y)*2-1);
+                    Laser Laser2 = new Laser(newLaserCoords2, -1);
+                    Point newLaserCoords3 = new Point((caseVerif.x)*2-2, (caseVerif.y)*2-1);
+                    Laser Laser3 = new Laser(newLaserCoords3, -1);
+                    Point newLaserCoords4 = new Point((caseVerif.x)*2-1, (caseVerif.y)*2-2);
+                    Laser Laser4 = new Laser(newLaserCoords4, -1);
+                    if(!dejaPresent(Laser1)){
+                        lasers.add(Laser1);
+                    }
+                    if(!dejaPresent(Laser2)){
+                        lasers.add(Laser2);
+                    }
+                    if(!dejaPresent(Laser3)){
+                        lasers.add(Laser3);
+                    }
+                    if(!dejaPresent(Laser4)){
+                        lasers.add(Laser4);
+                    }
+                    return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
+                }
                 default:{
                     return getCase(caseVerif.x, caseVerif.y).getBloc().deviationLaser(x, y, angle);
                 }
