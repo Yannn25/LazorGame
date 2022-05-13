@@ -50,13 +50,11 @@ public class ButtonMenu extends JButton implements ActionListener{
         
         switch (CommandNumber) {
             case 1:
-               rect.SetState(1);
-               break;
-       
+                rect.SetState(1);
+                break;
             case 2:
                 rect.SetState(2);
-               break;
-
+                break;
             case 4:
                 rect.SetState(rect.GameState-1);
                 break;
@@ -79,7 +77,7 @@ public class ButtonMenu extends JButton implements ActionListener{
 
         if (CommandNumber == 2)
             text = "Continue";
-
+        
         if (CommandNumber == 4) 
            text = "<";
 

@@ -15,6 +15,6 @@ public class BlocPlus extends Bloc{
 
 	@Override
 	public int deviationLaser(int x, int y, int angle) {
-		return 0;
+		return -1;
 	}
 }
