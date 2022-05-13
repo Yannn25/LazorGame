@@ -30,7 +30,7 @@ git clone https://gaufre.informatique.univ-paris-diderot.fr/porat/projet-lazor-g
 cd projet-lazor-grp-jeudi-u
 ```
 
-3.  Compilation
+3.  Compiler
 ```
 javac Main.java
 ```
