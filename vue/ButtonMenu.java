@@ -11,15 +11,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 
-import vue.Rectangle;
+import modele.Plateau;
+import vue.VuePlateau;
 
 /*  CLASSE QUI GERE LE MENU  */
 
 public class ButtonMenu extends JButton implements ActionListener{
     private int CommandNumber; /* 1-play,2-continue,3-son,4-retour */
-    Rectangle rect;
+    VuePlateau rect;
 
-    public ButtonMenu(int x,int y,int CommandNumber,Rectangle ecran) {
+    public ButtonMenu(int x,int y,int CommandNumber,VuePlateau ecran) {
         addActionListener(this);
         setBorderPainted(true);
         this.setBounds(x, y, 200, 100);
@@ -29,20 +30,25 @@ public class ButtonMenu extends JButton implements ActionListener{
         setOpaque(true);
 
         if (CommandNumber == 1) 
-        setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+        setIcon(new ImageIcon(VuePlateau.PATH+"laz.png"));
 
         if (CommandNumber == 2) 
-        setIcon(new ImageIcon(Rectangle.PATH+"laz.png"));
+        setIcon(new ImageIcon(VuePlateau.PATH+"laz.png"));
+
         if (CommandNumber == 4) {
-            setIcon(new ImageIcon(Rectangle.PATH+"arriereplan.png"));
-             setBounds(x, y, 80, 60);
-         }
+            setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
+            setBounds(x, y, 80, 60);
+        }
+        if (CommandNumber == 5) {
+            setIcon(new ImageIcon(VuePlateau.PATH+"arriereplan.png"));
+            setBounds(x, y, 150, 60);
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         
-       switch (CommandNumber) {
+        switch (CommandNumber) {
             case 1:
                rect.SetState(1);
                break;
@@ -53,15 +59,15 @@ public class ButtonMenu extends JButton implements ActionListener{
 
             case 4:
                 rect.SetState(rect.GameState-1);
-               break;
-            
-
+                break;
+            case 5:
+                rect.setPlat(new Plateau(rect.plat.niveau+1));
+                break;
        }
     }
 
-   @Override
-   protected void paintComponent(Graphics g) {
-
+    @Override
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
@@ -77,6 +83,9 @@ public class ButtonMenu extends JButton implements ActionListener{
         if (CommandNumber == 4) 
            text = "<";
 
+        if (CommandNumber == 5) 
+           text = "next >";
+
         int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
         int x = this.getWidth()/2 - length/2;
         int y = this.getHeight()/2;
@@ -84,10 +93,6 @@ public class ButtonMenu extends JButton implements ActionListener{
         g2.drawString(text, x+5, y+5);
         g2.setColor(Color.white);
         g2.drawString(text, x, y);
-   }
+    }
 
-  
-
-   
-    
 }

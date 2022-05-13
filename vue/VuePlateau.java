@@ -2,6 +2,10 @@ package vue;
 
 import modele.*;
 
+import java.util.concurrent.*;
+
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +15,7 @@ import java.awt.image.BufferedImage;
 
 /*  L'AIRE DE JEU  */
 
-public class Rectangle extends JLabel {
+public class VuePlateau extends JLabel {
     protected Plateau plat;
 	public JLabel[][] bloc;
 	public MouseAdapter ma;
@@ -19,7 +23,7 @@ public class Rectangle extends JLabel {
 
 
 	//public static final String PATH="./src/icones/";
-	public static final String PATH="./script/src/icones/";
+	public static final String PATH="./icones/";
 	//gestion des différents écran
 	public int GameState;
 	final int StartState = 0;
@@ -28,7 +32,7 @@ public class Rectangle extends JLabel {
 
     /*   CONSTRUCTEUR  */
     //initialise aussi les deplacements avec un mouseAdapter
-	public Rectangle(){
+	public VuePlateau(){
 		GameState = 0;
 		ma = new MouseAdapter() {
 			JLabel selectionPanel = null;
@@ -98,7 +102,7 @@ public class Rectangle extends JLabel {
 		setLayout(null);
 		setOpaque(true);
 
-		setIcon(new ImageIcon(Rectangle.PATH + "arriereplan.png"));
+		setIcon(new ImageIcon(VuePlateau.PATH + "arriereplan.png"));
 
 	}
 
@@ -106,7 +110,11 @@ public class Rectangle extends JLabel {
 		return plat;
 	}
 	public void setPlat(Plateau plat) {
+        clear();
+
 		this.plat = plat;
+        initbloc();
+        paintComponent(this.getGraphics());
 	}
 
 	public void paintComponent(Graphics g) {
@@ -177,7 +185,14 @@ public class Rectangle extends JLabel {
 		   	add(retour);
 			
 		   	if(plat.isWin()){
-			   fin = new FinDePartie();
+                g2.setFont(g2.getFont().deriveFont(Font.BOLD,26F));
+                g2.setColor(Color.black);
+			    g2.drawString("GAGNÉ", 650, 200);
+				if (plat.niveau <10) {
+					ButtonMenu next = new ButtonMenu(650, this.getHeight()-150, 5, this);
+                	add(next);
+				}
+                
 		   	}
 		}
 	}
@@ -278,15 +293,15 @@ public class Rectangle extends JLabel {
 					bloc[i][j].setLayout(null);
 					bloc[i][j].setBounds(50*j, 50*i, 50, 50);
 					if (plat.getCase(i, j) instanceof CaseVisible){
-						bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + "case.png"));
+						bloc[i][j].setIcon(new ImageIcon(VuePlateau.PATH + "case.png"));
 					}
 					String type = plat.getCase(i, j).getBloc().getType();
 					if(plat.getCase(i, j).getBloc().fixe){
-						bloc[i][j].setName("Blo");
-						bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type+ "Fixe" + ".png"));
+						bloc[i][j].setName("BlocFixe");
+						bloc[i][j].setIcon(new ImageIcon(VuePlateau.PATH + type+ "Fixe" + ".png"));
 					}else{
 						bloc[i][j].setName("Bloc");
-						bloc[i][j].setIcon(new ImageIcon(Rectangle.PATH + type + ".png"));
+						bloc[i][j].setIcon(new ImageIcon(VuePlateau.PATH + type + ".png"));
 					}
 					add(bloc[i][j]);
 					

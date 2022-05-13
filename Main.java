@@ -22,6 +22,7 @@ public class Main {
         }
         Controleur controleur = new Controleur();
         controleur.commencerJeu();
+
     }
 
 }
